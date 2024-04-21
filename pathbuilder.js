@@ -44,6 +44,15 @@ $(document).ready(function () {
 
     showdialog('startup');
 
+    document.addEventListener('keyup', function (event) {
+	// If the page mask is visible
+	if (! $('#pagemask').is(':hidden')) {
+	    if (event.keyCode == 27) { // Esc key pressed
+		$('.dialog-close').click();
+	    }	    
+	}
+    });
+
     $('.titlebar button').on('click', function(event) {
 	showdialog('startup');
     });

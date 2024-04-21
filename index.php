@@ -87,7 +87,7 @@
 	 .evidence-space {
 	     padding: 10px;
 	     background-color: #ddd;
-	     margin-bottom: 20px;
+	     margin-bottom: 40px;
 	 }
 	 /* Beginning of PATH figure styles */
 	 #pathfigure {
@@ -228,6 +228,27 @@
 		<textarea class="form-control" id="target-scenario-text" rows="3"></textarea>
 	    </div>	    
 	    <button class="btn btn-primary dialog-close" id="confirm-target-scenario">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#check-circle"/>
+		</svg>
+		Confirm
+	    </button>
+	</div>
+
+	<div id="evidence-strength" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Rate strength of evidence</h2>
+	    <div>
+		<label for="evidence-strength-slider" class="form-label">The <span id="evidence-strength-step"></span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection below.</label>
+		<div style="float: left;">No evidence</div>
+		<div style="float: right;">Strong evidence</div>
+		<input type="range" class="form-range" min="1" max="5" id="evidence-strength-slider">
+	    </div>
+	    <button class="btn btn-primary dialog-close" id="confirm-evidence-strength">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#check-circle"/>
 		</svg>
@@ -389,168 +410,195 @@
 
 		    <hr>
 
-		    <h3>
-			Target modulation in models (M0-M1)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-m0m1" data-step="m0m1">
+			<h3>
+			    Target modulation in models (M0-M1)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Translatability (T1)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-t1" data-step="t1">
+			<h3>
+			    Translatability (T1)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Physiological effect in models (M1-M2)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-m1m2" data-step="m1m2">
+			<h3>
+			    Physiological effect in models (M1-M2)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Translatability (T2)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-t2" data-step="t2">
+			<h3>
+			    Translatability (T2)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Clinical effect in models (M2-M3)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-m2m3" data-step="m2m3">
+			<h3>
+			    Clinical effect in models (M2-M3)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Translatability (T3)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-t3" data-step="t3">
+			<h3>
+			    Translatability (T3)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
 		    <hr>
 
-		    <h3>
-			Target modulation in the target scenario (D0-D1)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-d0d1" data-step="d0d1">
+			<h3>
+			    Target modulation in the target scenario (D0-D1)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Physiological effect in the target scenario (D1-D2)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-d1d2" data-step="d1d2">
+			<h3>
+			    Physiological effect in the target scenario (D1-D2)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
-		    <h3>
-			Clinical effect in the target scenario (D2-D3)
-			<button class="btn btn-primary btn-sm edit-evidence-strength">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#award"/>
-			    </svg>
-			    Rate strength of evidence
-			</button>
-		    </h3>
-		    <div class="evidence-space" data-node="m0m1">
-			<button class="btn btn-primary btn-sm edit-new-evidence">
-			    <svg width="16" height="16" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#plus-circle"/>
-			    </svg>
-			    Add evidence
-			</button>
+		    <div class="evidence-block" id="evidence-block-d2d3" data-step="d2d3">	    
+			<h3>
+			    Clinical effect in the target scenario (D2-D3)
+			    <button class="btn btn-primary btn-sm edit-evidence-strength">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#award"/>
+				</svg>
+				Rate strength of evidence
+			    </button>
+			</h3>
+			<div class="evidence-space">
+			    <div class="evidence-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-evidence">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add evidence
+			    </button>
+			</div>
 		    </div>
 
 		    <!-- End of text summary -->

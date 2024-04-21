@@ -35,7 +35,7 @@ function updatepage () {
 	evi = pathdata.evidence[key];
 	$('#evidence-block-' + evi['step'] + ' div.evidence-container').append(
 	    '<div class="evidence-instance" data-index="' + key + '">' +
-	    '<svg width="20" height="20" class="evidence-instance-grip"><use href="images/bootstrap-icons.svg#grip-vertical"/></svg>' +
+	    '<svg width="20" height="20" class="evidence-instance-grip"><use href="images/bootstrap-icons.svg#arrow-down-up"/></svg>' +
 	    evi['number'] + '. ' + evi['text'] +
 	    '<button class="btn btn-sm btn-primary" style="float: right;">' +
 	    '<svg width="12" height="12" fill="currentColor"><use href="images/bootstrap-icons.svg#pencil"/></svg> Edit' +

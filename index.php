@@ -99,7 +99,7 @@
 	 .path-arrow {
 	     fill: #666;
 	 }
-	 .path-node-label {
+	 .path-step-label {
 	     font-size: 16px;
 	     fill: #000;
 	 }
@@ -270,30 +270,30 @@
 			<path d="M350 0 L450 0 L450 80 L350 80 L350 0" fill="#666"></path>
 			<text x="400" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Model steps</text>
 
-			<!-- Node text labels -->
+			<!-- Step text labels -->
 			
 			<!-- Rx (D0) -->
-			<text x="120" y="110" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Rx (D0)</text>
+			<text x="120" y="110" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Rx (D0)</text>
 			<!-- Rx (M0) -->
-			<text x="380" y="110" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Rx (M0)</text>
+			<text x="380" y="110" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Rx (M0)</text>
 			<!-- T1 -->
-			<text x="250" y="160" dominant-baseline="middle" text-anchor="middle" class="path-node-label">T1</text>
+			<text x="250" y="160" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T1</text>
 			<!-- Molecular (D1) -->
-			<text x="120" y="270" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Molecular (D1)</text>
+			<text x="120" y="270" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Molecular (D1)</text>
 			<!-- Molecular (M1) -->
-			<text x="380" y="270" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Molecular (M1)</text>
+			<text x="380" y="270" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Molecular (M1)</text>
 			<!-- T2 -->
-			<text x="250" y="320" dominant-baseline="middle" text-anchor="middle" class="path-node-label">T2</text>
+			<text x="250" y="320" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T2</text>
 			<!-- Physiological (D2) -->
-			<text x="120" y="430" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Physiological (D2)</text>
+			<text x="120" y="430" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Physiological (D2)</text>
 			<!-- Physiological (M2) -->
-			<text x="380" y="430" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Physiological (M2)</text>
+			<text x="380" y="430" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Physiological (M2)</text>
 			<!-- T3 -->
-			<text x="250" y="480" dominant-baseline="middle" text-anchor="middle" class="path-node-label">T3</text>
+			<text x="250" y="480" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T3</text>
 			<!-- Clinical (D3) -->
-			<text x="120" y="590" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Clinical (D3)</text>
+			<text x="120" y="590" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Clinical (D3)</text>
 			<!-- Clinical (M3) -->
-			<text x="380" y="590" dominant-baseline="middle" text-anchor="middle" class="path-node-label">Clinical (M3)</text>
+			<text x="380" y="590" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Clinical (M3)</text>
 
 			<!-- Vertical arrows -->
 
@@ -343,23 +343,23 @@
 			<!-- Evidence statement text -->
 
 			<!-- D0-D1 -->
-			<text x="50" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d0d1" data-node="d0d1"></text>
+			<text x="50" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d0d1" data-step="d0d1"></text>
 			<!-- D1-D2 -->
-			<text x="50" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d1d2" data-node="d1d2"></text>
+			<text x="50" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d1d2" data-step="d1d2"></text>
 			<!-- D2-D3 -->
-			<text x="50" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d2d3" data-node="d2d3"></text>
+			<text x="50" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d2d3" data-step="d2d3"></text>
 			<!-- M0-M1 -->
-			<text x="450" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m0m1" data-node="m0m1"></text>
+			<text x="450" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m0m1" data-step="m0m1"></text>
 			<!-- M1-M2 -->
-			<text x="450" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m1m2" data-node="m1m2"></text>
+			<text x="450" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m1m2" data-step="m1m2"></text>
 			<!-- M2-M3 -->
-			<text x="450" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m2m3" data-node="m2m3"></text>
+			<text x="450" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m2m3" data-step="m2m3"></text>
 			<!-- T1 -->
-			<text x="250" y="220" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t1" data-node="t1"></text>
+			<text x="250" y="220" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t1" data-step="t1"></text>
 			<!-- T2 -->
-			<text x="250" y="380" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t2" data-node="t2"></text>
+			<text x="250" y="380" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t2" data-step="t2"></text>
 			<!-- T3 -->
-			<text x="250" y="540" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t3" data-node="t3"></text>
+			<text x="250" y="540" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t3" data-step="t3"></text>
 			
 		    </svg>
 		    <!-- End of PATH figure -->

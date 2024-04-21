@@ -63,6 +63,7 @@
 	 .dialog-close-x {
 	     float: right;
 	     padding: 0;
+	     border: none;
 	 }
 	 .titlebar {
 	     color: #fff;
@@ -89,6 +90,33 @@
 	     background-color: #ddd;
 	     margin-bottom: 40px;
 	 }
+	 .evidence-container {
+	     min-height: 40px;
+	     margin-bottom: 10px;
+	 }
+	 .evidence-instance {
+	     background-color: #ddd;
+	     border: 1px solid #fff;
+	     padding: 8px 10px;
+	     margin-bottom: 10px;
+	     min-height: 50px;
+	 }
+	 .evidence-placeholder {
+	     background-color: #eee;
+	     min-height: 50px;
+	     margin-bottom: 10px;
+	 }
+	 .evidence-instance-grip {
+	     fill: #333;
+	     margin-right: 20px;
+	 }
+	 #path-figure-container {
+	     padding-top: 20px;
+	     padding-bottom: 80px;
+	 }
+	 .edit-evidence-strength {
+	     display: none;
+	 }
 	 /* Beginning of PATH figure styles */
 	 #pathfigure {
 	     padding: 2%;
@@ -98,6 +126,22 @@
 	 }
 	 .path-arrow {
 	     fill: #666;
+	     stroke: #333;
+	 }
+	 .strength1 {
+	     fill: #ff0000;
+	 }
+	 .strength2 {
+	     fill: #ff8000;
+	 }
+	 .strength3 {
+	     fill: #ffff38;
+	 }
+	 .strength4 {
+	     fill: #bbe33d;
+	 }
+	 .strength5 {
+	     fill: #127622;
 	 }
 	 .path-step-label {
 	     font-size: 16px;
@@ -235,19 +279,44 @@
 	    </button>
 	</div>
 
+	<div id="evidence-editor" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Evidence for <span class="editor-evidence-stepname"></span></h2>
+	    <div>For direct or model steps, provide evidence that takes into account magnitude, precision and risk of bias. For translational steps, this will be more complicated, but it may be possible to express this evidence in terms of magnitude of relationships connecting models to target scenarios, precision and risk of bias.</div>
+	    <div>Where possible, citations should be provided for each piece of evidence.</div>
+	    <hr>
+	    <div class="mb-3">
+		<label for="evidence-editor-text" class="form-label">Summary of evidence</label>
+		<textarea class="form-control" id="evidence-editor-text" rows="3"></textarea>
+	    </div>
+	    <input type="hidden" id="editor-evidence-step" value="">
+	    <input type="hidden" id="editor-evidence-index" value="">
+	    <button class="btn btn-primary dialog-close" id="confirm-evidence-editor">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#check-circle"/>
+		</svg>
+		Confirm
+	    </button>
+	</div>
+
 	<div id="evidence-strength" class="dialog">
 	    <button class="btn dialog-close-x dialog-close">
 		<svg width="32" height="32" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#x"/>
 		</svg>
 	    </button>
-	    <h2>Rate strength of evidence</h2>
+	    <h2>Rate strength of <span class="evidence-strength-stepname"></span> evidence</h2>
 	    <div>
-		<label for="evidence-strength-slider" class="form-label">The <span id="evidence-strength-step"></span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection below.</label>
+		<label for="evidence-strength-slider" class="form-label">The <span class="evidence-strength-stepname"></span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection below.</label>
 		<div style="float: left;">No evidence</div>
 		<div style="float: right;">Strong evidence</div>
 		<input type="range" class="form-range" min="1" max="5" id="evidence-strength-slider">
 	    </div>
+	    <input type="hidden" id="evidence-strength-step" value="">
 	    <button class="btn btn-primary dialog-close" id="confirm-evidence-strength">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#check-circle"/>
@@ -255,7 +324,7 @@
 		Confirm
 	    </button>
 	</div>
-	
+
 	<!-- End of dialog boxes -->
 	<div class="container-fluid titlebar">
 	    <div class="row">
@@ -276,122 +345,124 @@
 	    <div class="row">
 		<div class="col-md-4">
 		    
-		    <!-- PATH figure -->
-		    <svg viewBox="0 0 500 600" id="pathfigure">
+		    <div id="path-figure-container" class="sticky-top">
+			<!-- PATH figure -->
+			<svg viewBox="0 0 500 600" id="pathfigure">
 
-			<!-- Top labels -->
-			
-			<!-- Direct steps -->
-			<path d="M50 0 L150 0 L150 80 L50 80 L50 0" fill="#666"></path>
-			<text x="100" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Direct steps</text>
-			<!-- Translational steps -->
-			<path d="M160 0 L340 0 L340 80 L160 80 L160 0" fill="#666"></path>
-			<text x="250" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Translational steps</text>
-			<!-- Model steps -->
-			<path d="M350 0 L450 0 L450 80 L350 80 L350 0" fill="#666"></path>
-			<text x="400" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Model steps</text>
+			    <!-- Top labels -->
+			    
+			    <!-- Direct steps -->
+			    <path d="M50 0 L150 0 L150 80 L50 80 L50 0" fill="#666"></path>
+			    <text x="100" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Direct steps</text>
+			    <!-- Translational steps -->
+			    <path d="M160 0 L340 0 L340 80 L160 80 L160 0" fill="#666"></path>
+			    <text x="250" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Translational steps</text>
+			    <!-- Model steps -->
+			    <path d="M350 0 L450 0 L450 80 L350 80 L350 0" fill="#666"></path>
+			    <text x="400" y="40" dominant-baseline="middle" text-anchor="middle" class="top-box-text">Model steps</text>
 
-			<!-- Step text labels -->
-			
-			<!-- Rx (D0) -->
-			<text x="120" y="110" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Rx (D0)</text>
-			<!-- Rx (M0) -->
-			<text x="380" y="110" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Rx (M0)</text>
-			<!-- T1 -->
-			<text x="250" y="160" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T1</text>
-			<!-- Molecular (D1) -->
-			<text x="120" y="270" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Molecular (D1)</text>
-			<!-- Molecular (M1) -->
-			<text x="380" y="270" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Molecular (M1)</text>
-			<!-- T2 -->
-			<text x="250" y="320" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T2</text>
-			<!-- Physiological (D2) -->
-			<text x="120" y="430" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Physiological (D2)</text>
-			<!-- Physiological (M2) -->
-			<text x="380" y="430" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Physiological (M2)</text>
-			<!-- T3 -->
-			<text x="250" y="480" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T3</text>
-			<!-- Clinical (D3) -->
-			<text x="120" y="590" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Clinical (D3)</text>
-			<!-- Clinical (M3) -->
-			<text x="380" y="590" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Clinical (M3)</text>
+			    <!-- Step text labels -->
+			    
+			    <!-- Rx (D0) -->
+			    <text x="120" y="110" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Rx (D0)</text>
+			    <!-- Rx (M0) -->
+			    <text x="380" y="110" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Rx (M0)</text>
+			    <!-- T1 -->
+			    <text x="250" y="160" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T1</text>
+			    <!-- Molecular (D1) -->
+			    <text x="120" y="270" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Molecular (D1)</text>
+			    <!-- Molecular (M1) -->
+			    <text x="380" y="270" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Molecular (M1)</text>
+			    <!-- T2 -->
+			    <text x="250" y="320" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T2</text>
+			    <!-- Physiological (D2) -->
+			    <text x="120" y="430" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Physiological (D2)</text>
+			    <!-- Physiological (M2) -->
+			    <text x="380" y="430" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Physiological (M2)</text>
+			    <!-- T3 -->
+			    <text x="250" y="480" dominant-baseline="middle" text-anchor="middle" class="path-step-label">T3</text>
+			    <!-- Clinical (D3) -->
+			    <text x="120" y="590" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Clinical (D3)</text>
+			    <!-- Clinical (M3) -->
+			    <text x="380" y="590" dominant-baseline="middle" text-anchor="middle" class="path-step-label">Clinical (M3)</text>
 
-			<!-- Vertical arrows -->
+			    <!-- Vertical arrows -->
 
-			<!-- D0-D1 -->
-			<path d="M110 120 L130 120 L130 240 L140 240 L120 260 L100 240 L110 240 L110 120" class="path-arrow"></path>
-			<!-- M0-M1 -->
-			<path d="M370 120 L390 120 L390 240 L400 240 L380 260 L360 240 L370 240 L370 120" class="path-arrow"></path>
-			<!-- D1-D2 -->
-			<path d="M110 280 L130 280 L130 400 L140 400 L120 420 L100 400 L110 400 L110 280" class="path-arrow"></path>
-			<!-- M1-M2 -->
-			<path d="M370 280 L390 280 L390 400 L400 400 L380 420 L360 400 L370 400 L370 280" class="path-arrow"></path>
-			<!-- D2-D3 -->
-			<path d="M110 440 L130 440 L130 560 L140 560 L120 580 L100 560 L110 560 L110 440" class="path-arrow"></path>
-			<!-- M2-M3 -->
-			<path d="M370 440 L390 440 L390 560 L400 560 L380 580 L360 560 L370 560 L370 440" class="path-arrow"></path>
+			    <!-- D0-D1 -->
+			    <path d="M110 120 L130 120 L130 240 L140 240 L120 260 L100 240 L110 240 L110 120" class="path-arrow" id="arrow-d0d1"></path>
+			    <!-- M0-M1 -->
+			    <path d="M370 120 L390 120 L390 240 L400 240 L380 260 L360 240 L370 240 L370 120" class="path-arrow" id="arrow-m0m1"></path>
+			    <!-- D1-D2 -->
+			    <path d="M110 280 L130 280 L130 400 L140 400 L120 420 L100 400 L110 400 L110 280" class="path-arrow" id="arrow-d1d2"></path>
+			    <!-- M1-M2 -->
+			    <path d="M370 280 L390 280 L390 400 L400 400 L380 420 L360 400 L370 400 L370 280" class="path-arrow" id="arrow-m1m2"></path>
+			    <!-- D2-D3 -->
+			    <path d="M110 440 L130 440 L130 560 L140 560 L120 580 L100 560 L110 560 L110 440" class="path-arrow" id="arrow-d2d3"></path>
+			    <!-- M2-M3 -->
+			    <path d="M370 440 L390 440 L390 560 L400 560 L380 580 L360 560 L370 560 L370 440" class="path-arrow" id="arrow-m2m3"></path>
 
-			<!-- Horizontal arrows -->
+			    <!-- Horizontal arrows -->
 
-			<!-- T1 -->
-			<path d="M130 180 L150 160 L150 170 L350 170 L350 160 L370 180 L350 200 L350 190 L150 190 L150 200 L130 180" class="path-arrow"></path>
-			<!-- T2 -->
-			<path d="M130 340 L150 320 L150 330 L350 330 L350 320 L370 340 L350 360 L350 350 L150 350 L150 360 L130 340" class="path-arrow"></path>
-			<!-- T3 -->
-			<path d="M130 500 L150 480 L150 490 L350 490 L350 480 L370 500 L350 520 L350 510 L150 510 L150 520 L130 500" class="path-arrow"></path>
+			    <!-- T1 -->
+			    <path d="M130 180 L150 160 L150 170 L350 170 L350 160 L370 180 L350 200 L350 190 L150 190 L150 200 L130 180" class="path-arrow" id="arrow-t1"></path>
+			    <!-- T2 -->
+			    <path d="M130 340 L150 320 L150 330 L350 330 L350 320 L370 340 L350 360 L350 350 L150 350 L150 360 L130 340" class="path-arrow" id="arrow-t2"></path>
+			    <!-- T3 -->
+			    <path d="M130 500 L150 480 L150 490 L350 490 L350 480 L370 500 L350 520 L350 510 L150 510 L150 520 L130 500" class="path-arrow" id="arrow-t3"></path>
 
-			<!-- Evidence statement boxes -->
+			    <!-- Evidence statement boxes -->
 
-			<!-- D0-D1 -->
-			<path d="M0 160 L100 160 L100 200 L0 200 L0 160" class="path-evidence-box"></path>
-			<!-- D1-D2 -->
-			<path d="M0 320 L100 320 L100 360 L0 360 L0 320" class="path-evidence-box"></path>
-			<!-- D2-D3 -->
-			<path d="M0 480 L100 480 L100 520 L0 520 L0 480" class="path-evidence-box"></path>
-			<!-- M0-M1 -->
-			<path d="M400 160 L500 160 L500 200 L400 200 L400 160" class="path-evidence-box"></path>
-			<!-- M1-M2 -->
-			<path d="M400 320 L500 320 L500 360 L400 360 L400 320" class="path-evidence-box"></path>
-			<!-- M2-M3 -->
-			<path d="M400 480 L500 480 L500 520 L400 520 L400 480" class="path-evidence-box"></path>
-			<!-- T1 -->
-			<path d="M200 200 L300 200 L300 240 L200 240 L200 200" class="path-evidence-box"></path>
-			<!-- T2 -->
-			<path d="M200 360 L300 360 L300 400 L200 400 L200 360" class="path-evidence-box"></path>
-			<!-- T3 -->
-			<path d="M200 520 L300 520 L300 560 L200 560 L200 520" class="path-evidence-box"></path>
+			    <!-- D0-D1 -->
+			    <path d="M0 160 L100 160 L100 200 L0 200 L0 160" class="path-evidence-box"></path>
+			    <!-- D1-D2 -->
+			    <path d="M0 320 L100 320 L100 360 L0 360 L0 320" class="path-evidence-box"></path>
+			    <!-- D2-D3 -->
+			    <path d="M0 480 L100 480 L100 520 L0 520 L0 480" class="path-evidence-box"></path>
+			    <!-- M0-M1 -->
+			    <path d="M400 160 L500 160 L500 200 L400 200 L400 160" class="path-evidence-box"></path>
+			    <!-- M1-M2 -->
+			    <path d="M400 320 L500 320 L500 360 L400 360 L400 320" class="path-evidence-box"></path>
+			    <!-- M2-M3 -->
+			    <path d="M400 480 L500 480 L500 520 L400 520 L400 480" class="path-evidence-box"></path>
+			    <!-- T1 -->
+			    <path d="M200 200 L300 200 L300 240 L200 240 L200 200" class="path-evidence-box"></path>
+			    <!-- T2 -->
+			    <path d="M200 360 L300 360 L300 400 L200 400 L200 360" class="path-evidence-box"></path>
+			    <!-- T3 -->
+			    <path d="M200 520 L300 520 L300 560 L200 560 L200 520" class="path-evidence-box"></path>
 
-			<!-- Evidence statement text -->
+			    <!-- Evidence statement text -->
 
-			<!-- D0-D1 -->
-			<text x="50" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d0d1" data-step="d0d1"></text>
-			<!-- D1-D2 -->
-			<text x="50" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d1d2" data-step="d1d2"></text>
-			<!-- D2-D3 -->
-			<text x="50" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d2d3" data-step="d2d3"></text>
-			<!-- M0-M1 -->
-			<text x="450" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m0m1" data-step="m0m1"></text>
-			<!-- M1-M2 -->
-			<text x="450" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m1m2" data-step="m1m2"></text>
-			<!-- M2-M3 -->
-			<text x="450" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m2m3" data-step="m2m3"></text>
-			<!-- T1 -->
-			<text x="250" y="220" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t1" data-step="t1"></text>
-			<!-- T2 -->
-			<text x="250" y="380" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t2" data-step="t2"></text>
-			<!-- T3 -->
-			<text x="250" y="540" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t3" data-step="t3"></text>
-			
-		    </svg>
-		    <!-- End of PATH figure -->
+			    <!-- D0-D1 -->
+			    <text x="50" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d0d1" data-step="d0d1"></text>
+			    <!-- D1-D2 -->
+			    <text x="50" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d1d2" data-step="d1d2"></text>
+			    <!-- D2-D3 -->
+			    <text x="50" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-d2d3" data-step="d2d3"></text>
+			    <!-- M0-M1 -->
+			    <text x="450" y="180" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m0m1" data-step="m0m1"></text>
+			    <!-- M1-M2 -->
+			    <text x="450" y="340" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m1m2" data-step="m1m2"></text>
+			    <!-- M2-M3 -->
+			    <text x="450" y="500" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-m2m3" data-step="m2m3"></text>
+			    <!-- T1 -->
+			    <text x="250" y="220" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t1" data-step="t1"></text>
+			    <!-- T2 -->
+			    <text x="250" y="380" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t2" data-step="t2"></text>
+			    <!-- T3 -->
+			    <text x="250" y="540" dominant-baseline="middle" text-anchor="middle" class="path-evidence-text" id="evidence-t3" data-step="t3"></text>
+			    
+			</svg>
+			<!-- End of PATH figure -->
 
-		    <div class="d-grid gap-2">
-			<button class="btn btn-primary" id="show-save-options">
-			    <svg width="32" height="32" fill="currentColor">
-				<use href="images/bootstrap-icons.svg#download"/>
-			    </svg>
-			    Save or export
-			</button>
+			<div class="d-grid gap-2">
+			    <button class="btn btn-primary" id="show-save-options">
+				<svg width="32" height="32" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#download"/>
+				</svg>
+				Save or export
+			    </button>
+			</div>
 		    </div>
 		    
 		</div>

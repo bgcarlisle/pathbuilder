@@ -16,7 +16,7 @@ function updatepage () {
     if (pathdata.targetScenario != "") {
 	$('#display-target-scenario').html(pathdata.targetScenario);
     } else {
-	$('display-target-scenario').html('No target scenario has been specified')
+	$('#display-target-scenario').html('No target scenario has been specified')
     }
 
     // Update counters for evidence

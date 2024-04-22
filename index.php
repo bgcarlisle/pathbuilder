@@ -172,11 +172,11 @@
 	    <h2>Welcome to PATH Builder</h2>
 	    <p>PATH (Preclinical Assessment of Translation to Humans) is a structured approach for presenting a comprehensive, accurate and transparent scientific rationale for early phase clinical trials and innovative care. Read <a href="#">the PATH paper (Kimmelman et al, 2024)</a> for a detailed rationale and worked examples.</p>
 	    <div class="d-grid gap-2">
-		<button class="btn btn-primary" disabled>
+		<button class="btn btn-primary" id="new-path-from-scratch">
 		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#person-raised-hand"/>
+			<use href="images/bootstrap-icons.svg#file-earmark-plus"/>
 		    </svg>
-		    Start a new PATH with guidance
+		    Start a new PATH from scratch
 		</button>
 		<button class="btn btn-primary" id="view-example">
 		    <svg width="32" height="32" fill="currentColor">
@@ -184,11 +184,11 @@
 		    </svg>
 		    View an example PATH
 		</button>
-		<button class="btn btn-primary">
+		<button class="btn btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#file-earmark-plus"/>
+			<use href="images/bootstrap-icons.svg#person-raised-hand"/>
 		    </svg>
-		    Start a new PATH from scratch
+		    Start a new PATH with guidance
 		</button>
 		<button class="btn btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
@@ -205,6 +205,38 @@
 	    </div>
 	</div>
 
+	<div id="replace-with-example-path" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Confirm view example PATH</h2>
+	    <div class="alert alert-warning" role="alert">Are you sure you want to replace the PATH that you currently have loaded with the example PATH?</div>
+	    <button class="btn btn-primary dialog-close" id="confirm-replace-with-example">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#check-circle"/>
+		</svg>
+		Confirm
+	    </button>
+	</div>
+
+	<div id="replace-with-empty-path" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Confirm view example PATH</h2>
+	    <div class="alert alert-warning" role="alert">Are you sure you want to clear the PATH that you currently have loaded? You will lose any unsaved work.</div>
+	    <button class="btn btn-primary dialog-close" id="confirm-replace-with-empty">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#check-circle"/>
+		</svg>
+		Confirm
+	    </button>
+	</div>
+
 	<div id="save-or-export" class="dialog">
 	    <button class="btn dialog-close-x dialog-close">
 		<svg width="32" height="32" fill="currentColor">
@@ -215,15 +247,7 @@
 	    <!-- Export buttons -->
 	    <div class="d-grid gap-2">
 		
-		<button class="btn btn-sm btn-primary">
-		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#cloud"/>
-		    </svg>
-		    Save PATH online (requires account)
-		</button>
-		<p>Continue working on your PATH later</p>
-		
-		<button class="btn btn-sm btn-primary">
+		<button class="btn btn-sm btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-json"/>
 		    </svg>
@@ -231,7 +255,15 @@
 		</button>
 		<p>Saving your work to your computer as a JSON will allow you to edit it again using JSON Builder</p>
 		
-		<button class="btn btn-sm btn-primary">
+		<button class="btn btn-sm btn-primary" disabled>
+		    <svg width="32" height="32" fill="currentColor">
+			<use href="images/bootstrap-icons.svg#cloud"/>
+		    </svg>
+		    Save PATH online (requires account)
+		</button>
+		<p>Continue working on your PATH later</p>
+		
+		<button class="btn btn-sm btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-svg"/>
 		    </svg>
@@ -239,7 +271,7 @@
 		</button>
 		<p>SVG export will only include the image of the PATH figure</p>
 		
-		<button class="btn btn-sm btn-primary">
+		<button class="btn btn-sm btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-md"/>
 		    </svg>
@@ -247,7 +279,7 @@
 		</button>
 		<p>Markdown export will only include the text of the PATH summary</p>
 		
-		<button class="btn btn-sm btn-primary">
+		<button class="btn btn-sm btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-pdf"/>
 		    </svg>
@@ -270,7 +302,7 @@
 	    <div class="mb-3">
 		<label for="target-scenario-text" class="form-label">Target scenario</label>
 		<textarea class="form-control" id="target-scenario-text" rows="3"></textarea>
-	    </div>	    
+	    </div>
 	    <button class="btn btn-primary dialog-close" id="confirm-target-scenario">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#check-circle"/>
@@ -363,7 +395,7 @@
 	</div>
 	<div class="container-md">
 	    <div class="row">
-		<div class="col-md-4">
+		<div class="col-md-5">
 		    
 		    <div id="path-figure-container" class="sticky-top">
 			<!-- PATH figure -->
@@ -486,7 +518,7 @@
 		    </div>
 		    
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-7">
 		    <!-- Beginning of text summary -->
 		    <h2>Target scenario</h2>
 		    <div>

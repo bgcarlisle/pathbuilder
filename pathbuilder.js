@@ -183,7 +183,8 @@ $(document).ready(function () {
 
     // Edit target scenario
     $('#edit-target-scenario').on('click', function(event) {
-	showdialog('target-scenario')
+	showdialog('target-scenario');
+	$('#target-scenario-text').val(pathdata.targetScenario);
     });
 
     // Show save/export buttons
@@ -310,17 +311,38 @@ $(document).ready(function () {
     });
 
     // Confirm strength
-    $('#confirm-evidence-strength').on('click', function (event){
+    $('#confirm-evidence-strength').on('click', function(event){
 	pathdata.strength[$('#evidence-strength-step').val()] = $('#evidence-strength-slider').val();
 	updatepage();
     });
 
-    $('#view-example').on('click', function (event) {
+    $('#view-example').on('click', function(event) {
 	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '') {
 	    $('.dialog-close-x').click();
 	    pathdata = JSON.parse(ex_pathdata);
 	    updatepage();
+	} else {
+	    showdialog('replace-with-example-path');
 	}
+    });
+
+    $('#confirm-replace-with-example').on('click', function(event) {
+	pathdata = JSON.parse(ex_pathdata);
+	updatepage();
+    });
+
+    $('#new-path-from-scratch').on('click', function(event) {
+	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '') {
+	    $('.dialog-close-x').click();
+	} else {
+	    showdialog('replace-with-empty-path');
+	}
+    });
+
+    $('#confirm-replace-with-empty').on('click', function(event) {
+	pathdata = {targetScenario:'', evidence:{}, strength:{}};
+	updatepage();
+	$('.path-arrow').removeClass('strength1');
     });
     
 })

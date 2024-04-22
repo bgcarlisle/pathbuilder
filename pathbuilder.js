@@ -146,7 +146,6 @@ $(document).ready(function () {
 
 	    // Get the step where the item is being dragged
 	    targetstep = ui.item.parent().parent().parent().data('step');
-	    console.log(targetstep);
 
 	    // Put the old data back but in the new order
 	    for (var ind in indices) {

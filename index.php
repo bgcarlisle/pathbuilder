@@ -389,47 +389,47 @@
 			    <!-- Vertical arrows -->
 
 			    <!-- D0-D1 -->
-			    <path d="M110 120 L130 120 L130 240 L140 240 L120 260 L100 240 L110 240 L110 120" class="path-arrow" id="arrow-d0d1"></path>
+			    <path d="M110 120 L130 120 L130 240 L140 240 L120 260 L100 240 L110 240 L110 120" class="path-arrow" id="arrow-d0d1" data-step="d0d1"></path>
 			    <!-- M0-M1 -->
-			    <path d="M370 120 L390 120 L390 240 L400 240 L380 260 L360 240 L370 240 L370 120" class="path-arrow" id="arrow-m0m1"></path>
+			    <path d="M370 120 L390 120 L390 240 L400 240 L380 260 L360 240 L370 240 L370 120" class="path-arrow" id="arrow-m0m1" data-step="m0m1"></path>
 			    <!-- D1-D2 -->
-			    <path d="M110 280 L130 280 L130 400 L140 400 L120 420 L100 400 L110 400 L110 280" class="path-arrow" id="arrow-d1d2"></path>
+			    <path d="M110 280 L130 280 L130 400 L140 400 L120 420 L100 400 L110 400 L110 280" class="path-arrow" id="arrow-d1d2" data-step="d1d2"></path>
 			    <!-- M1-M2 -->
-			    <path d="M370 280 L390 280 L390 400 L400 400 L380 420 L360 400 L370 400 L370 280" class="path-arrow" id="arrow-m1m2"></path>
+			    <path d="M370 280 L390 280 L390 400 L400 400 L380 420 L360 400 L370 400 L370 280" class="path-arrow" id="arrow-m1m2" data-step="m1m2"></path>
 			    <!-- D2-D3 -->
-			    <path d="M110 440 L130 440 L130 560 L140 560 L120 580 L100 560 L110 560 L110 440" class="path-arrow" id="arrow-d2d3"></path>
+			    <path d="M110 440 L130 440 L130 560 L140 560 L120 580 L100 560 L110 560 L110 440" class="path-arrow" id="arrow-d2d3" data-step="d2d3"></path>
 			    <!-- M2-M3 -->
-			    <path d="M370 440 L390 440 L390 560 L400 560 L380 580 L360 560 L370 560 L370 440" class="path-arrow" id="arrow-m2m3"></path>
+			    <path d="M370 440 L390 440 L390 560 L400 560 L380 580 L360 560 L370 560 L370 440" class="path-arrow" id="arrow-m2m3" data-step="m2m3"></path>
 
 			    <!-- Horizontal arrows -->
 
 			    <!-- T1 -->
-			    <path d="M130 180 L150 160 L150 170 L350 170 L350 160 L370 180 L350 200 L350 190 L150 190 L150 200 L130 180" class="path-arrow" id="arrow-t1"></path>
+			    <path d="M130 180 L150 160 L150 170 L350 170 L350 160 L370 180 L350 200 L350 190 L150 190 L150 200 L130 180" class="path-arrow" id="arrow-t1" data-step="t1"></path>
 			    <!-- T2 -->
-			    <path d="M130 340 L150 320 L150 330 L350 330 L350 320 L370 340 L350 360 L350 350 L150 350 L150 360 L130 340" class="path-arrow" id="arrow-t2"></path>
+			    <path d="M130 340 L150 320 L150 330 L350 330 L350 320 L370 340 L350 360 L350 350 L150 350 L150 360 L130 340" class="path-arrow" id="arrow-t2" data-step="t2"></path>
 			    <!-- T3 -->
-			    <path d="M130 500 L150 480 L150 490 L350 490 L350 480 L370 500 L350 520 L350 510 L150 510 L150 520 L130 500" class="path-arrow" id="arrow-t3"></path>
+			    <path d="M130 500 L150 480 L150 490 L350 490 L350 480 L370 500 L350 520 L350 510 L150 510 L150 520 L130 500" class="path-arrow" id="arrow-t3" data-step="t3"></path>
 
 			    <!-- Evidence statement boxes -->
 
 			    <!-- D0-D1 -->
-			    <path d="M0 160 L100 160 L100 200 L0 200 L0 160" class="path-evidence-box"></path>
+			    <path d="M0 160 L100 160 L100 200 L0 200 L0 160" class="path-evidence-box" data-step="d0d1"></path>
 			    <!-- D1-D2 -->
-			    <path d="M0 320 L100 320 L100 360 L0 360 L0 320" class="path-evidence-box"></path>
+			    <path d="M0 320 L100 320 L100 360 L0 360 L0 320" class="path-evidence-box" data-step="d1d2"></path>
 			    <!-- D2-D3 -->
-			    <path d="M0 480 L100 480 L100 520 L0 520 L0 480" class="path-evidence-box"></path>
+			    <path d="M0 480 L100 480 L100 520 L0 520 L0 480" class="path-evidence-box" data-step="d2d3"></path>
 			    <!-- M0-M1 -->
-			    <path d="M400 160 L500 160 L500 200 L400 200 L400 160" class="path-evidence-box"></path>
+			    <path d="M400 160 L500 160 L500 200 L400 200 L400 160" class="path-evidence-box" data-step="m0m1"></path>
 			    <!-- M1-M2 -->
-			    <path d="M400 320 L500 320 L500 360 L400 360 L400 320" class="path-evidence-box"></path>
+			    <path d="M400 320 L500 320 L500 360 L400 360 L400 320" class="path-evidence-box" data-step="m1m2"></path>
 			    <!-- M2-M3 -->
-			    <path d="M400 480 L500 480 L500 520 L400 520 L400 480" class="path-evidence-box"></path>
+			    <path d="M400 480 L500 480 L500 520 L400 520 L400 480" class="path-evidence-box" data-step="m2m3"></path>
 			    <!-- T1 -->
-			    <path d="M200 200 L300 200 L300 240 L200 240 L200 200" class="path-evidence-box"></path>
+			    <path d="M200 200 L300 200 L300 240 L200 240 L200 200" class="path-evidence-box" data-step="t1"></path>
 			    <!-- T2 -->
-			    <path d="M200 360 L300 360 L300 400 L200 400 L200 360" class="path-evidence-box"></path>
+			    <path d="M200 360 L300 360 L300 400 L200 400 L200 360" class="path-evidence-box" data-step="t2"></path>
 			    <!-- T3 -->
-			    <path d="M200 520 L300 520 L300 560 L200 560 L200 520" class="path-evidence-box"></path>
+			    <path d="M200 520 L300 520 L300 560 L200 560 L200 520" class="path-evidence-box" data-step="t3"></path>
 
 			    <!-- Evidence statement text -->
 

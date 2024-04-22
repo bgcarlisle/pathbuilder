@@ -1,4 +1,6 @@
-var pathdata = {evidence:{}, strength:{}};
+var pathdata = {targetScenario:'', evidence:{}, strength:{}};
+
+var ex_pathdata = '{"evidence":{"dbsu56sc5urwhm2e7qkdb21g5nglibwjv68p21i08wy5xau37uxhgrl8iysv8nqq":{"step":"m0m1","text":"Antonib IC50 inhibition of XYZ is 2.2 nM.","number":1},"mzrqby4ahx3mb8e57gfoj4wfl6gwmnwirj159wgak1vhka8xmvlgp8r22c7c3e39":{"step":"m0m1","text":"In randomized xenograft glioma models (see #6 below), Antonib led to 157% lowered expression of a ZIP, a downstream target of XYZ.","number":2},"t0nrkkhvh4avh4ei6ymu8qu4pu4izpatnnvdka3tnpv9o5ilrpsu092lgoqqu36q":{"step":"t1","text":"Antonib crossed the blood brain barrier at a rate that was 20% more efficient than morphine.","number":3},"pnvd0ty6ne02o8xd45cikcivmc7t38plo7t9nwn1bco4rd2f1845bxv78qdg7l9a":{"step":"t1","text":"70% of tumours resected from glioma patients show of XYZ overexpression in blinded pathology studies.","number":4},"md3yuobbk8f8nq6k4fanwaojhs08p2s33q3z7hl5ipnw87t8qjfheq007dnlw56m":{"step":"t1","text":"Doses needed to achieve target inhibition in models, when scaled to patients, did not cause any SAEs in studies involving 20 patients.","number":5},"ig140acrkhehcy6bc0r58us7yp3fn7kzwtzulknwf40wuv99kuk4fp3ytc9zw86n":{"step":"m1m2","text":"Antonib given to 8 of 9 different types of glioma cell lines showed growth inhibition of 60% or more.","number":6},"btf1ktm4hrg9pnfnghxws0j8ibigxryjw584ifbxct87efqrff33bt0r1934bc53":{"step":"m1m2","text":"Randomized studies of Antonib in glioma-bearing orthotopic mice significantly shrank by 50% compared with temazolomide. Results \\twere reproduced three times.","number":7},"0ske55px2fw3to9bam25the8eobxa9gcktgi0oakj4jlbici3a754p9tmisof4i2":{"step":"m1m2","text":"Antonib given to patients with lung or colorectal cancers resulted in ≥ 40% objective response (tumour assessments were blinded).","number":8},"bh9kqyzxxz2w9ludzfsns9hc5xurrgcsokpb3ykb3aao6vefnqkuzqu522i8yao6":{"step":"t2","text":"Glioma-bearing orthotopic mice are sensitive, but not specific models for human glioma. Doses in this study were similar to those planned for this trial","number":9},"edxls0exi034nmjrw7deojk41e5z7vtjpr07vf2124v7y6pingcj0r3hcom46kda":{"step":"t2","text":"Lung and colorectal cancers are driven by XYZ over-activation. Doses used in the above (and present) trial were tolerable (5% of patients experienced serious adverse events)","number":10},"309jabx8zhp0bifob5h6htvrisz7en9mgm3d8gvzowfqu5b1d1xeivhjw40ylifr":{"step":"t2","text":"Glioma progression is driven by XYZ hyperactivation, as indicated by several independent studies showing knock-down of XYZ in glioma cells inhibits growth by 70% (p < .05).","number":11},"mbtzzrwt4ssekfz6yszybxkfwcdj2rnvd4zdk4sn0u1p6rgss6l7j2spnurs48ko":{"step":"t2","text":"Robustness of Antonib anti-tumour activity is suggested by achievement of significantly reduced tumour growth (>50% shrinkage) in randomized xenograft studies of three different cancers types.","number":12},"svau0g7xs8iigi5jjs9zaiuekixerysuifhq1plx7v9dls1ngs541nch8tc9unct":{"step":"m2m3","text":"Antonib significantly doubled survival in randomized, blinded studies of glioma xenograft mice.","number":13},"pcphcuwzlj9pdxrchtsvklk5t2hy9e8tmilsxn5s0l3b9106h1slkp244adicfkx":{"step":"t3","text":"Doses of Antonib in #12 matched those planned for this trial. The model is very sensitive but not very specific for predicting human response.","number":14},"7cvlksk1z7tvu8el2l5z9kgwkmwitemiiervba8my6msxm8k5b8nl2aznoefudz0":{"step":"d0d1","text":"Antonib significantly doubled XYZ phosphorylation in gliomas resected from patients in a phase 0 trial.","number":15},"7z0dju7qpjyzxyohpmytfkx7e70q7g9uomvrwg567x2w3leuoth00qgjzbliry07":{"step":"d1d2","text":"Antonib produced a partial response in one of two glioma patients in a phase 1 trial involving mixed cancers.","number":16},"bp76e7crn459o8fn1mdzb3amfrlf7k8gmhvs4jqgi5hjh7xfi2op47n3yi051xxp":{"step":"d2d3","text":"A meta-analyses of glioma trials showed tumour response was moderately but significantly correlated with increased overall survival (R²=0.4). ","number":17}},"strength":{"d0d1":"4","t1":"4","m0m1":"5","d1d2":"2","t2":"4","m1m2":"5","m2m3":"4","t3":"3","d2d3":"2"},"targetScenario":"Antonib given to glioma patients will improve survival"}';
 
 var steps = ["m0m1", "t1", "m1m2", "t2", "m2m3", "t3", "d0d1", "d1d2", "d2d3"];
 
@@ -35,11 +37,16 @@ function updatepage () {
 	evi = pathdata.evidence[key];
 	$('#evidence-block-' + evi['step'] + ' div.evidence-container').append(
 	    '<div class="evidence-instance" data-index="' + key + '">' +
-	    '<svg width="20" height="20" class="evidence-instance-grip"><use href="images/bootstrap-icons.svg#arrow-down-up"/></svg>' +
-	    evi['number'] + '. ' + evi['text'] +
-	    '<button class="btn btn-sm btn-primary" style="float: right;">' +
+	    '<div style="float: right; margin-left: 10px;">' +
+	    '<button class="btn btn-sm btn-primary edit-old-evidence" style="margin-right: 10px;">' +
 	    '<svg width="12" height="12" fill="currentColor"><use href="images/bootstrap-icons.svg#pencil"/></svg> Edit' +
 	    '</button>' +
+	    '<button class="btn btn-sm btn-danger delete-evidence">' +
+	    '<svg width="12" height="12" fill="currentColor"><use href="images/bootstrap-icons.svg#backspace"/></svg> Delete' +
+	    '</button>' +
+	    '</div>' +
+	    '<svg width="20" height="20" class="evidence-instance-grip"><use href="images/bootstrap-icons.svg#arrow-down-up"/></svg>' +
+	    evi['number'] + '. ' + evi['text'] +
 	    '</div>'
 	);
     }
@@ -191,49 +198,116 @@ $(document).ready(function () {
 	updatepage();
     });
 
-    // Show evidence editor (insert new)
+    // Show evidence editor (insert new, button click)
     $('.edit-new-evidence').on('click', function() {
 	showdialog('evidence-editor');
 	step = $(this).parent().parent().data('step');
-	$('#editor-evidence-step').val(step) // Update step
+	$('#editor-evidence-step').val(step); // Update step
+	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
+	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
+	$('#evidence-editor-text').val(''); // Clear old text
+    });
+
+    // Show evidence editor (insert new, arrow click)
+    $('.path-evidence-box').on('click', function () {
+	showdialog('evidence-editor');
+	step = $(this).data('step');
+	$('#editor-evidence-step').val(step); // Update step
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(''); // Clear old text
     });
 
     // Show evidence editor (edit old)
-    // TO DO
+    $('.evidence-block').on('click', '.edit-old-evidence', function(event) {
+	showdialog('evidence-editor');
+	step = $(this).parent().parent().parent().parent().parent().data('step');
+	index = $(this).parent().parent().data('index');
+	$('#editor-evidence-step').val(step); // Update step
+	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
+	$('#editor-evidence-index').val(index); // Indicate that it's new evidence
+	$('#evidence-editor-text').val(pathdata.evidence[index].text); // Bring back old text
+    });
     
+    // Show delete evidence dialog
+    $('.evidence-block').on('click', '.delete-evidence', function(event) {
+	showdialog('evidence-delete');
+	step = $(this).parent().parent().parent().parent().parent().data('step');
+	index = $(this).parent().parent().data('index');
+	$('.delete-evidence-stepname').html(stepname(step)); // Update user-facing step name in dialog
+	$('#delete-evidence-index').val(index); // Indicate index to be deleted
+	$('#delete-evidence-text').html(pathdata.evidence[index].text); // Show text for reference
+    });
+
     // Show evidence strength editor
     $('.edit-evidence-strength').on('click', function(event) {
 	showdialog('evidence-strength');
 	step = $(this).parent().parent().data('step');
 	$('#evidence-strength-step').val(step);
 	$('.evidence-strength-stepname').html(stepname(step));
-	if (pathdata.strength.hasOwnProperty(step)) { // 
+	if (pathdata.strength.hasOwnProperty(step)) {
 	    $('#evidence-strength-slider').val(pathdata.strength[step]);
 	} else {
 	    $('#evidence-strength-slider').val(1);	    
 	}
+	// Enable slider and confirm
+	$('#evidence-strength-slider').attr('disabled', false);
+	$('#confirm-evidence-strength').attr('disabled', false);
+    });
+
+    // Show evidence strength editor (arrow click)
+    $('.path-arrow').on('click', function (event) {
+	// Check whether there's any evidence
+	step = $(this).data('step');
+	var count_evidence = 0;
+	for (var key in pathdata.evidence) {
+	    if (step == pathdata.evidence[key].step) {
+		count_evidence ++;
+	    }
+	}
+	if (count_evidence > 0) { // There is evidence for this step
+	    showdialog('evidence-strength');
+	    $('#evidence-strength-step').val(step);
+	    $('.evidence-strength-stepname').html(stepname(step));
+	    if (pathdata.strength.hasOwnProperty(step)) {
+		$('#evidence-strength-slider').val(pathdata.strength[step]);
+	    } else {
+		$('#evidence-strength-slider').val(1);	    
+	    }
+	    // Enable slider and confirm
+	    $('#evidence-strength-slider').attr('disabled', false);
+	    $('#confirm-evidence-strength').attr('disabled', false);
+	} else { // No evidence for this step
+	    showdialog('evidence-strength');
+	    $('#evidence-strength-step').val(step);
+	    $('.evidence-strength-stepname').html(stepname(step));
+	    $('#evidence-strength-slider').val(1);
+	    // Disable slider and confirm
+	    $('#evidence-strength-slider').attr('disabled', true);
+	    $('#confirm-evidence-strength').attr('disabled', true);   
+	}
+	
     });
 
     // Confirm evidence
     $('#confirm-evidence-editor').on('click', function(event) {
-	if ($('#evidence-editor-index').val() != '') { // Inserting new evidence
+	if ($('#editor-evidence-index').val() == '') { // Inserting new evidence
 	    newindex = gen_index(); // Index for new evidence entry
 	    pathdata.evidence[newindex] = { // Add evidence to JSON object
 		step: $('#editor-evidence-step').val(),
 		text: $('#evidence-editor-text').val()
 	    };
-	    updatepage();
 	} else { // Updating old evidence
-	    eindex = $('#evidence-editor-index').val();
-	    // TODO
-	    // Update the JSON object
-	    
+	    index = $('#editor-evidence-index').val();
+	    pathdata.evidence[index].text = $('#evidence-editor-text').val();
 	}
-	
-	
+	updatepage();
+    });
+
+    // Confirm delete
+    $('#confirm-delete').on('click', function (event) {
+	delete pathdata.evidence[$('#delete-evidence-index').val()];
+	updatepage()
     });
 
     // Confirm strength
@@ -242,9 +316,12 @@ $(document).ready(function () {
 	updatepage();
     });
 
-    // Hover over path figure parts
-    $('#arrow-m0m1').on('mouseover', function (event) {
-	$('#evidence-block-m0m1').css('border', '1px solid red;');
+    $('#view-example').on('click', function (event) {
+	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '') {
+	    $('.dialog-close-x').click();
+	    pathdata = JSON.parse(ex_pathdata);
+	    updatepage();
+	}
     });
     
 })

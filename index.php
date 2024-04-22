@@ -178,7 +178,7 @@
 		    </svg>
 		    Start a new PATH with guidance
 		</button>
-		<button class="btn btn-primary">
+		<button class="btn btn-primary" id="view-example">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#easel"/>
 		    </svg>
@@ -300,6 +300,26 @@
 		    <use href="images/bootstrap-icons.svg#check-circle"/>
 		</svg>
 		Confirm
+	    </button>
+	</div>
+
+	<div id="evidence-delete" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Confirm delete evidence</h2>
+	    <div class="alert alert-warning" role="alert">Are you sure you want to delete the following evidence for <span class="delete-evidence-stepname"></span>?</div>
+	    <hr>
+	    <div id="delete-evidence-text" style="margin-bottom: 20px"></div>
+	    <hr>
+	    <input type="hidden" id="delete-evidence-index" value="">
+	    <button class="btn btn-danger dialog-close" id="confirm-delete">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#backspace"/>
+		</svg>
+		Delete
 	    </button>
 	</div>
 

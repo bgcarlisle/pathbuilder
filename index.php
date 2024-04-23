@@ -122,7 +122,7 @@
 	     padding: 2%;
 	     border: 1px solid #666;
 	     width: 100%;
-	     margin-bottom: 10px;
+	     margin-bottom: 20px;
 	 }
 	 .path-arrow {
 	     fill: #666;

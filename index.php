@@ -227,7 +227,7 @@
 		    <use href="images/bootstrap-icons.svg#x"/>
 		</svg>
 	    </button>
-	    <h2>Confirm view example PATH</h2>
+	    <h2>Confirm start new PATH</h2>
 	    <div class="alert alert-warning" role="alert">Are you sure you want to clear the PATH that you currently have loaded? You will lose any unsaved work.</div>
 	    <button class="btn btn-primary dialog-close" id="confirm-replace-with-empty">
 		<svg width="20" height="20" fill="currentColor">

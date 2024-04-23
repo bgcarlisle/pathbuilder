@@ -7,6 +7,7 @@ var steps = ["m0m1", "t1", "m1m2", "t2", "m2m3", "t3", "d0d1", "d1d2", "d2d3"];
 function showdialog (dialogname) {
     $('#pagemask').fadeIn(250, function () {
 	$('#' + dialogname).slideDown();
+	$('#' + dialogname + ' textarea,#' + dialogname + ' input').first().focus();
     });
 }
 

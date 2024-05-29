@@ -247,7 +247,7 @@
 	    <!-- Export buttons -->
 	    <div class="d-grid gap-2">
 		
-		<button class="btn btn-sm btn-primary" disabled>
+		<button class="btn btn-sm btn-primary" onclick="export_pathdata_to_json()">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-json"/>
 		    </svg>

@@ -11,6 +11,17 @@ function showdialog (dialogname) {
     });
 }
 
+function export_pathdata_to_json() {
+    const dl = document.createElement("a");
+    dl.href = URL.createObjectURL(new Blob([JSON.stringify(pathdata, null, 2)], {
+	type: "text/plain"
+    }));
+    dl.setAttribute("download", "pathdata.json");
+    document.body.appendChild(dl);
+    dl.click();
+    document.body.removeChild(dl);
+}
+
 function updatepage () {
 
     // Update target Scenario

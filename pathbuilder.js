@@ -139,7 +139,7 @@ $(document).ready(function () {
 	    }	    
 	}
     });
-
+    
     $('.evidence-container').sortable({
 	connectWith: ".evidence-container",
 	placeholder: "evidence-placeholder",
@@ -328,6 +328,7 @@ $(document).ready(function () {
 	updatepage();
     });
 
+    // Replace data with example or warn if there's already something there
     $('#view-example').on('click', function(event) {
 	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '') {
 	    $('.dialog-close-x').click();
@@ -338,9 +339,31 @@ $(document).ready(function () {
 	}
     });
 
+    // Replace data with example
     $('#confirm-replace-with-example').on('click', function(event) {
 	pathdata = JSON.parse(ex_pathdata);
 	updatepage();
+    });
+
+    // Show file selector and warn if this will replace existing data
+    $('#open-json-file').on('click', function (event) {
+	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '') {
+	    showdialog('open-saved-json-path');
+	    $('#open-saved-json-path div.alert').fadeOut();
+	} else {
+	    showdialog('open-saved-json-path');
+	    $('#open-saved-json-path div.alert').fadeIn();
+	}
+    });
+
+    // Read JSON from disk and replace PATH data in memory
+    $('#confirm-replace-with-file-data').on('click', function(event) {
+        let fr = new FileReader();
+        fr.onload = function () {
+	    pathdata = JSON.parse(fr.result);
+	    updatepage();
+        }
+        fr.readAsText(document.getElementById('inputfile').files[0]);
     });
 
     $('#new-path-from-scratch').on('click', function(event) {

@@ -190,7 +190,7 @@
 		    </svg>
 		    Start a new PATH with guidance
 		</button>
-		<button class="btn btn-primary" disabled>
+		<button class="btn btn-primary" id="open-json-file">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-json"/>
 		    </svg>
@@ -203,6 +203,26 @@
 		    Open a PATH saved online (requires account)
 		</button>
 	    </div>
+	</div>
+
+	<div id="open-saved-json-path" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Open a PATH previously saved to your computer</h2>
+	    <div class="alert alert-warning" role="alert">This will replace the PATH that you currently have loaded with the data from the selected file. Are you sure?</div>
+	    <div class="mb-3">
+		<label for="formFile" class="form-label">Choose a JSON file from your computer</label>
+		<input class="form-control" type="file" id="inputfile" name="inputfile">
+	    </div>
+	    <button class="btn btn-primary dialog-close" id="confirm-replace-with-file-data">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#check-circle"/>
+		</svg>
+		Confirm
+	    </button>
 	</div>
 
 	<div id="replace-with-example-path" class="dialog">

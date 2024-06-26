@@ -85,28 +85,28 @@
 	 .btn {
 	     border-color: #423629 !important;
 	 }
-	 .evidence-space {
+	 .evidence-space,.references-space {
 	     padding: 10px;
 	     background-color: #ddd;
 	     margin-bottom: 40px;
 	 }
-	 .evidence-container {
+	 .evidence-container,.references-container {
 	     min-height: 40px;
 	     margin-bottom: 10px;
 	 }
-	 .evidence-instance {
+	 .evidence-instance,.reference-instance {
 	     background-color: #ddd;
 	     border: 1px solid #fff;
 	     padding: 8px 10px;
 	     margin-bottom: 10px;
 	     min-height: 50px;
 	 }
-	 .evidence-placeholder {
+	 .evidence-placeholder,.reference-placeholder {
 	     background-color: #eee;
 	     min-height: 50px;
 	     margin-bottom: 10px;
 	 }
-	 .evidence-instance-grip {
+	 .evidence-instance-grip,.reference-instance-grip {
 	     fill: #333;
 	     margin-right: 20px;
 	 }
@@ -395,6 +395,21 @@
 		</svg>
 		Confirm
 	    </button>
+	</div>
+
+	<div id="reference-editor" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Reference details</h2>
+	    <div class="mb-3">
+		<label for="ref-search" class="form-label">Search by DOI</label>
+		<input type="text" class="form-control" id="ref-search" aria-describedby="ref-search-help">
+		<div id="ref-search-help" class="form-text">Enter a DOI, and we'll try to auto-populate the reference for you</div>
+	    </div>
+	    <input type="hidden" id="reference-index" value="">
 	</div>
 
 	<!-- End of dialog boxes -->
@@ -740,6 +755,21 @@
 				    <use href="images/bootstrap-icons.svg#plus-circle"/>
 				</svg>
 				Add evidence
+			    </button>
+			</div>
+		    </div>
+
+		    <hr>
+
+		    <div id="references-block">
+			<h3>References</h3>
+			<div class="references-space">
+			    <div class="references-container"></div>
+			    <button class="btn btn-primary btn-sm edit-new-reference">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add reference
 			    </button>
 			</div>
 		    </div>

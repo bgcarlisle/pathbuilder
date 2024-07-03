@@ -385,4 +385,4 @@ $(document).ready(function () {
 	$('.path-arrow').removeClass('strength1');
     });
     
-})
+});

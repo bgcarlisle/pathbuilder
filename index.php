@@ -170,7 +170,7 @@
 		</svg>
 	    </button>
 	    <h2>Welcome to PATH Builder</h2>
-	    <p>PATH (Preclinical Assessment of Translation to Humans) is a structured approach for presenting a comprehensive, accurate and transparent scientific rationale for early phase clinical trials and innovative care. Read <a href="#">the PATH paper (Kimmelman et al, 2024)</a> for a detailed rationale and worked examples.</p>
+	    <p>PATH (Preclinical Assessment of Translation to Humans) is a structured approach for presenting a comprehensive, accurate and transparent scientific rationale for early phase clinical trials and innovative care. Read <a href="https://doi.org/10.1016/j.medj.2024.07.014">the PATH paper (Kimmelman et al, 2024)</a> for a detailed rationale and worked examples.</p>
 	    <div class="d-grid gap-2">
 		<button class="btn btn-primary" id="new-path-from-scratch">
 		    <svg width="32" height="32" fill="currentColor">

@@ -338,13 +338,124 @@
 		</svg>
 	    </button>
 	    <h2>Evidence for <span class="editor-evidence-stepname"></span></h2>
-	    <div>For direct or model steps, provide evidence that takes into account magnitude, precision and risk of bias. For translational steps, this will be more complicated, but it may be possible to express this evidence in terms of magnitude of relationships connecting models to target scenarios, precision and risk of bias.</div>
-	    <div>Where possible, citations should be provided for each piece of evidence.</div>
+	    <div id="evidence-editor-prompt-text"></div>
 	    <hr>
 	    <div class="mb-3">
 		<label for="evidence-editor-text" class="form-label">Summary of evidence</label>
 		<textarea class="form-control" id="evidence-editor-text" rows="3"></textarea>
 	    </div>
+
+	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
+	    <div id="evidence-editor-vertical-arrow-fields">
+		<div class="mb-3">
+		    <label for="magnitude-of-effect-editor" class="form-label">Magnitude of effect</label>
+		    <input type="text" class="form-control" id="magnitude-of-effect-editor" aria-describedby="magnitude-of-effect-editor">
+		    <div id="magnitude-of-effect-editor" class="form-text">Provide magnitude and units where appropriate</div>
+		</div>
+		<div class="mb-3">
+		    <label for="precision-around-estimate-editor" class="form-label">Precision around estimate</label>
+		    <input type="text" class="form-control" id="precision-around-estimate-editor" aria-describedby="precision-around-estimate-editor">
+		    <div id="precision-around-estimate-editor-help" class="form-text">E.g. p-value, 95% confidence interval, etc.</div>
+		</div>
+		<div class="mb-3">
+		    <p>Measures to address risk of bias</p>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-randomization">
+			<label class="form-check-label" for="rob-randomization">
+			    Randomization
+			</label>
+		    </div>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-blinding">
+			<label class="form-check-label" for="rob-blinding">
+			    Blinding
+			</label>
+		    </div>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-preregistration">
+			<label class="form-check-label" for="rob-preregistration">
+			    Pre-registration
+			</label>
+		    </div>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-comparator">
+			<label class="form-check-label" for="rob-comparator">
+			    Comparator (specify below)
+			</label>
+		    </div>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-other-check">
+			<label class="form-check-label" for="rob-other-check">
+			    Other (specify below)
+			</label>
+		    </div>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-none">
+			<label class="form-check-label" for="rob-none">
+			    None
+			</label>
+		    </div>
+		    <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="rob-ns">
+			<label class="form-check-label" for="rob-ns">
+			    Not stated
+			</label>
+		    </div>
+		</div>
+		<div class="mb-3">
+		    <label for="rob-comparator-editor" class="form-label">Comparator</label>
+		    <input type="text" class="form-control" id="rob-other-editor" aria-describedby="rob-comparator-editor">
+		    <div id="rob-comparator-editor-help" class="form-text">E.g. name of particular drug, relevant dose, "standard of care" or historical control</div>
+		</div>
+		<div class="mb-3">
+		    <label for="rob-other-editor" class="form-label">Other measures to address risk of bias</label>
+		    <input type="text" class="form-control" id="rob-other-editor" aria-describedby="rob-other-editor">
+		    <div id="rob-other-editor-help" class="form-text">Anything else</div>
+		</div>
+		
+	    </div>
+
+	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
+	    <div id="evidence-editor-horizontal-arrow-fields">
+		<div class="mb-3">
+		    <label for="target-disease-path-editor" class="form-label">Evidence supporting target disease pathophysiology (and along with it, reasons to believe such pathophysiology is recapitulated in model systems)</label>
+		    <textarea class="form-control" id="target-disease-path-editor" rows="3"></textarea>
+		</div>
+		<div class="mb-3">
+		    <label for="construct-validity-editor" class="form-label">Explanation of relationships between various features of a model systems and those for the target scenario ("construct validity")</label>
+		    <textarea class="form-control" id="construct-validity-editor" rows="3"></textarea>
+		</div>
+		<div class="mb-3">
+		    <label for="external-validity-editor" class="form-label">Replication of effects in different model systems ("external validity")</label>
+		    <textarea class="form-control" id="external-validity-editor" rows="3"></textarea>
+		</div>
+		<div class="mb-3">
+		    <label for="interfering-effects-editor" class="form-label">Evidence suggesting the absence of "interfering effects" in the target scenario</label>
+		    <textarea class="form-control" id="interfering-effects-editor" rows="3"></textarea>
+		</div>
+		<div class="mb-3">
+		    <label for="sr-evidence-editor" class="form-label">Systematic review evidence regarding the model's predictive value</label>
+		    <textarea class="form-control" id="src-evidence-editor" rows="3"></textarea>
+		</div>
+	    </div>
+	    <!-- End of conditional display -->
+
+	    <hr>
+	    
+	    <div id="references-in-editor-block">
+		<h3>References</h3>
+		<div class="references-space">
+		    <div class="references-container"></div>
+		    <button class="btn btn-primary btn-sm edit-new-reference">
+			<svg width="16" height="16" fill="currentColor">
+			    <use href="images/bootstrap-icons.svg#plus-circle"/>
+			</svg>
+			Add reference
+		    </button>
+		</div>
+	    </div>
+
+	    
 	    <input type="hidden" id="editor-evidence-step" value="">
 	    <input type="hidden" id="editor-evidence-index" value="">
 	    <button class="btn btn-primary dialog-close" id="confirm-evidence-editor">

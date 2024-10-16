@@ -4,6 +4,44 @@ var ex_pathdata = '{"targetScenario":"Antonib given to glioma patients will impr
 
 var steps = ["m0m1", "t1", "m1m2", "t2", "m2m3", "t3", "d0d1", "d1d2", "d2d3"];
 
+var prompts = [
+    {
+	"step":"m0m1",
+	"prompt":"What evidence from models suggests that the drug engages and has the desired effect on its molecular target?"
+    },
+    {
+	"step":"m1m2",
+	"prompt":"What evidence from models suggests that the drug, once it has engaged with the molecular target, will go on to produce the intended physiological effect?"
+    },
+    {
+	"step":"m2m3",
+	"prompt":"What evidence from models suggests that the drug, once it has produced the intended physiological effect, will go on to also produce the desired clinical effect?"
+    },{
+	"step":"d0d1",
+	"prompt":"What direct evidence from clinical studies in the target population suggests that the drug engages and has the desired effect on its molecular target?"
+    },
+    {
+	"step":"d1d2",
+	"prompt":"What direct evidence from clinical studies suggests that the drug, once it has engaged with the molecular target, will go on to produce the intended physiological effect in the target population?"
+    },
+    {
+	"step":"d2d3",
+	"prompt":"What direct evidence from clinical studies suggests that the drug, once it has produced the intended physiological effect, will go on to also produce the desired clinical effect in the target population?"
+    },
+    {
+	"step":"t1",
+	"prompt":"What evidence suggests that the target system studied in models is recapitulated in humans such that evidence of the molecular effect of the drug is relevant to the target population?"
+    },
+    {
+	"step":"t2",
+	"prompt":"What evidence suggests that the target system studied in models is recapitulated in humans such that evidence regarding the physiological effect of the drug is relevant to the target population in humans?"
+    },
+    {
+	"step":"t3",
+	"prompt":"What evidence suggests that the target system studied in models is recapitulated in humans such that evidence regarding the clinical effect of the drug is relevant to the target population in humans?"
+    }
+];
+
 function showdialog (dialogname) {
     $('#pagemask').fadeIn(250, function () {
 	$('#' + dialogname).slideDown();
@@ -122,6 +160,27 @@ function stepname (step) {
     
 }
 
+function steptype (step) {
+
+    firstletter = step.substring(0, 1);
+
+    if (firstletter == 'm' | firstletter == 'd') {
+	return 'vertical';
+    } else {
+	// Takes e.g. t1 and turns it to T1
+	return 'horizontal';
+    }
+    
+}
+
+function stepprompt (step) {
+    for (var nstep in prompts) {
+	if (prompts[nstep].step == step) {
+	    return(prompts[nstep].prompt);
+	}
+    }
+}
+
 $(document).ready(function () {
 
     $('#pagemask, .dialog-close').on('click', function (event) {
@@ -218,6 +277,14 @@ $(document).ready(function () {
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(''); // Clear old text
+	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
+	if (steptype(step) == "vertical") {
+	    $('#evidence-editor-vertical-arrow-fields').slideDown();
+	    $('#evidence-editor-horizontal-arrow-fields').slideUp();
+	} else {
+	    $('#evidence-editor-vertical-arrow-fields').slideUp();
+	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
+	}
     });
 
     // Show evidence editor (insert new, arrow click)
@@ -228,6 +295,14 @@ $(document).ready(function () {
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(''); // Clear old text
+	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
+	if (steptype(step) == "vertical") {
+	    $('#evidence-editor-vertical-arrow-fields').slideDown();
+	    $('#evidence-editor-horizontal-arrow-fields').slideUp();
+	} else {
+	    $('#evidence-editor-vertical-arrow-fields').slideUp();
+	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
+	}
     });
 
     // Show evidence editor (edit old)
@@ -239,6 +314,14 @@ $(document).ready(function () {
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(index); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(pathdata.evidence[index].text); // Bring back old text
+	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
+	if (steptype(step) == "vertical") {
+	    $('#evidence-editor-vertical-arrow-fields').slideDown();
+	    $('#evidence-editor-horizontal-arrow-fields').slideUp();
+	} else {
+	    $('#evidence-editor-vertical-arrow-fields').slideUp();
+	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
+	}
     });
     
     // Show delete evidence dialog

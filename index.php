@@ -508,21 +508,6 @@
 	    </button>
 	</div>
 
-	<div id="reference-editor" class="dialog">
-	    <button class="btn dialog-close-x dialog-close">
-		<svg width="32" height="32" fill="currentColor">
-		    <use href="images/bootstrap-icons.svg#x"/>
-		</svg>
-	    </button>
-	    <h2>Reference details</h2>
-	    <div class="mb-3">
-		<label for="ref-search" class="form-label">Search by DOI</label>
-		<input type="text" class="form-control" id="ref-search" aria-describedby="ref-search-help">
-		<div id="ref-search-help" class="form-text">Enter a DOI, and we'll try to auto-populate the reference for you</div>
-	    </div>
-	    <input type="hidden" id="reference-index" value="">
-	</div>
-
 	<!-- End of dialog boxes -->
 	<div class="container-fluid titlebar">
 	    <div class="row">

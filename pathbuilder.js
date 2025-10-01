@@ -410,12 +410,7 @@ $(document).ready(function () {
 	pathdata.strength[$('#evidence-strength-step').val()] = $('#evidence-strength-slider').val();
 	updatepage();
     });
-
-    // Show reference editor
-    $('.edit-new-reference').on('click', function(event){
-	showdialog('reference-editor');
-    });
-
+    
     // Replace data with example or warn if there's already something there
     $('#view-example').on('click', function(event) {
 	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '' & Object.keys(pathdata.references).length == 0) {

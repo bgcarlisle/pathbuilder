@@ -214,7 +214,7 @@
 	    <h2>Open a PATH previously saved to your computer</h2>
 	    <div class="alert alert-warning" role="alert">This will replace the PATH that you currently have loaded with the data from the selected file. Are you sure?</div>
 	    <div class="mb-3">
-		<label for="formFile" class="form-label">Choose a JSON file from your computer</label>
+		<label for="inputfile" class="form-label">Choose a JSON file from your computer</label>
 		<input class="form-control" type="file" id="inputfile" name="inputfile">
 	    </div>
 	    <button class="btn btn-primary dialog-close" id="confirm-replace-with-file-data">
@@ -404,7 +404,7 @@
 		</div>
 		<div class="mb-3">
 		    <label for="rob-comparator-editor" class="form-label">Comparator</label>
-		    <input type="text" class="form-control" id="rob-other-editor" aria-describedby="rob-comparator-editor">
+		    <input type="text" class="form-control" id="rob-comparator-editor" aria-describedby="rob-comparator-editor">
 		    <div id="rob-comparator-editor-help" class="form-text">E.g. name of particular drug, relevant dose, "standard of care" or historical control</div>
 		</div>
 		<div class="mb-3">
@@ -435,7 +435,7 @@
 		</div>
 		<div class="mb-3">
 		    <label for="sr-evidence-editor" class="form-label">Systematic review evidence regarding the model's predictive value</label>
-		    <textarea class="form-control" id="src-evidence-editor" rows="3"></textarea>
+		    <textarea class="form-control" id="sr-evidence-editor" rows="3"></textarea>
 		</div>
 	    </div>
 	    <!-- End of conditional display -->

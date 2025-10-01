@@ -446,11 +446,17 @@
 		<h3>References</h3>
 		<div class="references-space">
 		    <div class="references-container"></div>
-		    <button class="btn btn-primary btn-sm edit-new-reference">
+		    <button class="btn btn-primary btn-sm edit-new-reference-doi">
 			<svg width="16" height="16" fill="currentColor">
 			    <use href="images/bootstrap-icons.svg#plus-circle"/>
 			</svg>
-			Add reference
+			Add reference by DOI lookup
+		    </button>
+		    <button class="btn btn-primary btn-sm edit-new-reference-manual">
+			<svg width="16" height="16" fill="currentColor">
+			    <use href="images/bootstrap-icons.svg#plus-circle"/>
+			</svg>
+			Add reference manually
 		    </button>
 		</div>
 	    </div>
@@ -861,11 +867,17 @@
 			<h3>References</h3>
 			<div class="references-space">
 			    <div class="references-container"></div>
-			    <button class="btn btn-primary btn-sm edit-new-reference">
+			    <button class="btn btn-primary btn-sm edit-new-reference-doi">
 				<svg width="16" height="16" fill="currentColor">
 				    <use href="images/bootstrap-icons.svg#plus-circle"/>
 				</svg>
-				Add reference
+				Add reference by DOI lookup
+			    </button>
+			    <button class="btn btn-primary btn-sm edit-new-reference-manual">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add reference manually
 			    </button>
 			</div>
 		    </div>

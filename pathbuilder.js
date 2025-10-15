@@ -131,9 +131,9 @@ function updatepage () {
 }
 
 function gen_index () {
-    
-   generate_another_index = 1;
+    generate_another_index = 1;
     while (generate_another_index == 1) {
+	// Make a random alphanumeric 64-character string
 	length = 64;
 	result = '';
 	characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -148,7 +148,6 @@ function gen_index () {
 	    generate_another_index = 0;
 	}
     }
-    
     return result;
 }
 

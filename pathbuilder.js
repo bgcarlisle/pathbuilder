@@ -130,16 +130,25 @@ function updatepage () {
 
 }
 
-function gen_index() {
-    length = 64;
-    result = '';
-    characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-      counter += 1;
+function gen_index () {
+    
+   generate_another_index = 1;
+    while (generate_another_index == 1) {
+	length = 64;
+	result = '';
+	characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+	counter = 0;
+	while (counter < length) {
+	    result += characters.charAt(Math.floor(Math.random() * characters.length));
+	    counter += 1;
+	}
+	// Check that the index isn't already in use before returning
+	// result and repeat if it is
+	if (! (result in pathdata.evidence)) {
+	    generate_another_index = 0;
+	}
     }
-    // TODO: check that the index isn't already in use before returning result and repeat if it is
+    
     return result;
 }
 

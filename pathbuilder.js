@@ -174,9 +174,10 @@ function steptype (step) {
     firstletter = step.substring(0, 1);
 
     if (firstletter == 'm' | firstletter == 'd') {
+	// It's an M- or D-type step
 	return 'vertical';
     } else {
-	// Takes e.g. t1 and turns it to T1
+	// It's a T-type step
 	return 'horizontal';
     }
     

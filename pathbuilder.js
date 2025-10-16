@@ -42,6 +42,29 @@ var prompts = [
     }
 ];
 
+var translational_arrow_evidence_types = [
+    {
+	"code":"target-present",
+	"description":"Evidence suggesting drug target/functional assay used in models is also present in target patients"
+    },
+    {
+	"code":"construct-validity",
+	"description":"Explanation of relationships between various features of a model systems and those for the target scenario ('construct validity')"
+    },
+    {
+	"code":"external-validity",
+	"description":"Replication of effects in different model systems ('external validity')"
+    },
+    {
+	"code":"interfering-effects",
+	"description":"Evidence suggesting the absence of 'interfering effects' in the target scenario"
+    },
+    {
+	"code":"systematic-review",
+	"description":"Systematic review evidence regarding the model's predictive value"
+    }
+];
+
 function showdialog (dialogname) {
     $('#pagemask').fadeIn(250, function () {
 	$('#' + dialogname).slideDown();

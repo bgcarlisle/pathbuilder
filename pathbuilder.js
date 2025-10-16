@@ -467,7 +467,7 @@ $(document).ready(function () {
     });
 
     $('#confirm-replace-with-empty').on('click', function(event) {
-	pathdata = {targetScenario:'', evidence:{}, strength:{}};
+	pathdata = {targetScenario:'', evidence:{}, strength:{}, references:{}};
 	updatepage();
 	$('.path-arrow').removeClass('strength1');
     });

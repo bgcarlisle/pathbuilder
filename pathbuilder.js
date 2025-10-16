@@ -30,7 +30,7 @@ var prompts = [
     },
     {
 	"step":"t1",
-	"prompt":"What evidence suggests that the target system studied in models is recapitulated in humans such that evidence of the molecular effect of the drug is relevant to the target population?"
+	"prompt":"What evidence suggests that the drug target engagement / functional effects in models is recapitulated in the target patients such that evidence of the molecular effect of the drug is relevant to the target population?"
     },
     {
 	"step":"t2",

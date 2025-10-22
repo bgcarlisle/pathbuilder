@@ -341,12 +341,73 @@
 	    <div id="evidence-editor-prompt-text"></div>
 	    <hr>
 	    <div class="mb-3">
-		<label for="evidence-editor-text" class="form-label">Summary of evidence</label>
+		<label for="evidence-editor-text" class="form-label">Evidence</label>
 		<textarea class="form-control" id="evidence-editor-text" rows="3"></textarea>
 	    </div>
 
 	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
 	    <div id="evidence-editor-vertical-arrow-fields">
+		<label>Types of evidence provided</label>
+		<div class="mb-3 list-group" id="vertical-arrow-evidence">
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="magnitude-of-effect">
+			<span>
+			    Magnitude of effect
+			    <small class="d-block text-body-secondary">The size of the effect in question is quantified</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="units-provided">
+			<span>
+			    Units provided
+			    <small class="d-block text-body-secondary">If appropriate, units are provided</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="measure-precision">
+			<span>
+			    Precision around estimate
+			    <small class="d-block text-body-secondary">If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.</small>
+			</span>
+		    </label>
+		</div>
+
+		
+		<label>Measures to address risk of bias</label>
+		<div class="mb-3 list-group" id="vertical-arrow-evidence-rob">
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="randomization">
+			<span>
+			    Randomization
+			    <small class="d-block text-body-secondary">Randomized experimental design is mentioned</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="masking">
+			<span>
+			    Masking
+			    <small class="d-block text-body-secondary">Masked experimental design is mentioned</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="pre-registration">
+			<span>
+			    Pre-registration
+			    <small class="d-block text-body-secondary">Study in question was pre-registered</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="comparator">
+			<span>
+			    Comparator
+			    <small class="d-block text-body-secondary">Identity of comparator mentioned</small>
+			</span>
+		    </label>
+		    
+		</div>
+		
+
+		<!-- The old one: -->
 		<div class="mb-3">
 		    <label for="magnitude-of-effect-editor" class="form-label">Magnitude of effect</label>
 		    <input type="text" class="form-control" id="magnitude-of-effect-editor" aria-describedby="magnitude-of-effect-editor">
@@ -417,26 +478,45 @@
 
 	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
 	    <div id="evidence-editor-horizontal-arrow-fields">
-		<div class="mb-3">
-		    <label for="target-disease-path-editor" class="form-label">Evidence supporting target disease pathophysiology (and along with it, reasons to believe such pathophysiology is recapitulated in model systems)</label>
-		    <textarea class="form-control" id="target-disease-path-editor" rows="3"></textarea>
+		<label>Types of evidence provided</label>
+		<div class="mb-3 list-group" id="horizontal-arrow-evidence-types">
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="target-present">
+			<span>
+			    Target evidence
+			    <small class="d-block text-body-secondary">Evidence suggesting drug target/functional assay used in models is also present in target patients</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="construct-validity">
+			<span>
+			    Construct validity
+			    <small class="d-block text-body-secondary">Explanation of relationships between various features of a model systems and those for the target scenario</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="external-validity">
+			<span>
+			    External validity
+			    <small class="d-block text-body-secondary">Replication of effects in different model systems</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="interfering-effects">
+			<span>
+			    Interfering effects
+			    <small class="d-block text-body-secondary">Evidence suggesting the absence of "interfering effects" in the target scenario</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="systematic-review">
+			<span>
+			    Systematic review
+			    <small class="d-block text-body-secondary">Systematic review evidence regarding the model's predictive value</small>
+			</span>
+		    </label>
 		</div>
-		<div class="mb-3">
-		    <label for="construct-validity-editor" class="form-label">Explanation of relationships between various features of a model systems and those for the target scenario ("construct validity")</label>
-		    <textarea class="form-control" id="construct-validity-editor" rows="3"></textarea>
-		</div>
-		<div class="mb-3">
-		    <label for="external-validity-editor" class="form-label">Replication of effects in different model systems ("external validity")</label>
-		    <textarea class="form-control" id="external-validity-editor" rows="3"></textarea>
-		</div>
-		<div class="mb-3">
-		    <label for="interfering-effects-editor" class="form-label">Evidence suggesting the absence of "interfering effects" in the target scenario</label>
-		    <textarea class="form-control" id="interfering-effects-editor" rows="3"></textarea>
-		</div>
-		<div class="mb-3">
-		    <label for="sr-evidence-editor" class="form-label">Systematic review evidence regarding the model's predictive value</label>
-		    <textarea class="form-control" id="sr-evidence-editor" rows="3"></textarea>
-		</div>
+		
 	    </div>
 	    <!-- End of conditional display -->
 

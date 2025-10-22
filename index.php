@@ -99,12 +99,12 @@
 	     border: 1px solid #fff;
 	     padding: 8px 10px;
 	     margin-bottom: 10px;
-	     min-height: 50px;
+	     min-height: 100px;
 	 }
 	 .evidence-placeholder,.reference-placeholder {
-	     background-color: #eee;
-	     min-height: 50px;
+	     min-height: 100px;
 	     margin-bottom: 10px;
+	     border: 5px dashed #fff;
 	 }
 	 .evidence-instance-grip,.reference-instance-grip {
 	     fill: #333;

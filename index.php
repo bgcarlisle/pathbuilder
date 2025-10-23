@@ -353,14 +353,14 @@
 			<input class="form-check-input flex-shrink-0" type="checkbox" value="magnitude-of-effect">
 			<span>
 			    Magnitude of effect
-			    <small class="d-block text-body-secondary">The size of the effect in question is quantified</small>
+			    <small class="d-block text-body-secondary">The size of the effect being reported is quantified</small>
 			</span>
 		    </label>
 		    <label class="list-group-item d-flex gap-2">
 			<input class="form-check-input flex-shrink-0" type="checkbox" value="units-provided">
 			<span>
 			    Units provided
-			    <small class="d-block text-body-secondary">If appropriate, units are provided</small>
+			    <small class="d-block text-body-secondary">Units are provided for all reported measures of effect where appropriate</small>
 			</span>
 		    </label>
 		    <label class="list-group-item d-flex gap-2">

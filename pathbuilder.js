@@ -42,27 +42,12 @@ var prompts = [
     }
 ];
 
-var translational_arrow_evidence_types = [
-    {
-	"code":"target-present",
-	"description":"Evidence suggesting drug target/functional assay used in models is also present in target patients"
-    },
-    {
-	"code":"construct-validity",
-	"description":"Explanation of relationships between various features of a model systems and those for the target scenario ('construct validity')"
-    },
-    {
-	"code":"external-validity",
-	"description":"Replication of effects in different model systems ('external validity')"
-    },
-    {
-	"code":"interfering-effects",
-	"description":"Evidence suggesting the absence of 'interfering effects' in the target scenario"
-    },
-    {
-	"code":"systematic-review",
-	"description":"Systematic review evidence regarding the model's predictive value"
-    }
+var precision_regex = [
+    "\\d+ patients",
+    "p-value",
+    "(p|P)\\s*(?:<|>|<=|>=|≤|≥|=)\\s*0?\\.\\d+",
+    "(?:(?:[\\[\\(]\\s*)?(?:\\d+%?\\s*)?(?:CI|confidence\\s*interval)(?:\\s*(?:for|of))?[:\\s-]*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*(?:–|-|,|to)\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*(?:[\\]\\)])?|[\\[\\(]\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*(?:–|-|,|to)\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*[\\]\\)])",
+    "(?<!\\bnot\\s+)significantly"
 ];
 
 function showdialog (dialogname) {
@@ -355,7 +340,7 @@ $(document).ready(function () {
 	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
 	}
     });
-    
+
     // Show delete evidence dialog
     $('.evidence-block').on('click', '.delete-evidence', function(event) {
 	showdialog('evidence-delete');
@@ -493,6 +478,32 @@ $(document).ready(function () {
 	pathdata = {targetScenario:'', evidence:{}, strength:{}, references:{}};
 	updatepage();
 	$('.path-arrow').removeClass('strength1');
+    });
+
+    // Auto-analyze evidence
+    $('.auto-analyze-evidence').on('click', function (event) {
+	evidence_text = $('#evidence-editor-text').val();
+
+	var matches = [];
+	for (var key in precision_regex) {
+	    regex_matches = evidence_text.matchAll(precision_regex[key]);
+	    for (var regex_match of regex_matches) {
+		matches.push(regex_match[0]);	
+	    }
+	}
+	
+	$('#auto-analysis-report').html('').slideUp();
+	if (matches.length > 0) {
+	    // If there are any matches
+	    $('#auto-analysis-report').slideDown();
+	    $('#auto-analysis-report').append('<div id="precision-auto-analysis-report">The evidence provided contains the following phrases, which seem to indicate precision around the estimate: </div>');
+	    
+	    for (var key in matches) {
+		$('#precision-auto-analysis-report').append('<span class="badge badge-primary me-2">' + matches[key] + '</span>')
+		console.log(matches[key]);
+	    }
+	}
+	
     });
     
 });

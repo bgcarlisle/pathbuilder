@@ -79,7 +79,7 @@
 	     color: #fff;
 	     float: right;
 	 }
-	 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+	 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .badge-primary {
 	     background-color: #423629 !important;
 	 }
 	 .btn {
@@ -342,7 +342,14 @@
 	    <hr>
 	    <div class="mb-3">
 		<label for="evidence-editor-text" class="form-label">Evidence</label>
-		<textarea class="form-control" id="evidence-editor-text" rows="3"></textarea>
+		<textarea class="form-control mb-2" id="evidence-editor-text" rows="3"></textarea>
+		<button class="btn btn-primary btn-sm mb-2 auto-analyze-evidence">
+		    <svg width="16" height="16" fill="currentColor">
+			<use href="images/bootstrap-icons.svg#magic"/>
+		    </svg>
+		    Auto-analyze evidence
+		</button>
+		<div id="auto-analysis-report"></div>
 	    </div>
 
 	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
@@ -368,6 +375,13 @@
 			<span>
 			    Precision around estimate
 			    <small class="d-block text-body-secondary">If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.</small>
+			</span>
+		    </label>
+		    <label class="list-group-item d-flex gap-2">
+			<input class="form-check-input flex-shrink-0" type="checkbox" value="comparator">
+			<span>
+			    Comparator
+			    <small class="d-block text-body-secondary">Identity of comparator mentioned</small>
 			</span>
 		    </label>
 		</div>
@@ -396,17 +410,8 @@
 			    <small class="d-block text-body-secondary">Study in question was pre-registered</small>
 			</span>
 		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="comparator">
-			<span>
-			    Comparator
-			    <small class="d-block text-body-secondary">Identity of comparator mentioned</small>
-			</span>
-		    </label>
 		    
 		</div>
-		
-
 		
 	    </div>
 

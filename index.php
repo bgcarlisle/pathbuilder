@@ -53,7 +53,7 @@
 	     height: 70%;
 	     overflow-y: scroll;
 	 }
-	 @media (max-width: 800px) {
+	 @media (max-width: 900px) {
 	     .dialog {
 		 margin: 5% 5%;
 		 width: 90%;

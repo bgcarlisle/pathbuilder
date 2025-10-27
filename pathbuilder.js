@@ -43,11 +43,57 @@ var prompts = [
 ];
 
 var precision_regex = [
-    "\\d+ patients",
-    "p-value",
-    "(p|P)\\s*(?:<|>|<=|>=|≤|≥|=)\\s*0?\\.\\d+",
-    "(?:(?:[\\[\\(]\\s*)?(?:\\d+%?\\s*)?(?:CI|confidence\\s*interval)(?:\\s*(?:for|of))?[:\\s-]*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*(?:–|-|,|to)\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*(?:[\\]\\)])?|[\\[\\(]\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*(?:–|-|,|to)\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*[\\]\\)])",
-    "(?<!\\bnot\\s+)significantly"
+    // A numeral and then the word "patients"
+    /\d+ patients/gi,
+    // The word
+    /p-value/gi,
+    // p < 0.05 and variants
+    /(p|P)\s*(?:<|>|<=|>=|≤|≥|=)\s*0?\.\d+/gi,
+    // (95% CI 50-60) and variants
+    /(?:(?:[\[\(]\s*)?(?:\d+%?\s*)?(?:CI|confidence\s*interval)(?:\s*(?:for|of))?[:\s-]*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*(?:–|-|,|to)\s*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*(?:[\]\)])?|[\[\(]\s*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*(?:–|-|,|to)\s*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*[\]\)])/gi,
+    // The word "significantly" without the word "not in front"
+    /\b(?<!not\s+)significantly\b/gi
+];
+
+var comparator_regex = [
+    // The phrase "standard of care"
+    /standard of care/gi,
+    // SOC
+    /\bSOC\b/gi,
+    // "A vs B" and variants
+    /\b\w+ (versus|vs|vs.|v|v.) \w+\b/gi,
+    // The word "comparator"
+    /\bcomparator\b/gi,
+    // "(as) compared with/to X"
+    /\b(|as) compared (with|to) \w+\b/gi,
+    // "comparison of X"
+    /\bcomparison of \w+\b/gi,
+    // "Head to head"
+    /\bhead to head\b/gi,
+    // Comparative study of X
+    /\bcomparative study of \w+\b/gi,
+    // "Randomized to/betwen A or B"
+    /\brandomi(z|s)ed (to|between) \w+ or \w+\b/gi,
+    // Randomized between A and B
+    /\brandomi(z|s)ed between \w+ and \w+\b/gi,
+    // "Placebo"
+    /\bplacebo\b/gi,
+    // "Control(led)"
+    /\bcontrol(|led)\b/gi
+];
+
+var randomization_regex = [
+    /\brandomized\b/gi,
+    /\brandomly\b/gi,
+    /\brandomization\b/gi,
+    /\brandom\b/gi
+];
+
+var masking_regex [
+    /\bblinded\b/gi,
+    /\b(double|triple|quadruple)-blind\b/gi,
+    /\bmasked\b/gi,
+    /\bmasking\b/gi
 ];
 
 function showdialog (dialogname) {
@@ -198,7 +244,18 @@ function stepprompt (step) {
     }
 }
 
-$(document).ready(function () {
+function return_matches (text, regexes) {
+    var matches = [];
+    for (var key in regexes) {
+	regex_matches = text.matchAll(regexes[key]);
+	for (var regex_match of regex_matches) {
+	    matches.push(regex_match[0]);
+	}
+    }
+    return(matches);
+}
+
+$(document).ready(function() {
 
     $('#pagemask, .dialog-close').on('click', function (event) {
 	$('.dialog').slideUp(250, function () {
@@ -484,24 +541,27 @@ $(document).ready(function () {
     $('.auto-analyze-evidence').on('click', function (event) {
 	evidence_text = $('#evidence-editor-text').val();
 
-	var matches = [];
-	for (var key in precision_regex) {
-	    regex_matches = evidence_text.matchAll(precision_regex[key]);
-	    for (var regex_match of regex_matches) {
-		matches.push(regex_match[0]);	
-	    }
-	}
+	precision_matches = return_matches(evidence_text, precision_regex);
+	comparator_matches = return_matches(evidence_text, comparator_regex);
 	
 	$('#auto-analysis-report').html('').slideUp();
-	if (matches.length > 0) {
-	    // If there are any matches
+	if (precision_matches.length > 0) {
 	    $('#auto-analysis-report').slideDown();
-	    $('#auto-analysis-report').append('<div id="precision-auto-analysis-report">The evidence provided contains the following phrases, which seem to indicate precision around the estimate: </div>');
+	    $('#auto-analysis-report').append('<div id="precision-auto-analysis-report">The evidence provided contains the following phrases which seem to indicate precision around the estimate: </div>');
 	    
-	    for (var key in matches) {
-		$('#precision-auto-analysis-report').append('<span class="badge badge-primary me-2">' + matches[key] + '</span>')
-		console.log(matches[key]);
+	    for (var key in precision_matches) {
+		$('#precision-auto-analysis-report').append('<span class="badge badge-primary me-2">' + precision_matches[key] + '</span>');
 	    }
+	}
+
+	if (comparator_matches.length > 0) {
+	    $('#auto-analysis-report').slideDown();
+	    $('#auto-analysis-report').append('<div id="comparator-auto-analysis-report">The evidence provided contains the following phrases which seem to indicate the presence of a comparator: </div>');
+	    
+	    for (var key in comparator_matches) {
+		$('#comparator-auto-analysis-report').append('<span class="badge badge-primary me-2">' + comparator_matches[key] + '</span>');
+	    }
+	    
 	}
 	
     });

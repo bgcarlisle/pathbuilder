@@ -48,7 +48,7 @@ var precision_regex = [
     // The word
     /p-value/gi,
     // p < 0.05 and variants
-    /(p|P)\s*(?:<|>|<=|>=|≤|≥|=)\s*0?\.\d+/gi,
+    /\bp\s*(?:<|>|<=|>=|≤|≥|=)\s*0?\.\d+/gi,
     // (95% CI 50-60) and variants
     /(?:(?:[\[\(]\s*)?(?:\d+%?\s*)?(?:CI|confidence\s*interval)(?:\s*(?:for|of))?[:\s-]*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*(?:–|-|,|to)\s*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*(?:[\]\)])?|[\[\(]\s*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*(?:–|-|,|to)\s*([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)\s*[\]\)])/gi,
     // The word "significantly" without the word "not in front"
@@ -86,10 +86,11 @@ var randomization_regex = [
     /\brandomized\b/gi,
     /\brandomly\b/gi,
     /\brandomization\b/gi,
-    /\brandom\b/gi
+    /\brandom\b/gi,
+    /\bRCT\b/gi
 ];
 
-var masking_regex [
+var masking_regex = [
     /\bblinded\b/gi,
     /\b(double|triple|quadruple)-blind\b/gi,
     /\bmasked\b/gi,

@@ -185,6 +185,10 @@ function updatepage () {
 
 }
 
+function insert_reference () {
+    
+}
+
 function gen_index () {
     generate_another_index = 1;
     while (generate_another_index == 1) {
@@ -565,6 +569,36 @@ $(document).ready(function() {
 	    
 	}
 	
+    });
+
+    $('.edit-new-reference-doi').on('click', function(event) {
+	$(this).parent().children('.add-refs-buttons').slideUp();
+	$(this).parent().children('.add-ref-by-doi').slideDown();
+    });
+
+    $('.cancel-add-refs').on('click', function(event) {
+	$(this).parent().parent().children('.add-ref-space').slideUp();
+	$(this).parent().parent().children('.add-refs-buttons').slideDown();
+    });
+
+    $('#do-doi-lookup').on('click', function (event) {
+	$.ajax ({
+	    url: 'crossref.php',
+	    type: 'post',
+	    data: {
+		doi: $('#doi-to-look-up').val()
+	    },
+	    dataType: 'html'
+	}).done ( function (response) {
+	    response_json = JSON.parse(response);
+
+	    if (response_json.status == "success") {
+		console.log(response_json.authors);
+	    } else {
+		
+	    }
+	    
+	});
     });
     
 });

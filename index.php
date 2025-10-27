@@ -117,6 +117,9 @@
 	 .edit-evidence-strength {
 	     display: none;
 	 }
+	 .add-ref-by-doi {
+	     display: none;
+	 }
 	 /* Beginning of PATH figure styles */
 	 #pathfigure {
 	     padding: 2%;
@@ -465,13 +468,31 @@
 		<h3>References</h3>
 		<div class="references-space">
 		    <div class="references-container"></div>
-		    <button class="btn btn-primary btn-sm edit-new-reference-doi">
+		    <div class="add-ref-space add-ref-by-doi">
+			<div class="mb-3">
+			    <label for="doi-to-look-up">DOI</label>
+			    <input type="text" class="form-control" id="doi-to-look-up" placeholder="10.1016/j.medj.2024.07.014">
+			</div>
+			<button class="btn btn-primary btn-sm" id="do-doi-lookup">
+			    <svg width="16" height="16" fill="currentColor">
+				<use href="images/bootstrap-icons.svg#plus-circle"/>
+			    </svg>
+			    Add reference by DOI
+			</button>
+			<button class="btn btn-primary btn-sm cancel-add-refs">
+			    <svg width="16" height="16" fill="currentColor">
+				<use href="images/bootstrap-icons.svg#x-circle"/>
+			    </svg>
+			    Cancel
+			</button>
+		    </div>
+		    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 			<svg width="16" height="16" fill="currentColor">
 			    <use href="images/bootstrap-icons.svg#plus-circle"/>
 			</svg>
 			Add reference by DOI lookup
 		    </button>
-		    <button class="btn btn-primary btn-sm edit-new-reference-manual">
+		    <button class="btn btn-primary btn-sm edit-new-reference-manual add-refs-buttons">
 			<svg width="16" height="16" fill="currentColor">
 			    <use href="images/bootstrap-icons.svg#plus-circle"/>
 			</svg>
@@ -886,13 +907,13 @@
 			<h3>References</h3>
 			<div class="references-space">
 			    <div class="references-container"></div>
-			    <button class="btn btn-primary btn-sm edit-new-reference-doi">
+			    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 				<svg width="16" height="16" fill="currentColor">
 				    <use href="images/bootstrap-icons.svg#plus-circle"/>
 				</svg>
 				Add reference by DOI lookup
 			    </button>
-			    <button class="btn btn-primary btn-sm edit-new-reference-manual">
+			    <button class="btn btn-primary btn-sm edit-new-reference-manual add-refs-buttons">
 				<svg width="16" height="16" fill="currentColor">
 				    <use href="images/bootstrap-icons.svg#plus-circle"/>
 				</svg>

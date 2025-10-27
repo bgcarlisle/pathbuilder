@@ -185,7 +185,32 @@ function updatepage () {
 
 }
 
-function insert_reference () {
+function add_new_reference (authors, title, journal, year, doi, step) {
+    // Check that there isn't already one with an identical DOI
+
+    ref_already_added = false;
+    key_of_potential_dupe = '';
+    for (var key in pathdata.references) {
+	if (pathdata.references[key].doi == doi) {
+	    ref_already_added = true;
+	    key_of_potential_dupe = key;
+	}
+    }
+
+    if (! ref_already_added) {
+	newindex = gen_index();
+	pathdata.references[newindex] = {
+	    authors: authors,
+	    title: title,
+	    journal: journal,
+	    year: year,
+	    doi: doi,
+	    steps: [step]
+	}	
+    } else {
+	console.log(key_of_potential_dupe);
+	// See if the current step is already listed
+    }
     
 }
 
@@ -203,7 +228,7 @@ function gen_index () {
 	}
 	// Check that the index isn't already in use before returning
 	// result and repeat if it is
-	if (! (result in pathdata.evidence)) {
+	if (! (result in pathdata.evidence) & ! (result in pathdata.references)) {
 	    generate_another_index = 0;
 	}
     }
@@ -266,6 +291,7 @@ $(document).ready(function() {
 	$('.dialog').slideUp(250, function () {
 	    $('#pagemask').fadeOut(250);
 	});
+	$('.cancel-add-refs').click();
     });
 
     showdialog('startup');
@@ -579,21 +605,32 @@ $(document).ready(function() {
     $('.cancel-add-refs').on('click', function(event) {
 	$(this).parent().parent().children('.add-ref-space').slideUp();
 	$(this).parent().parent().children('.add-refs-buttons').slideDown();
+	$(this).parent().find('.doi-to-look-up').val('');
     });
 
-    $('#do-doi-lookup').on('click', function (event) {
+    $('.do-doi-lookup').on('click', function (event) {
+
+	doi_to_look_up = $(this).parent().find('.doi-to-look-up').val();
+	
 	$.ajax ({
 	    url: 'crossref.php',
 	    type: 'post',
 	    data: {
-		doi: $('#doi-to-look-up').val()
+		doi: doi_to_look_up
 	    },
 	    dataType: 'html'
 	}).done ( function (response) {
 	    response_json = JSON.parse(response);
 
 	    if (response_json.status == "success") {
-		console.log(response_json.authors);
+		add_new_reference(
+		    response_json.authors,
+		    response_json.title,
+		    response_json.journal,
+		    response_json.year,
+		    response_json.doi,
+		    $('#editor-evidence-step').val()
+		);
 	    } else {
 		
 	    }

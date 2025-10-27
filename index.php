@@ -469,15 +469,15 @@
 		<div class="references-space">
 		    <div class="references-container"></div>
 		    <div class="add-ref-space add-ref-by-doi">
-			<div class="mb-3">
-			    <label for="doi-to-look-up">DOI</label>
-			    <input type="text" class="form-control" id="doi-to-look-up" placeholder="10.1016/j.medj.2024.07.014">
+			<div class="mb-1">
+			    <label for="dialog-doi-to-look-up">Add reference by DOI lookup</label>
+			    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="10.1016/j.medj.2024.07.014">
 			</div>
-			<button class="btn btn-primary btn-sm" id="do-doi-lookup">
+			<button class="btn btn-primary btn-sm do-doi-lookup">
 			    <svg width="16" height="16" fill="currentColor">
 				<use href="images/bootstrap-icons.svg#plus-circle"/>
 			    </svg>
-			    Add reference by DOI
+			    Look up reference by DOI
 			</button>
 			<button class="btn btn-primary btn-sm cancel-add-refs">
 			    <svg width="16" height="16" fill="currentColor">

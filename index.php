@@ -356,109 +356,111 @@
 	    </div>
 
 	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
-	    <div id="evidence-editor-vertical-arrow-fields">
-		<label>Types of evidence provided</label>
-		<div class="mb-3 list-group" id="vertical-arrow-evidence">
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="magnitude-of-effect">
-			<span>
-			    Magnitude of effect
-			    <small class="d-block text-body-secondary">The size of the effect being reported is quantified</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="units-provided">
-			<span>
-			    Units provided
-			    <small class="d-block text-body-secondary">Units are provided for all reported measures of effect where appropriate</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="measure-precision">
-			<span>
-			    Precision around estimate
-			    <small class="d-block text-body-secondary">If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="comparator">
-			<span>
-			    Comparator
-			    <small class="d-block text-body-secondary">Identity of comparator mentioned</small>
-			</span>
-		    </label>
-		</div>
+	    <div id="evidence-metadata-checkboxes">
+		<div id="evidence-editor-vertical-arrow-fields">
+		    <label>Types of evidence provided</label>
+		    <div class="mb-3 list-group" id="vertical-arrow-evidence">
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="magnitude-of-effect">
+			    <span>
+				Magnitude of effect
+				<small class="d-block text-body-secondary">The size of the effect being reported is quantified</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="units-provided">
+			    <span>
+				Units provided
+				<small class="d-block text-body-secondary">Units are provided for all reported measures of effect where appropriate</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="measure-precision">
+			    <span>
+				Precision around estimate
+				<small class="d-block text-body-secondary">If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="comparator">
+			    <span>
+				Comparator
+				<small class="d-block text-body-secondary">Identity of comparator mentioned</small>
+			    </span>
+			</label>
+		    </div>
 
-		
-		<label>Measures to address risk of bias</label>
-		<div class="mb-3 list-group" id="vertical-arrow-evidence-rob">
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="randomization">
-			<span>
-			    Randomization
-			    <small class="d-block text-body-secondary">Randomized experimental design is mentioned</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="masking">
-			<span>
-			    Masking
-			    <small class="d-block text-body-secondary">Masked experimental design is mentioned</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="pre-registration">
-			<span>
-			    Pre-registration
-			    <small class="d-block text-body-secondary">Study in question was pre-registered</small>
-			</span>
-		    </label>
+		    
+		    <label>Measures to address risk of bias</label>
+		    <div class="mb-3 list-group" id="vertical-arrow-evidence-rob">
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="randomization">
+			    <span>
+				Randomization
+				<small class="d-block text-body-secondary">Randomized experimental design is mentioned</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="masking">
+			    <span>
+				Masking
+				<small class="d-block text-body-secondary">Masked experimental design is mentioned</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="pre-registration">
+			    <span>
+				Pre-registration
+				<small class="d-block text-body-secondary">Study in question was pre-registered</small>
+			    </span>
+			</label>
+			
+		    </div>
 		    
 		</div>
-		
-	    </div>
 
-	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
-	    <div id="evidence-editor-horizontal-arrow-fields">
-		<label>Types of evidence provided</label>
-		<div class="mb-3 list-group" id="horizontal-arrow-evidence-types">
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="target-present">
-			<span>
-			    Target evidence
-			    <small class="d-block text-body-secondary">Evidence suggesting drug target/functional assay used in models is also present in target patients</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="construct-validity">
-			<span>
-			    Construct validity
-			    <small class="d-block text-body-secondary">Explanation of relationships between various features of a model systems and those for the target scenario</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="external-validity">
-			<span>
-			    External validity
-			    <small class="d-block text-body-secondary">Replication of effects in different model systems</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="interfering-effects">
-			<span>
-			    Interfering effects
-			    <small class="d-block text-body-secondary">Evidence suggesting the absence of "interfering effects" in the target scenario</small>
-			</span>
-		    </label>
-		    <label class="list-group-item d-flex gap-2">
-			<input class="form-check-input flex-shrink-0" type="checkbox" value="systematic-review">
-			<span>
-			    Systematic review
-			    <small class="d-block text-body-secondary">Systematic review evidence regarding the model's predictive value</small>
-			</span>
-		    </label>
+		<!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
+		<div id="evidence-editor-horizontal-arrow-fields">
+		    <label>Types of evidence provided</label>
+		    <div class="mb-3 list-group" id="horizontal-arrow-evidence-types">
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="target-present">
+			    <span>
+				Target evidence
+				<small class="d-block text-body-secondary">Evidence suggesting drug target/functional assay used in models is also present in target patients</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="construct-validity">
+			    <span>
+				Construct validity
+				<small class="d-block text-body-secondary">Explanation of relationships between various features of a model systems and those for the target scenario</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="external-validity">
+			    <span>
+				External validity
+				<small class="d-block text-body-secondary">Replication of effects in different model systems</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="interfering-effects">
+			    <span>
+				Interfering effects
+				<small class="d-block text-body-secondary">Evidence suggesting the absence of "interfering effects" in the target scenario</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="systematic-review">
+			    <span>
+				Systematic review
+				<small class="d-block text-body-secondary">Systematic review evidence regarding the model's predictive value</small>
+			    </span>
+			</label>
+		    </div>
+		    
 		</div>
-		
 	    </div>
 	    <!-- End of conditional display -->
 

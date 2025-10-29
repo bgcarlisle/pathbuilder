@@ -514,16 +514,30 @@ $(document).ready(function() {
 	
 	if ($('#editor-evidence-index').val() == '') { // Inserting new evidence
 	    newindex = gen_index(); // Index for new evidence entry
-	    pathdata.evidence[newindex] = { // Add evidence to JSON object
-		step: $('#editor-evidence-step').val(),
-		text: $('#evidence-editor-text').val(),
-		checks: checks
-	    };
+	    if (checks.length > 0) {
+		pathdata.evidence[newindex] = { // Add evidence to JSON object
+		    step: $('#editor-evidence-step').val(),
+		    text: $('#evidence-editor-text').val(),
+		    checks: checks
+		};
+	    } else {
+		pathdata.evidence[newindex] = { // Add evidence to JSON object
+		    step: $('#editor-evidence-step').val(),
+		    text: $('#evidence-editor-text').val()
+		};
+	    }
 	} else { // Updating old evidence
 	    index = $('#editor-evidence-index').val();
-	    pathdata.evidence[index].text = $('#evidence-editor-text').val();
-	    pathdata.evidence[index].checks = checks;
+	    if (checks.length > 0) {
+		pathdata.evidence[index].text = $('#evidence-editor-text').val();
+		pathdata.evidence[index].checks = checks;
+	    } else {
+		index = $('#editor-evidence-index').val();
+		pathdata.evidence[index].text = $('#evidence-editor-text').val();
+		delete pathdata.evidence[index].checks;
+	    }
 	}
+	
 	updatepage();
     });
 

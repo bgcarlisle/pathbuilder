@@ -419,7 +419,7 @@ $(document).ready(function() {
 	index = $(this).parent().parent().data('index');
 	$('#editor-evidence-step').val(step); // Update step
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
-	$('#editor-evidence-index').val(index); // Indicate that it's new evidence
+	$('#editor-evidence-index').val(index); // Indicate that it's old evidence
 	$('#evidence-editor-text').val(pathdata.evidence[index].text); // Bring back old text
 	// Bring back the checks
 	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').prop('checked', false); // Clear checkboxes

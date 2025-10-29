@@ -506,6 +506,7 @@
 	    
 	    <input type="hidden" id="editor-evidence-step" value="">
 	    <input type="hidden" id="editor-evidence-index" value="">
+	    <input type="hidden" id="editor-evidence-index-new" value="true">
 	    <button class="btn btn-primary dialog-close" id="confirm-evidence-editor">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#check-circle"/>

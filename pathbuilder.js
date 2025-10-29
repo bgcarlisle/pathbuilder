@@ -185,7 +185,7 @@ function updatepage () {
 
 }
 
-function add_new_reference (authors, title, journal, year, doi, step) {
+function add_new_reference (authors, title, journal, year, doi, evidence) {
     // Check that there isn't already one with an identical DOI
 
     ref_already_added = false;
@@ -206,12 +206,19 @@ function add_new_reference (authors, title, journal, year, doi, step) {
 	    year: year,
 	    doi: doi,
 	    published: true,
-	    steps: [step]
-	}	
+	    evidence: [evidence]
+	}
+
+	update_references();
     } else {
 	console.log(key_of_potential_dupe);
-	// See if the current step is already listed
+	// See if the current evidence is already listed
     }
+    
+}
+
+function update_references () {
+    // First, alphabetize by author
     
 }
 
@@ -375,32 +382,15 @@ $(document).ready(function() {
 	updatepage();
     });
 
-    // Show evidence editor (insert new, button click)
-    $('.edit-new-evidence').on('click', function() {
+    // Show evidence editor (insert new)
+    $('.edit-new-evidence, .path-evidence-box').on('click', function() {
 	showdialog('evidence-editor');
 	step = $(this).parent().parent().data('step');
+	newindex = gen_index();
+	$('#editor-evidence-index').val(newindex);
+	$('#editor-evidence-index-new').val('true');
 	$('#editor-evidence-step').val(step); // Update step
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
-	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
-	$('#evidence-editor-text').val(''); // Clear old text
-	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').prop('checked', false); // Clear checkboxes
-	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
-	if (steptype(step) == "vertical") {
-	    $('#evidence-editor-vertical-arrow-fields').slideDown();
-	    $('#evidence-editor-horizontal-arrow-fields').slideUp();
-	} else {
-	    $('#evidence-editor-vertical-arrow-fields').slideUp();
-	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
-	}
-    });
-
-    // Show evidence editor (insert new, arrow click)
-    $('.path-evidence-box').on('click', function () {
-	showdialog('evidence-editor');
-	step = $(this).data('step');
-	$('#editor-evidence-step').val(step); // Update step
-	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
-	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(''); // Clear old text
 	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').prop('checked', false); // Clear checkboxes
 	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
@@ -418,6 +408,7 @@ $(document).ready(function() {
 	showdialog('evidence-editor');
 	step = $(this).parent().parent().parent().parent().parent().data('step');
 	index = $(this).parent().parent().data('index');
+	$('#editor-evidence-index-new').val('false');
 	$('#editor-evidence-step').val(step); // Update step
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(index); // Indicate that it's old evidence
@@ -512,10 +503,10 @@ $(document).ready(function() {
 	    checks.push($(this).val());
 	});
 	
-	if ($('#editor-evidence-index').val() == '') { // Inserting new evidence
-	    newindex = gen_index(); // Index for new evidence entry
+	if ($('#editor-evidence-index-new').val() == 'true') { // Inserting new evidence
+	    index = $('#editor-evidence-index').val(); // Index for new evidence entry
 	    if (checks.length > 0) {
-		pathdata.evidence[newindex] = { // Add evidence to JSON object
+		pathdata.evidence[index] = { // Add evidence to JSON object
 		    step: $('#editor-evidence-step').val(),
 		    text: $('#evidence-editor-text').val(),
 		    checks: checks
@@ -648,6 +639,7 @@ $(document).ready(function() {
     $('.do-doi-lookup').on('click', function (event) {
 
 	doi_to_look_up = $(this).parent().find('.doi-to-look-up').val();
+	index = $('#editor-evidence-index').val();
 	
 	$.ajax ({
 	    url: 'crossref.php',
@@ -666,10 +658,10 @@ $(document).ready(function() {
 		    response_json.journal,
 		    response_json.year,
 		    response_json.doi,
-		    $('#editor-evidence-step').val()
+		    index
 		);
 	    } else {
-		
+		// What to do in case of error
 	    }
 	    
 	});

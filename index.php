@@ -473,7 +473,7 @@
 		    <div class="add-ref-space add-ref-by-doi">
 			<div class="mb-1">
 			    <label for="dialog-doi-to-look-up">Add reference by DOI lookup</label>
-			    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="10.1016/j.medj.2024.07.014">
+			    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
 			</div>
 			<button class="btn btn-primary btn-sm do-doi-lookup">
 			    <svg width="16" height="16" fill="currentColor">

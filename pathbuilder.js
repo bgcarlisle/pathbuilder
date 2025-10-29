@@ -429,7 +429,7 @@ $(document).ready(function() {
 	} else {
 	    var checks = [];
 	}
-	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']:visible').each(function() {
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').each(function() {
 	    if (checks.includes($(this).val())) {
 		$(this).prop('checked', true);
 	    }
@@ -508,7 +508,7 @@ $(document).ready(function() {
     $('#confirm-evidence-editor').on('click', function(event) {
 	// Get all the checkboxes
 	var checks = [];
-	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']:checked').each(function () {
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']:checked:visible').each(function () {
 	    checks.push($(this).val());
 	});
 	

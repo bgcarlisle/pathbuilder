@@ -382,6 +382,7 @@ $(document).ready(function() {
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(''); // Clear old text
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').prop('checked', false); // Clear checkboxes
 	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
 	if (steptype(step) == "vertical") {
 	    $('#evidence-editor-vertical-arrow-fields').slideDown();
@@ -400,6 +401,7 @@ $(document).ready(function() {
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(''); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(''); // Clear old text
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').prop('checked', false); // Clear checkboxes
 	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
 	if (steptype(step) == "vertical") {
 	    $('#evidence-editor-vertical-arrow-fields').slideDown();
@@ -419,6 +421,18 @@ $(document).ready(function() {
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor
 	$('#editor-evidence-index').val(index); // Indicate that it's new evidence
 	$('#evidence-editor-text').val(pathdata.evidence[index].text); // Bring back old text
+	// Bring back the checks
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').prop('checked', false); // Clear checkboxes
+	if (typeof(pathdata.evidence[index].checks) != 'undefined') {
+	    var checks = pathdata.evidence[index].checks;
+	} else {
+	    var checks = [];
+	}
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').each(function() {
+	    if (checks.includes($(this).val())) {
+		$(this).prop('checked', true);
+	    }
+	});
 	$('#evidence-editor-prompt-text').html(stepprompt(step)); // Show the prompt that's relevant for the step
 	if (steptype(step) == "vertical") {
 	    $('#evidence-editor-vertical-arrow-fields').slideDown();
@@ -491,15 +505,23 @@ $(document).ready(function() {
 
     // Confirm evidence
     $('#confirm-evidence-editor').on('click', function(event) {
+	// Get all the checkboxes
+	var checks = [];
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']:checked').each(function () {
+	    checks.push($(this).val());
+	});
+	
 	if ($('#editor-evidence-index').val() == '') { // Inserting new evidence
 	    newindex = gen_index(); // Index for new evidence entry
 	    pathdata.evidence[newindex] = { // Add evidence to JSON object
 		step: $('#editor-evidence-step').val(),
-		text: $('#evidence-editor-text').val()
+		text: $('#evidence-editor-text').val(),
+		checks: checks
 	    };
 	} else { // Updating old evidence
 	    index = $('#editor-evidence-index').val();
 	    pathdata.evidence[index].text = $('#evidence-editor-text').val();
+	    pathdata.evidence[index].checks = checks;
 	}
 	updatepage();
     });

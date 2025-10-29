@@ -205,6 +205,7 @@ function add_new_reference (authors, title, journal, year, doi, step) {
 	    journal: journal,
 	    year: year,
 	    doi: doi,
+	    published: true,
 	    steps: [step]
 	}	
     } else {

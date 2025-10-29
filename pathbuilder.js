@@ -429,7 +429,7 @@ $(document).ready(function() {
 	} else {
 	    var checks = [];
 	}
-	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']').each(function() {
+	$('#evidence-metadata-checkboxes').find('input[type=\'checkbox\']:visible').each(function() {
 	    if (checks.includes($(this).val())) {
 		$(this).prop('checked', true);
 	    }

@@ -267,9 +267,11 @@ function update_references () {
 	    '<span class="references-year">(' +
 	    pathdata.references[key].year +
 	    ')</span> ' +
-	    '<span class="references-doi">DOI: ' +
+	    '<span class="references-doi">DOI: <a href="' +
 	    pathdata.references[key].doi +
-	    '</span>' +
+	    '" target="_blank">' +
+	    pathdata.references[key].doi +
+	    '</a></span>' +
 	    '</div>' +
 	    '<div class="ref-path-steps">' +
 	    refsteps +
@@ -309,9 +311,11 @@ function update_references () {
 	    '<span class="references-year">(' +
 	    pathdata.references[key].year +
 	    ')</span> ' +
-	    '<span class="references-doi">DOI: ' +
+	    '<span class="references-doi">DOI: <a href="' +
 	    pathdata.references[key].doi +
-	    '</span>' +
+	    '" target="_blank">' +
+	    pathdata.references[key].doi +
+	    '</a></span>' +
 	    '</span></label>' +
 	    '</div>'
 	);

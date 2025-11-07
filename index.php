@@ -94,12 +94,18 @@
 	     min-height: 40px;
 	     margin-bottom: 10px;
 	 }
-	 .evidence-instance,.reference-instance {
+	 .evidence-instance {
 	     background-color: #ddd;
 	     border: 1px solid #fff;
 	     padding: 8px 10px;
 	     margin-bottom: 10px;
 	     min-height: 100px;
+	 }
+	 .reference-instance {
+	     background-color: #ddd;
+	     border: 1px solid #fff;
+	     padding: 8px 10px;
+	     margin-bottom: 10px;
 	 }
 	 .evidence-placeholder,.reference-placeholder {
 	     min-height: 100px;
@@ -119,6 +125,20 @@
 	 }
 	 .add-ref-by-doi {
 	     display: none;
+	 }
+	 .references-title {
+	     font-style: italic;
+	 }
+	 .ref-path-steps {
+	     font-size: small;
+	     margin-top: 5px;
+	 }
+	 .evidence-references-section {
+	     font-size: small;
+	     margin-top: 5px;
+	 }
+	 .evidence-references-number-instance {
+	     margin: 0 3px;
 	 }
 	 /* Beginning of PATH figure styles */
 	 #pathfigure {

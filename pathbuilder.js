@@ -1,6 +1,6 @@
-var pathdata = {targetScenario:'', evidence:{}, strength:{}, references:{}};
+var pathdata = {targetScenario:'', evidence:{}, strength:{}, references:[]};
 
-var ex_pathdata = '{"targetScenario":"Antonib given to glioma patients will improve survival","evidence":{"dbsu56sc5urwhm2e7qkdb21g5nglibwjv68p21i08wy5xau37uxhgrl8iysv8nqq":{"step":"m0m1","text":"Antonib IC50 inhibition of XYZ is 2.2 nM.","number":1},"mzrqby4ahx3mb8e57gfoj4wfl6gwmnwirj159wgak1vhka8xmvlgp8r22c7c3e39":{"step":"m0m1","text":"In randomized xenograft glioma models (see #6 below), Antonib led to 157% lowered expression of a ZIP, a downstream target of XYZ.","number":2},"t0nrkkhvh4avh4ei6ymu8qu4pu4izpatnnvdka3tnpv9o5ilrpsu092lgoqqu36q":{"step":"t1","text":"Antonib crossed the blood brain barrier at a rate that was 20% more efficient than morphine.","number":3},"pnvd0ty6ne02o8xd45cikcivmc7t38plo7t9nwn1bco4rd2f1845bxv78qdg7l9a":{"step":"t1","text":"70% of tumours resected from glioma patients show of XYZ overexpression in blinded pathology studies.","number":4},"md3yuobbk8f8nq6k4fanwaojhs08p2s33q3z7hl5ipnw87t8qjfheq007dnlw56m":{"step":"t1","text":"Doses needed to achieve target inhibition in models, when scaled to patients, did not cause any SAEs in studies involving 20 patients.","number":5},"ig140acrkhehcy6bc0r58us7yp3fn7kzwtzulknwf40wuv99kuk4fp3ytc9zw86n":{"step":"m1m2","text":"Antonib given to 8 of 9 different types of glioma cell lines showed growth inhibition of 60% or more.","number":6},"btf1ktm4hrg9pnfnghxws0j8ibigxryjw584ifbxct87efqrff33bt0r1934bc53":{"step":"m1m2","text":"Randomized studies of Antonib in glioma-bearing orthotopic mice significantly shrank by 50% compared with temazolomide. Results \\twere reproduced three times.","number":7},"0ske55px2fw3to9bam25the8eobxa9gcktgi0oakj4jlbici3a754p9tmisof4i2":{"step":"m1m2","text":"Antonib given to patients with lung or colorectal cancers resulted in ≥ 40% objective response (tumour assessments were blinded).","number":8},"bh9kqyzxxz2w9ludzfsns9hc5xurrgcsokpb3ykb3aao6vefnqkuzqu522i8yao6":{"step":"t2","text":"Glioma-bearing orthotopic mice are sensitive, but not specific models for human glioma. Doses in this study were similar to those planned for this trial","number":9},"edxls0exi034nmjrw7deojk41e5z7vtjpr07vf2124v7y6pingcj0r3hcom46kda":{"step":"t2","text":"Lung and colorectal cancers are driven by XYZ over-activation. Doses used in the above (and present) trial were tolerable (5% of patients experienced serious adverse events)","number":10},"309jabx8zhp0bifob5h6htvrisz7en9mgm3d8gvzowfqu5b1d1xeivhjw40ylifr":{"step":"t2","text":"Glioma progression is driven by XYZ hyperactivation, as indicated by several independent studies showing knock-down of XYZ in glioma cells inhibits growth by 70% (p < .05).","number":11},"mbtzzrwt4ssekfz6yszybxkfwcdj2rnvd4zdk4sn0u1p6rgss6l7j2spnurs48ko":{"step":"t2","text":"Robustness of Antonib anti-tumour activity is suggested by achievement of significantly reduced tumour growth (>50% shrinkage) in randomized xenograft studies of three different cancers types.","number":12},"svau0g7xs8iigi5jjs9zaiuekixerysuifhq1plx7v9dls1ngs541nch8tc9unct":{"step":"m2m3","text":"Antonib significantly doubled survival in randomized, blinded studies of glioma xenograft mice.","number":13},"pcphcuwzlj9pdxrchtsvklk5t2hy9e8tmilsxn5s0l3b9106h1slkp244adicfkx":{"step":"t3","text":"Doses of Antonib in #12 matched those planned for this trial. The model is very sensitive but not very specific for predicting human response.","number":14},"7cvlksk1z7tvu8el2l5z9kgwkmwitemiiervba8my6msxm8k5b8nl2aznoefudz0":{"step":"d0d1","text":"Antonib significantly doubled XYZ phosphorylation in gliomas resected from patients in a phase 0 trial.","number":15},"7z0dju7qpjyzxyohpmytfkx7e70q7g9uomvrwg567x2w3leuoth00qgjzbliry07":{"step":"d1d2","text":"Antonib produced a partial response in one of two glioma patients in a phase 1 trial involving mixed cancers.","number":16},"bp76e7crn459o8fn1mdzb3amfrlf7k8gmhvs4jqgi5hjh7xfi2op47n3yi051xxp":{"step":"d2d3","text":"A meta-analysis of glioma trials showed tumour response was moderately but significantly correlated with increased overall survival (R²=0.4). ","number":17}},"strength":{"d0d1":"4","t1":"4","m0m1":"5","d1d2":"2","t2":"4","m1m2":"5","m2m3":"4","t3":"3","d2d3":"2"},"references":{}}';
+var ex_pathdata = '{"targetScenario":"Antonib given to glioma patients will improve survival","evidence":{"dbsu56sc5urwhm2e7qkdb21g5nglibwjv68p21i08wy5xau37uxhgrl8iysv8nqq":{"step":"m0m1","text":"Antonib IC50 inhibition of XYZ is 2.2 nM.","number":1},"mzrqby4ahx3mb8e57gfoj4wfl6gwmnwirj159wgak1vhka8xmvlgp8r22c7c3e39":{"step":"m0m1","text":"In randomized xenograft glioma models (see #6 below), Antonib led to 157% lowered expression of a ZIP, a downstream target of XYZ.","number":2},"t0nrkkhvh4avh4ei6ymu8qu4pu4izpatnnvdka3tnpv9o5ilrpsu092lgoqqu36q":{"step":"t1","text":"Antonib crossed the blood brain barrier at a rate that was 20% more efficient than morphine.","number":3},"pnvd0ty6ne02o8xd45cikcivmc7t38plo7t9nwn1bco4rd2f1845bxv78qdg7l9a":{"step":"t1","text":"70% of tumours resected from glioma patients show of XYZ overexpression in blinded pathology studies.","number":4},"md3yuobbk8f8nq6k4fanwaojhs08p2s33q3z7hl5ipnw87t8qjfheq007dnlw56m":{"step":"t1","text":"Doses needed to achieve target inhibition in models, when scaled to patients, did not cause any SAEs in studies involving 20 patients.","number":5},"ig140acrkhehcy6bc0r58us7yp3fn7kzwtzulknwf40wuv99kuk4fp3ytc9zw86n":{"step":"m1m2","text":"Antonib given to 8 of 9 different types of glioma cell lines showed growth inhibition of 60% or more.","number":6},"btf1ktm4hrg9pnfnghxws0j8ibigxryjw584ifbxct87efqrff33bt0r1934bc53":{"step":"m1m2","text":"Randomized studies of Antonib in glioma-bearing orthotopic mice significantly shrank by 50% compared with temazolomide. Results \\twere reproduced three times.","number":7},"0ske55px2fw3to9bam25the8eobxa9gcktgi0oakj4jlbici3a754p9tmisof4i2":{"step":"m1m2","text":"Antonib given to patients with lung or colorectal cancers resulted in ≥ 40% objective response (tumour assessments were blinded).","number":8},"bh9kqyzxxz2w9ludzfsns9hc5xurrgcsokpb3ykb3aao6vefnqkuzqu522i8yao6":{"step":"t2","text":"Glioma-bearing orthotopic mice are sensitive, but not specific models for human glioma. Doses in this study were similar to those planned for this trial","number":9},"edxls0exi034nmjrw7deojk41e5z7vtjpr07vf2124v7y6pingcj0r3hcom46kda":{"step":"t2","text":"Lung and colorectal cancers are driven by XYZ over-activation. Doses used in the above (and present) trial were tolerable (5% of patients experienced serious adverse events)","number":10},"309jabx8zhp0bifob5h6htvrisz7en9mgm3d8gvzowfqu5b1d1xeivhjw40ylifr":{"step":"t2","text":"Glioma progression is driven by XYZ hyperactivation, as indicated by several independent studies showing knock-down of XYZ in glioma cells inhibits growth by 70% (p < .05).","number":11},"mbtzzrwt4ssekfz6yszybxkfwcdj2rnvd4zdk4sn0u1p6rgss6l7j2spnurs48ko":{"step":"t2","text":"Robustness of Antonib anti-tumour activity is suggested by achievement of significantly reduced tumour growth (>50% shrinkage) in randomized xenograft studies of three different cancers types.","number":12},"svau0g7xs8iigi5jjs9zaiuekixerysuifhq1plx7v9dls1ngs541nch8tc9unct":{"step":"m2m3","text":"Antonib significantly doubled survival in randomized, blinded studies of glioma xenograft mice.","number":13},"pcphcuwzlj9pdxrchtsvklk5t2hy9e8tmilsxn5s0l3b9106h1slkp244adicfkx":{"step":"t3","text":"Doses of Antonib in #12 matched those planned for this trial. The model is very sensitive but not very specific for predicting human response.","number":14},"7cvlksk1z7tvu8el2l5z9kgwkmwitemiiervba8my6msxm8k5b8nl2aznoefudz0":{"step":"d0d1","text":"Antonib significantly doubled XYZ phosphorylation in gliomas resected from patients in a phase 0 trial.","number":15},"7z0dju7qpjyzxyohpmytfkx7e70q7g9uomvrwg567x2w3leuoth00qgjzbliry07":{"step":"d1d2","text":"Antonib produced a partial response in one of two glioma patients in a phase 1 trial involving mixed cancers.","number":16},"bp76e7crn459o8fn1mdzb3amfrlf7k8gmhvs4jqgi5hjh7xfi2op47n3yi051xxp":{"step":"d2d3","text":"A meta-analysis of glioma trials showed tumour response was moderately but significantly correlated with increased overall survival (R²=0.4). ","number":17}},"strength":{"d0d1":"4","t1":"4","m0m1":"5","d1d2":"2","t2":"4","m1m2":"5","m2m3":"4","t3":"3","d2d3":"2"},"references":[]}';
 
 var steps = ["m0m1", "t1", "m1m2", "t2", "m2m3", "t3", "d0d1", "d1d2", "d2d3"];
 
@@ -141,7 +141,7 @@ function updatepage () {
     for (var key in pathdata.evidence) {
 	evi = pathdata.evidence[key];
 	$('#evidence-block-' + evi['step'] + ' div.evidence-container').append(
-	    '<div class="evidence-instance" data-index="' + key + '">' +
+	    '<div class="evidence-instance" id="evidence-instance-' + key + '" data-index="' + key + '">' +
 	    '<div style="float: right; margin-left: 10px;">' +
 	    '<button class="btn btn-sm btn-primary edit-old-evidence" style="margin-right: 10px;">' +
 	    '<svg width="12" height="12" fill="currentColor"><use href="images/bootstrap-icons.svg#pencil"/></svg> Edit' +
@@ -152,6 +152,9 @@ function updatepage () {
 	    '</div>' +
 	    '<svg width="20" height="20" class="evidence-instance-grip"><use href="images/bootstrap-icons.svg#arrow-down-up"/></svg>' +
 	    evi['number'] + '. ' + evi['text'] +
+	    '<div class="evidence-references-section">Reference(s): ' +
+	    '<span class="evidence-references-numbers"></span>' +
+	    '</div>' +
 	    '</div>'
 	);
     }
@@ -183,6 +186,8 @@ function updatepage () {
 	}
     }
 
+    update_references();
+
 }
 
 function add_new_reference (authors, title, journal, year, doi, evidence) {
@@ -198,16 +203,15 @@ function add_new_reference (authors, title, journal, year, doi, evidence) {
     }
 
     if (! ref_already_added) {
-	newindex = gen_index();
-	pathdata.references[newindex] = {
+	pathdata.references.push({
 	    authors: authors,
 	    title: title,
 	    journal: journal,
 	    year: year,
 	    doi: doi,
-	    published: true,
+	    published: true, // This will always be true for ones fetched by DOI
 	    evidence: [evidence]
-	}
+	});
 
 	update_references();
     } else {
@@ -219,6 +223,114 @@ function add_new_reference (authors, title, journal, year, doi, evidence) {
 
 function update_references () {
     // First, alphabetize by author
+    pathdata.references.sort((a, b) => {
+	return a.authors.localeCompare(b.authors);
+    });
+
+    // Then number the references
+    counter = 1;
+    for (var key in pathdata.references) {
+	pathdata.references[key].number = counter;
+	counter++
+    }
+
+    // Then add them to the text summary references section
+    $('#references-block').find('.references-container').html('');
+    for (var key in pathdata.references) {
+
+	ref_in_steps = [];
+	for (var ekey in pathdata.references[key].evidence) {
+	    ref_in_steps.push(
+		evidence_number(pathdata.references[key].evidence[ekey])
+	    );
+	}
+	refsteps = ref_in_steps.join(', ');
+
+	if (refsteps != '') {
+	    refsteps = 'Cited in PATH evidence: ' + refsteps;
+	}
+	
+	$('#references-block').find('.references-container').append(
+	    '<div class="reference-instance"><div>' +
+	    '<span class="references-number">' +
+	    pathdata.references[key].number +
+	    '.</span> ' +
+	    '<span class="references-authors">' +
+	    pathdata.references[key].authors +
+	    '.</span> ' +
+	    '<span class="references-title">' +
+	    pathdata.references[key].title +
+	    '.</span> ' +
+	    '<span class="references-journal">' +
+	    pathdata.references[key].journal +
+	    '.</span> ' +
+	    '<span class="references-year">(' +
+	    pathdata.references[key].year +
+	    ')</span> ' +
+	    '<span class="references-doi">DOI: ' +
+	    pathdata.references[key].doi +
+	    '</span>' +
+	    '</div>' +
+	    '<div class="ref-path-steps">' +
+	    refsteps +
+	    '</div>' +
+	    '</div>'
+	);
+    }
+
+    // Then add them to the evidence editor references section
+    $('#references-in-editor-block').find('.references-container').html('');
+    for (var key in pathdata.references) {
+
+	refchecked = '';
+	for (var ekey in pathdata.references[key].evidence) {
+	    if ($('#editor-evidence-index').val() == pathdata.references[key].evidence[ekey]) {
+		refchecked = ' checked';
+	    }
+	}
+	
+	$('#references-in-editor-block').find('.references-container').append(
+	    '<div class="reference-instance">' +
+	    '<label class="d-flex gap-2">' +
+	    '<input class="form-check-input flex-shrink-0" type="checkbox"' + refchecked + '>' +
+	    '<span>' +
+	    '<span class="references-number">' +
+	    pathdata.references[key].number +
+	    '.</span> ' +
+	    '<span class="references-authors">' +
+	    pathdata.references[key].authors +
+	    '.</span> ' +
+	    '<span class="references-title">' +
+	    pathdata.references[key].title +
+	    '.</span> ' +
+	    '<span class="references-journal">' +
+	    pathdata.references[key].journal +
+	    '.</span> ' +
+	    '<span class="references-year">(' +
+	    pathdata.references[key].year +
+	    ')</span> ' +
+	    '<span class="references-doi">DOI: ' +
+	    pathdata.references[key].doi +
+	    '</span>' +
+	    '</span></label>' +
+	    '</div>'
+	);
+    }
+
+    // Then add them to the text summary section evidence boxes
+    $('.evidence-references-section').slideUp(0);
+    $('.evidence-references-numbers').html('');
+    for (var key in pathdata.references) {
+	for (var ekey in pathdata.references[key].evidence) {
+	    $('#evidence-instance-' + pathdata.references[key].evidence + ' .evidence-references-numbers').parent().slideDown(0);
+	    $('#evidence-instance-' + pathdata.references[key].evidence + ' .evidence-references-numbers').append(
+		'<span class="evidence-references-number-instance">' +
+		pathdata.references[key].number +
+		'</span>'
+	    );
+	}
+    }
+    
     
 }
 
@@ -236,7 +348,7 @@ function gen_index () {
 	}
 	// Check that the index isn't already in use before returning
 	// result and repeat if it is
-	if (! (result in pathdata.evidence) & ! (result in pathdata.references)) {
+	if (! (result in pathdata.evidence)) {
 	    generate_another_index = 0;
 	}
     }
@@ -291,6 +403,14 @@ function return_matches (text, regexes) {
 	}
     }
     return(matches);
+}
+
+function evidence_number (evidence_key) {
+    for (var key in pathdata.evidence) {
+	if (key == evidence_key) {
+	    return(pathdata.evidence[key].number);
+	}
+    }
 }
 
 $(document).ready(function() {
@@ -404,6 +524,7 @@ $(document).ready(function() {
 	    $('#evidence-editor-vertical-arrow-fields').slideUp();
 	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
 	}
+	update_references();
     });
 
     // Show evidence editor (edit old)
@@ -436,6 +557,7 @@ $(document).ready(function() {
 	    $('#evidence-editor-vertical-arrow-fields').slideUp();
 	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
 	}
+	update_references();
     });
 
     // Show delete evidence dialog
@@ -668,6 +790,9 @@ $(document).ready(function() {
 	    }
 	    
 	});
+
+	$('.cancel-add-refs').click();
+	
     });
     
 });

@@ -386,6 +386,9 @@ $(document).ready(function() {
     $('.edit-new-evidence, .path-evidence-box').on('click', function() {
 	showdialog('evidence-editor');
 	step = $(this).parent().parent().data('step');
+	if (typeof step === 'undefined') {
+	    step = $(this).data('step');
+	}
 	newindex = gen_index();
 	$('#editor-evidence-index').val(newindex);
 	$('#editor-evidence-index-new').val('true');

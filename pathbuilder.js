@@ -244,6 +244,7 @@ function update_references () {
 		evidence_number(pathdata.references[key].evidence[ekey])
 	    );
 	}
+	ref_in_steps.sort();
 	refsteps = ref_in_steps.join(', ');
 
 	if (refsteps != '') {
@@ -294,7 +295,7 @@ function update_references () {
 	$('#references-in-editor-block').find('.references-container').append(
 	    '<div class="reference-instance">' +
 	    '<label class="d-flex gap-2">' +
-	    '<input class="form-check-input flex-shrink-0" type="checkbox"' + refchecked + '>' +
+	    '<input class="form-check-input flex-shrink-0" type="checkbox" data-refkey="' + key + '" ' + refchecked + '>' +
 	    '<span>' +
 	    '<span class="references-number">' +
 	    pathdata.references[key].number +
@@ -323,11 +324,12 @@ function update_references () {
 
     // Then add them to the text summary section evidence boxes
     $('.evidence-references-section').slideUp(0);
-    $('.evidence-references-numbers').html('');
+    $('.evidence-references-number-instance').remove();
     for (var key in pathdata.references) {
 	for (var ekey in pathdata.references[key].evidence) {
-	    $('#evidence-instance-' + pathdata.references[key].evidence + ' .evidence-references-numbers').parent().slideDown(0);
-	    $('#evidence-instance-' + pathdata.references[key].evidence + ' .evidence-references-numbers').append(
+	    console.log('#evidence-instance-' + pathdata.references[key].evidence[ekey] + ' .evidence-references-numbers');
+	    $('#evidence-instance-' + pathdata.references[key].evidence[ekey] + ' .evidence-references-numbers').parent().slideDown(0);
+	    $('#evidence-instance-' + pathdata.references[key].evidence[ekey] + ' .evidence-references-numbers').append(
 		'<span class="evidence-references-number-instance">' +
 		pathdata.references[key].number +
 		'</span>'
@@ -632,8 +634,8 @@ $(document).ready(function() {
 	    checks.push($(this).val());
 	});
 	
+	index = $('#editor-evidence-index').val(); // Index for new evidence entry
 	if ($('#editor-evidence-index-new').val() == 'true') { // Inserting new evidence
-	    index = $('#editor-evidence-index').val(); // Index for new evidence entry
 	    if (checks.length > 0) {
 		pathdata.evidence[index] = { // Add evidence to JSON object
 		    step: $('#editor-evidence-step').val(),
@@ -641,13 +643,12 @@ $(document).ready(function() {
 		    checks: checks
 		};
 	    } else {
-		pathdata.evidence[newindex] = { // Add evidence to JSON object
+		pathdata.evidence[index] = { // Add evidence to JSON object
 		    step: $('#editor-evidence-step').val(),
 		    text: $('#evidence-editor-text').val()
 		};
 	    }
 	} else { // Updating old evidence
-	    index = $('#editor-evidence-index').val();
 	    if (checks.length > 0) {
 		pathdata.evidence[index].text = $('#evidence-editor-text').val();
 		pathdata.evidence[index].checks = checks;
@@ -657,6 +658,20 @@ $(document).ready(function() {
 		delete pathdata.evidence[index].checks;
 	    }
 	}
+
+	// Add the evidence key to all the checked references
+	$('#references-in-editor-block .form-check-input').each(function() {
+	    if ($(this).is(':checked')) {
+		// If it's checked, make sure that the evidence key is is the references array
+		if (! pathdata.references[$(this).data('refkey')].evidence.includes(index)) {
+		    pathdata.references[$(this).data('refkey')].evidence.push(index);
+		}
+	    } else {
+		if (pathdata.references[$(this).data('refkey')].evidence.includes(index)) {
+		    pathdata.references[$(this).data('refkey')].evidence = pathdata.references[$(this).data('refkey')].evidence.filter(i => i !== index);
+		}
+	    }
+	});
 	
 	updatepage();
     });

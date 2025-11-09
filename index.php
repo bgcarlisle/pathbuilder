@@ -501,7 +501,7 @@
 			    </svg>
 			    Look up reference by DOI
 			</button>
-			<button class="btn btn-primary btn-sm cancel-add-refs">
+			<button class="btn btn-sm cancel-add-refs">
 			    <svg width="16" height="16" fill="currentColor">
 				<use href="images/bootstrap-icons.svg#x-circle"/>
 			    </svg>
@@ -930,6 +930,24 @@
 			<h3>References</h3>
 			<div class="references-space">
 			    <div class="references-container"></div>
+			    <div class="add-ref-space add-ref-by-doi">
+				<div class="mb-1">
+				    <label for="dialog-doi-to-look-up">Add reference by DOI lookup</label>
+				    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
+				</div>
+				<button class="btn btn-primary btn-sm do-doi-lookup">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#plus-circle"/>
+				    </svg>
+				    Look up reference by DOI
+				</button>
+				<button class="btn btn-sm cancel-add-refs">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#x-circle"/>
+				    </svg>
+				    Cancel
+				</button>
+			    </div>
 			    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 				<svg width="16" height="16" fill="currentColor">
 				    <use href="images/bootstrap-icons.svg#plus-circle"/>

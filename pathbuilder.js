@@ -203,15 +203,27 @@ function add_new_reference (authors, title, journal, year, doi, evidence) {
     }
 
     if (! ref_already_added) {
-	pathdata.references.push({
-	    authors: authors,
-	    title: title,
-	    journal: journal,
-	    year: year,
-	    doi: doi,
-	    published: true, // This will always be true for ones fetched by DOI
-	    evidence: [evidence]
-	});
+	if (evidence !== null) {
+	    pathdata.references.push({
+		authors: authors,
+		title: title,
+		journal: journal,
+		year: year,
+		doi: doi,
+		published: true, // This will always be true for ones fetched by DOI
+		evidence: [evidence]
+	    });
+	} else {
+	    pathdata.references.push({
+		authors: authors,
+		title: title,
+		journal: journal,
+		year: year,
+		doi: doi,
+		published: true, // This will always be true for ones fetched by DOI
+		evidence: []
+	    });	    
+	}
 
 	update_references();
     } else {
@@ -783,7 +795,11 @@ $(document).ready(function() {
     $('.do-doi-lookup').on('click', function (event) {
 
 	doi_to_look_up = $(this).parent().find('.doi-to-look-up').val();
-	index = $('#editor-evidence-index').val();
+	if ($('#evidence-editor').is(":visible")) {
+	    index = $('#editor-evidence-index').val();
+	} else {
+	    index = null;
+	}
 	
 	$.ajax ({
 	    url: 'crossref.php',

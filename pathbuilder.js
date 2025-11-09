@@ -190,7 +190,7 @@ function updatepage () {
 
 }
 
-function add_new_reference (authors, title, journal, year, doi, evidence) {
+function add_new_reference_by_doi (authors, title, journal, year, doi, evidence, doi_field, doi_field_feedback) {
     // Check that there isn't already one with an identical DOI
 
     ref_already_added = false;
@@ -226,10 +226,44 @@ function add_new_reference (authors, title, journal, year, doi, evidence) {
 	}
 
 	update_references();
+
+	$('.cancel-add-refs').click();
     } else {
-	console.log(key_of_potential_dupe);
-	// See if the current evidence is already listed
+	doi_field.addClass('is-invalid');
+	doi_field_feedback.html('A reference with this DOI has already been added');
     }
+    
+}
+
+
+function add_new_manual_reference (authors, title, journal, year, url, evidence) {
+    // Check that there isn't already one with an identical DOI
+
+    if (evidence !== null) {
+	pathdata.references.push({
+	    authors: authors,
+	    title: title,
+	    journal: journal,
+	    year: year,
+	    url: url,
+	    published: false, // This will always be true for ones added manually
+	    evidence: [evidence]
+	});
+    } else {
+	pathdata.references.push({
+	    authors: authors,
+	    title: title,
+	    journal: journal,
+	    year: year,
+	    url: url,
+	    published: false, // This will always be true for ones added manually
+	    evidence: []
+	});	    
+    }
+
+    update_references();
+
+    $('.cancel-add-refs').click();
     
 }
 
@@ -262,9 +296,27 @@ function update_references () {
 	if (refsteps != '') {
 	    refsteps = 'Cited in PATH evidence: ' + refsteps;
 	}
+
+	if (pathdata.references[key].published) {
+	    extlink = '<span class="references-doi">DOI: <a href="' +
+		      pathdata.references[key].doi +
+		      '" target="_blank">' +
+		      pathdata.references[key].doi +
+		      '</a></span>'
+	} else {
+	    extlink = '<span class="references-doi">URL: <a href="' +
+		      pathdata.references[key].url +
+		      '" target="_blank">' +
+		      pathdata.references[key].url +
+		      '</a></span>'
+	    
+	}
 	
 	$('#references-block').find('.references-container').append(
-	    '<div class="reference-instance"><div>' +
+	    '<div class="reference-instance" data-key="' + key + '"><div>' +
+	    '<div style="float: right; margin-left: 10px;"><button class="btn btn-sm btn-danger delete-reference">' +
+	    '<svg width="12" height="12" fill="currentColor"><use href="images/bootstrap-icons.svg#backspace"/></svg> Delete' +
+	    '</button></div>' +
 	    '<span class="references-number">' +
 	    pathdata.references[key].number +
 	    '.</span> ' +
@@ -280,11 +332,7 @@ function update_references () {
 	    '<span class="references-year">(' +
 	    pathdata.references[key].year +
 	    ')</span> ' +
-	    '<span class="references-doi">DOI: <a href="' +
-	    pathdata.references[key].doi +
-	    '" target="_blank">' +
-	    pathdata.references[key].doi +
-	    '</a></span>' +
+	    extlink +
 	    '</div>' +
 	    '<div class="ref-path-steps">' +
 	    refsteps +
@@ -324,11 +372,7 @@ function update_references () {
 	    '<span class="references-year">(' +
 	    pathdata.references[key].year +
 	    ')</span> ' +
-	    '<span class="references-doi">DOI: <a href="' +
-	    pathdata.references[key].doi +
-	    '" target="_blank">' +
-	    pathdata.references[key].doi +
-	    '</a></span>' +
+	    extlink +
 	    '</span></label>' +
 	    '</div>'
 	);
@@ -588,6 +632,52 @@ $(document).ready(function() {
 	$('#delete-evidence-text').html(pathdata.evidence[index].text); // Show text for reference
     });
 
+    // Show delete reference dialog
+    $('#references-block').on('click', '.delete-reference', function(event) {
+
+	console.log('yes');
+
+	key = $(this).parent().parent().parent().data('key');
+
+	if (pathdata.references[key].published) {
+	    extlink = '<span class="references-doi">DOI: <a href="' +
+		      pathdata.references[key].doi +
+		      '" target="_blank">' +
+		      pathdata.references[key].doi +
+		      '</a></span>'
+	} else {
+	    extlink = '<span class="references-doi">URL: <a href="' +
+		      pathdata.references[key].url +
+		      '" target="_blank">' +
+		      pathdata.references[key].url +
+		      '</a></span>'
+	    
+	}
+	
+	$('#delete-reference-text').html(
+	    '<span class="references-number">' +
+	    pathdata.references[key].number +
+	    '.</span> ' +
+	    '<span class="references-authors">' +
+	    pathdata.references[key].authors +
+	    '.</span> ' +
+	    '<span class="references-title">' +
+	    pathdata.references[key].title +
+	    '.</span> ' +
+	    '<span class="references-journal">' +
+	    pathdata.references[key].journal +
+	    '.</span> ' +
+	    '<span class="references-year">(' +
+	    pathdata.references[key].year +
+	    ')</span> ' +
+	    extlink
+	);
+
+	$('#delete-reference-key').val(key);
+	
+	showdialog('reference-delete');
+    });
+
     // Show evidence strength editor
     $('.edit-evidence-strength').on('click', function(event) {
 	showdialog('evidence-strength');
@@ -694,6 +784,12 @@ $(document).ready(function() {
 	updatepage()
     });
 
+    // Confirm delete reference
+    $('#confirm-delete-ref').on('click', function (event) {
+	delete pathdata.references[$('#delete-reference-key').val()];
+	updatepage()
+    });
+
     // Confirm strength
     $('#confirm-evidence-strength').on('click', function(event){
 	pathdata.strength[$('#evidence-strength-step').val()] = $('#evidence-strength-slider').val();
@@ -786,47 +882,91 @@ $(document).ready(function() {
 	$(this).parent().children('.add-ref-by-doi').slideDown();
     });
 
+    $('.edit-new-reference-manual').on('click', function(event) {
+	$(this).parent().children('.add-refs-buttons').slideUp();
+	$(this).parent().children('.add-ref-manual').slideDown();
+    });
+
     $('.cancel-add-refs').on('click', function(event) {
 	$(this).parent().parent().children('.add-ref-space').slideUp();
 	$(this).parent().parent().children('.add-refs-buttons').slideDown();
 	$(this).parent().find('.doi-to-look-up').val('');
+	$(this).parent().find('.doi-to-look-up').removeClass('is-invalid');
+	$(this).parent().find('.doi-to-look-up-feedback').html('');
+	$(this).parent().parent().find('.add-ref-manual input').val('');
     });
 
     $('.do-doi-lookup').on('click', function (event) {
 
-	doi_to_look_up = $(this).parent().find('.doi-to-look-up').val();
+	doi_field = $(this).parent().find('.doi-to-look-up');
+	doi_field_feedback = $(this).parent().find('.doi-to-look-up-feedback');
+	doi_to_look_up = doi_field.val();
+	if ($('#evidence-editor').is(":visible")) {
+	    index = $('#editor-evidence-index').val();
+	} else {
+	    index = null;
+	}
+
+	if (doi_to_look_up != '') {
+	    
+	    $.ajax ({
+		url: 'crossref.php',
+		type: 'post',
+		data: {
+		    doi: doi_to_look_up
+		},
+		dataType: 'html'
+	    }).done ( function (response) {
+		response_json = JSON.parse(response);
+
+		if (response_json.status == "success") {
+		    add_new_reference_by_doi(
+			response_json.authors,
+			response_json.title,
+			response_json.journal,
+			response_json.year,
+			response_json.doi,
+			index,
+			doi_field,
+			doi_field_feedback
+		    );
+		} else {
+		    // What to do in case of error
+		    doi_field.addClass('is-invalid');
+		    doi_field_feedback.html('Failure to look up provided DOI');
+		}
+		
+	    });
+	    
+	} else {
+	    doi_field.addClass('is-invalid');
+	    doi_field_feedback.html('Please enter a DOI');
+	}
+
+    });
+
+    $('.add-manual-reference').on('click', function (event) {
+
+	authors_field = $(this).parent().find('.manual-ref-authors');
+	title_field = $(this).parent().find('.manual-ref-title');
+	journal_field = $(this).parent().find('.manual-ref-journal');
+	year_field = $(this).parent().find('.manual-ref-year');
+	url_field = $(this).parent().find('.manual-ref-url');
+
 	if ($('#evidence-editor').is(":visible")) {
 	    index = $('#editor-evidence-index').val();
 	} else {
 	    index = null;
 	}
 	
-	$.ajax ({
-	    url: 'crossref.php',
-	    type: 'post',
-	    data: {
-		doi: doi_to_look_up
-	    },
-	    dataType: 'html'
-	}).done ( function (response) {
-	    response_json = JSON.parse(response);
-
-	    if (response_json.status == "success") {
-		add_new_reference(
-		    response_json.authors,
-		    response_json.title,
-		    response_json.journal,
-		    response_json.year,
-		    response_json.doi,
-		    index
-		);
-	    } else {
-		// What to do in case of error
-	    }
-	    
-	});
-
-	$('.cancel-add-refs').click();
+	add_new_manual_reference(
+	    authors_field.val(),
+	    title_field.val(),
+	    journal_field.val(),
+	    year_field.val(),
+	    url_field.val(),
+	    index
+	);
 	
     });
     

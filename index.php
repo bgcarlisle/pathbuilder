@@ -126,6 +126,9 @@
 	 .add-ref-by-doi {
 	     display: none;
 	 }
+	 .add-ref-manual {
+	     display: none;
+	 }
 	 .references-title {
 	     font-style: italic;
 	 }
@@ -494,6 +497,7 @@
 			<div class="mb-1">
 			    <label for="dialog-doi-to-look-up">Add reference by DOI lookup</label>
 			    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
+			    <small class="doi-to-look-up-feedback"></small>
 			</div>
 			<button class="btn btn-primary btn-sm do-doi-lookup">
 			    <svg width="16" height="16" fill="currentColor">
@@ -548,6 +552,26 @@
 	    <hr>
 	    <input type="hidden" id="delete-evidence-index" value="">
 	    <button class="btn btn-danger dialog-close" id="confirm-delete">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#backspace"/>
+		</svg>
+		Delete
+	    </button>
+	</div>
+
+	<div id="reference-delete" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Confirm delete reference</h2>
+	    <div class="alert alert-warning" role="alert">Are you sure you want to delete the following reference?</div>
+	    <hr>
+	    <div id="delete-reference-text" style="margin-bottom: 20px"></div>
+	    <hr>
+	    <input type="hidden" id="delete-reference-key" value="">
+	    <button class="btn btn-danger dialog-close" id="confirm-delete-ref">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#backspace"/>
 		</svg>
@@ -932,8 +956,9 @@
 			    <div class="references-container"></div>
 			    <div class="add-ref-space add-ref-by-doi">
 				<div class="mb-1">
-				    <label for="dialog-doi-to-look-up">Add reference by DOI lookup</label>
-				    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
+				    <label for="summary-doi-to-look-up">Add reference by DOI lookup</label>
+				    <input type="text" class="form-control doi-to-look-up" id="summary-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
+				    <small class="doi-to-look-up-feedback"></small>
 				</div>
 				<button class="btn btn-primary btn-sm do-doi-lookup">
 				    <svg width="16" height="16" fill="currentColor">
@@ -947,6 +972,41 @@
 				    </svg>
 				    Cancel
 				</button>
+			    </div>
+			    <div class="add-ref-space add-ref-manual">
+				<div class="mb-1">
+				    <label for="summary-manual-authors">Authors</label>
+				    <input type="text" class="form-control manual-ref-authors" id="summary-manual-authors" placeholder="Kimmelman J, Carlisle BG, et al.">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-title">Title</label>
+				    <input type="text" class="form-control manual-ref-title" id="summary-manual-title" placeholder="Activity of Antonib in a xenograft mouse model">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-journal">Journal</label>
+				    <input type="text" class="form-control manual-ref-journal" id="summary-manual-journal" placeholder="Journal of Preclinical Evidence">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-year">Year</label>
+				    <input type="text" class="form-control manual-ref-year" id="summary-manual-year" placeholder="2025">
+				</div>
+				<div class="mb-3">
+				    <label for="summary-manual-url">URL</label>
+				    <input type="text" class="form-control manual-ref-url" id="summary-manual-url" placeholder="https://www.translationalethics.com/pathbuilder/">
+				</div>
+				<button class="btn btn-primary btn-sm add-manual-reference">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#plus-circle"/>
+				    </svg>
+				    Add manual reference
+				</button>
+				<button class="btn btn-sm cancel-add-refs">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#x-circle"/>
+				    </svg>
+				    Cancel
+				</button>
+				
 			    </div>
 			    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 				<svg width="16" height="16" fill="currentColor">

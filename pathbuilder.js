@@ -659,6 +659,7 @@ $(document).ready(function() {
 	    $('#evidence-editor-vertical-arrow-fields').slideUp();
 	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
 	}
+	$('#auto-analysis-report').slideUp();
 	update_references();
     });
 
@@ -692,6 +693,7 @@ $(document).ready(function() {
 	    $('#evidence-editor-vertical-arrow-fields').slideUp();
 	    $('#evidence-editor-horizontal-arrow-fields').slideDown();
 	}
+	$('#auto-analysis-report').slideUp();
 	update_references();
     });
 

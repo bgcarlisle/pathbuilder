@@ -297,6 +297,38 @@ function update_references () {
 	    refsteps = 'Cited in PATH evidence: ' + refsteps;
 	}
 
+	if (pathdata.references[key].authors != '') {
+	    authorref = '<span class="references-authors">' +
+			pathdata.references[key].authors +
+			'.</span> ';
+	} else {
+	    authorref = '';
+	}
+
+	if (pathdata.references[key].title != '') {
+	    titleref = '<span class="references-title">' +
+		       pathdata.references[key].title +
+		       '.</span> ';
+	} else {
+	    titleref = '';
+	}
+
+	if (pathdata.references[key].journal != '') {
+	    journalref = '<span class="references-journal">' +
+			 pathdata.references[key].journal +
+			 '.</span> ';
+	} else {
+	    journalref = '';
+	}
+
+	if (pathdata.references[key].year != '') {
+	    yearref = '<span class="references-year">(' +
+		      pathdata.references[key].year +
+		      ')</span> ';
+	} else {
+	    yearref = '';
+	}
+
 	if (pathdata.references[key].published) {
 	    extlink = '<span class="references-doi">DOI: <a href="' +
 		      pathdata.references[key].doi +
@@ -304,11 +336,16 @@ function update_references () {
 		      pathdata.references[key].doi +
 		      '</a></span>'
 	} else {
-	    extlink = '<span class="references-doi">URL: <a href="' +
-		      pathdata.references[key].url +
-		      '" target="_blank">' +
-		      pathdata.references[key].url +
-		      '</a></span>'
+
+	    if (pathdata.references[key].url != '') {
+		extlink = '<span class="references-doi">URL: <a href="' +
+			  pathdata.references[key].url +
+			  '" target="_blank">' +
+			  pathdata.references[key].url +
+			  '</a></span>'		
+	    } else {
+		extlink = '';
+	    }
 	    
 	}
 	
@@ -320,18 +357,10 @@ function update_references () {
 	    '<span class="references-number">' +
 	    pathdata.references[key].number +
 	    '.</span> ' +
-	    '<span class="references-authors">' +
-	    pathdata.references[key].authors +
-	    '.</span> ' +
-	    '<span class="references-title">' +
-	    pathdata.references[key].title +
-	    '.</span> ' +
-	    '<span class="references-journal">' +
-	    pathdata.references[key].journal +
-	    '.</span> ' +
-	    '<span class="references-year">(' +
-	    pathdata.references[key].year +
-	    ')</span> ' +
+	    authorref +
+	    titleref +
+	    journalref +
+	    yearref +
 	    extlink +
 	    '</div>' +
 	    '<div class="ref-path-steps">' +
@@ -351,6 +380,58 @@ function update_references () {
 		refchecked = ' checked';
 	    }
 	}
+
+	if (pathdata.references[key].authors != '') {
+	    authorref = '<span class="references-authors">' +
+			pathdata.references[key].authors +
+			'.</span> ';
+	} else {
+	    authorref = '';
+	}
+	
+	if (pathdata.references[key].title != '') {
+	    titleref = '<span class="references-title">' +
+		       pathdata.references[key].title +
+		       '.</span> ';
+	} else {
+	    titleref = '';
+	}
+
+	if (pathdata.references[key].journal != '') {
+	    journalref = '<span class="references-journal">' +
+			 pathdata.references[key].journal +
+			 '.</span> ';
+	} else {
+	    journalref = '';
+	}
+
+	if (pathdata.references[key].year != '') {
+	    yearref = '<span class="references-year">(' +
+		      pathdata.references[key].year +
+		      ')</span> ';
+	} else {
+	    yearref = '';
+	}
+
+	if (pathdata.references[key].published) {
+	    extlink = '<span class="references-doi">DOI: <a href="' +
+		      pathdata.references[key].doi +
+		      '" target="_blank">' +
+		      pathdata.references[key].doi +
+		      '</a></span>'
+	} else {
+
+	    if (pathdata.references[key].url != '') {
+		extlink = '<span class="references-doi">URL: <a href="' +
+			  pathdata.references[key].url +
+			  '" target="_blank">' +
+			  pathdata.references[key].url +
+			  '</a></span>'		
+	    } else {
+		extlink = '';
+	    }
+	    
+	}
 	
 	$('#references-in-editor-block').find('.references-container').append(
 	    '<div class="reference-instance">' +
@@ -360,18 +441,10 @@ function update_references () {
 	    '<span class="references-number">' +
 	    pathdata.references[key].number +
 	    '.</span> ' +
-	    '<span class="references-authors">' +
-	    pathdata.references[key].authors +
-	    '.</span> ' +
-	    '<span class="references-title">' +
-	    pathdata.references[key].title +
-	    '.</span> ' +
-	    '<span class="references-journal">' +
-	    pathdata.references[key].journal +
-	    '.</span> ' +
-	    '<span class="references-year">(' +
-	    pathdata.references[key].year +
-	    ')</span> ' +
+	    authorref +
+	    titleref+
+	    journalref+
+	    yearref+
 	    extlink +
 	    '</span></label>' +
 	    '</div>'
@@ -639,6 +712,39 @@ $(document).ready(function() {
 
 	key = $(this).parent().parent().parent().data('key');
 
+	
+	if (pathdata.references[key].authors != '') {
+	    authorref = '<span class="references-authors">' +
+			pathdata.references[key].authors +
+			'.</span> ';
+	} else {
+	    authorref = '';
+	}
+
+	if (pathdata.references[key].title != '') {
+	    titleref = '<span class="references-title">' +
+		       pathdata.references[key].title +
+		       '.</span> ';
+	} else {
+	    titleref = '';
+	}
+
+	if (pathdata.references[key].journal != '') {
+	    journalref = '<span class="references-journal">' +
+			 pathdata.references[key].journal +
+			 '.</span> ';
+	} else {
+	    journalref = '';
+	}
+
+	if (pathdata.references[key].year != '') {
+	    yearref = '<span class="references-year">(' +
+		      pathdata.references[key].year +
+		      ')</span> ';
+	} else {
+	    yearref = '';
+	}
+
 	if (pathdata.references[key].published) {
 	    extlink = '<span class="references-doi">DOI: <a href="' +
 		      pathdata.references[key].doi +
@@ -646,11 +752,16 @@ $(document).ready(function() {
 		      pathdata.references[key].doi +
 		      '</a></span>'
 	} else {
-	    extlink = '<span class="references-doi">URL: <a href="' +
-		      pathdata.references[key].url +
-		      '" target="_blank">' +
-		      pathdata.references[key].url +
-		      '</a></span>'
+
+	    if (pathdata.references[key].url != '') {
+		extlink = '<span class="references-doi">URL: <a href="' +
+			  pathdata.references[key].url +
+			  '" target="_blank">' +
+			  pathdata.references[key].url +
+			  '</a></span>'		
+	    } else {
+		extlink = '';
+	    }
 	    
 	}
 	
@@ -658,18 +769,10 @@ $(document).ready(function() {
 	    '<span class="references-number">' +
 	    pathdata.references[key].number +
 	    '.</span> ' +
-	    '<span class="references-authors">' +
-	    pathdata.references[key].authors +
-	    '.</span> ' +
-	    '<span class="references-title">' +
-	    pathdata.references[key].title +
-	    '.</span> ' +
-	    '<span class="references-journal">' +
-	    pathdata.references[key].journal +
-	    '.</span> ' +
-	    '<span class="references-year">(' +
-	    pathdata.references[key].year +
-	    ')</span> ' +
+	    authorref +
+	    titleref +
+	    journalref +
+	    yearref +
 	    extlink
 	);
 

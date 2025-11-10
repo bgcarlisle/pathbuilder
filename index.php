@@ -512,6 +512,40 @@
 			    Cancel
 			</button>
 		    </div>
+		    <div class="add-ref-space add-ref-manual">
+				<div class="mb-1">
+				    <label for="summary-manual-authors">Authors</label>
+				    <input type="text" class="form-control manual-ref-authors" id="summary-manual-authors" placeholder="Kimmelman J, Carlisle BG, et al.">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-title">Title</label>
+				    <input type="text" class="form-control manual-ref-title" id="summary-manual-title" placeholder="Activity of Antonib in a xenograft mouse model">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-journal">Journal</label>
+				    <input type="text" class="form-control manual-ref-journal" id="summary-manual-journal" placeholder="Journal of Preclinical Evidence">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-year">Year</label>
+				    <input type="text" class="form-control manual-ref-year" id="summary-manual-year" placeholder="2025">
+				</div>
+				<div class="mb-3">
+				    <label for="summary-manual-url">URL</label>
+				    <input type="text" class="form-control manual-ref-url" id="summary-manual-url" placeholder="https://www.translationalethics.com/pathbuilder/">
+				</div>
+				<button class="btn btn-primary btn-sm add-manual-reference">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#plus-circle"/>
+				    </svg>
+				    Add manual reference
+				</button>
+				<button class="btn btn-sm cancel-add-refs">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#x-circle"/>
+				    </svg>
+				    Cancel
+				</button>
+		    </div>
 		    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 			<svg width="16" height="16" fill="currentColor">
 			    <use href="images/bootstrap-icons.svg#plus-circle"/>
@@ -1006,7 +1040,6 @@
 				    </svg>
 				    Cancel
 				</button>
-				
 			    </div>
 			    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 				<svg width="16" height="16" fill="currentColor">

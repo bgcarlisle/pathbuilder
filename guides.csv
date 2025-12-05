@@ -10,6 +10,6 @@ PATH for stem cells,3,prompt,Goodbye,NA
 Preclinical PATH,1,prompt,Welcome to PATH but for preclinical,NA
 Preclinical PATH,1,text,Please specify the target scenario,targetScenario
 Preclinical PATH,2,prompt,Here is the 2nd page; I can write some text,NA
-Preclinical PATH,2,text,What evidence do you have from models suggests that the drug engages and has the desired effect on its molecular target (M0-M1)?,step:m0m1
+Preclinical PATH,2,text,What evidence do you have from models that suggests the drug engages and has the desired effect on its molecular target (M0-M1)?,step:m0m1
 Preclinical PATH,3,check,Magnitude of effect (The size of the effect being reported is quantified),step:m0m1:magnitude-of-effect
 Preclinical PATH,3,prompt,Goodbye,NA

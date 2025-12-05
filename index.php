@@ -1067,6 +1067,7 @@
 	<script src="jquery-3.7.1.min.js"></script>
 	<script src="jquery-ui-1.13.2/jquery-ui.min.js"></script>
 	<script>
+	 var pathguides = <?php include("guides.php"); ?>;
 	 <?php include("pathbuilder.js"); ?>
 	</script>
 	<!-- End of Javascript -->

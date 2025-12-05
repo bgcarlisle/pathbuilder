@@ -53,7 +53,7 @@
 	     height: 70%;
 	     overflow-y: scroll;
 	 }
-	 @media (max-width: 800px) {
+	 @media (max-width: 900px) {
 	     .dialog {
 		 margin: 5% 5%;
 		 width: 90%;
@@ -79,18 +79,18 @@
 	     color: #fff;
 	     float: right;
 	 }
-	 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+	 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .badge-primary {
 	     background-color: #423629 !important;
 	 }
 	 .btn {
 	     border-color: #423629 !important;
 	 }
-	 .evidence-space {
+	 .evidence-space,.references-space {
 	     padding: 10px;
 	     background-color: #ddd;
 	     margin-bottom: 40px;
 	 }
-	 .evidence-container {
+	 .evidence-container,.references-container {
 	     min-height: 40px;
 	     margin-bottom: 10px;
 	 }
@@ -99,14 +99,20 @@
 	     border: 1px solid #fff;
 	     padding: 8px 10px;
 	     margin-bottom: 10px;
-	     min-height: 50px;
+	     min-height: 100px;
 	 }
-	 .evidence-placeholder {
-	     background-color: #eee;
-	     min-height: 50px;
+	 .reference-instance {
+	     background-color: #ddd;
+	     border: 1px solid #fff;
+	     padding: 8px 10px;
 	     margin-bottom: 10px;
 	 }
-	 .evidence-instance-grip {
+	 .evidence-placeholder,.reference-placeholder {
+	     min-height: 100px;
+	     margin-bottom: 10px;
+	     border: 5px dashed #fff;
+	 }
+	 .evidence-instance-grip,.reference-instance-grip {
 	     fill: #333;
 	     margin-right: 20px;
 	 }
@@ -116,6 +122,26 @@
 	 }
 	 .edit-evidence-strength {
 	     display: none;
+	 }
+	 .add-ref-by-doi {
+	     display: none;
+	 }
+	 .add-ref-manual {
+	     display: none;
+	 }
+	 .references-title {
+	     font-style: italic;
+	 }
+	 .ref-path-steps {
+	     font-size: small;
+	     margin-top: 5px;
+	 }
+	 .evidence-references-section {
+	     font-size: small;
+	     margin-top: 5px;
+	 }
+	 .evidence-references-number-instance {
+	     margin: 0 3px;
 	 }
 	 /* Beginning of PATH figure styles */
 	 #pathfigure {
@@ -170,7 +196,7 @@
 		</svg>
 	    </button>
 	    <h2>Welcome to PATH Builder</h2>
-	    <p>PATH (Preclinical Assessment of Translation to Humans) is a structured approach for presenting a comprehensive, accurate and transparent scientific rationale for early phase clinical trials and innovative care. Read <a href="#">the PATH paper (Kimmelman et al, 2024)</a> for a detailed rationale and worked examples.</p>
+	    <p>PATH (Preclinical Assessment of Translation to Humans) is a structured approach for presenting a comprehensive, accurate and transparent scientific rationale for early phase clinical trials and innovative care. Read <a href="https://doi.org/10.1016/j.medj.2024.07.014">the PATH paper (Kimmelman et al, 2024)</a> for a detailed rationale and worked examples.</p>
 	    <div class="d-grid gap-2">
 		<button class="btn btn-primary" id="new-path-from-scratch">
 		    <svg width="32" height="32" fill="currentColor">
@@ -184,7 +210,7 @@
 		    </svg>
 		    View an example PATH
 		</button>
-		<button class="btn btn-primary" disabled>
+		<button class="btn btn-primary" id="choose-guide">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#person-raised-hand"/>
 		    </svg>
@@ -214,7 +240,7 @@
 	    <h2>Open a PATH previously saved to your computer</h2>
 	    <div class="alert alert-warning" role="alert">This will replace the PATH that you currently have loaded with the data from the selected file. Are you sure?</div>
 	    <div class="mb-3">
-		<label for="formFile" class="form-label">Choose a JSON file from your computer</label>
+		<label for="inputfile" class="form-label">Choose a JSON file from your computer</label>
 		<input class="form-control" type="file" id="inputfile" name="inputfile">
 	    </div>
 	    <button class="btn btn-primary dialog-close" id="confirm-replace-with-file-data">
@@ -338,15 +364,207 @@
 		</svg>
 	    </button>
 	    <h2>Evidence for <span class="editor-evidence-stepname"></span></h2>
-	    <div>For direct or model steps, provide evidence that takes into account magnitude, precision and risk of bias. For translational steps, this will be more complicated, but it may be possible to express this evidence in terms of magnitude of relationships connecting models to target scenarios, precision and risk of bias.</div>
-	    <div>Where possible, citations should be provided for each piece of evidence.</div>
+	    <div id="evidence-editor-prompt-text"></div>
 	    <hr>
 	    <div class="mb-3">
-		<label for="evidence-editor-text" class="form-label">Summary of evidence</label>
-		<textarea class="form-control" id="evidence-editor-text" rows="3"></textarea>
+		<label for="evidence-editor-text" class="form-label">Evidence</label>
+		<textarea class="form-control mb-2" id="evidence-editor-text" rows="3"></textarea>
+		<button class="btn btn-primary btn-sm mb-2 auto-analyze-evidence">
+		    <svg width="16" height="16" fill="currentColor">
+			<use href="images/bootstrap-icons.svg#magic"/>
+		    </svg>
+		    Auto-analyze evidence
+		</button>
+		<div id="auto-analysis-report"></div>
 	    </div>
+
+	    <!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
+	    <div id="evidence-metadata-checkboxes">
+		<div id="evidence-editor-vertical-arrow-fields">
+		    <label>Types of evidence provided</label>
+		    <div class="mb-3 list-group" id="vertical-arrow-evidence">
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="magnitude-of-effect">
+			    <span>
+				Magnitude of effect
+				<small class="d-block text-body-secondary">The size of the effect being reported is quantified</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="units-provided">
+			    <span>
+				Units provided
+				<small class="d-block text-body-secondary">Units are provided for all reported measures of effect where appropriate</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="measure-precision">
+			    <span>
+				Precision around estimate
+				<small class="d-block text-body-secondary">If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="comparator">
+			    <span>
+				Comparator
+				<small class="d-block text-body-secondary">Identity of comparator mentioned</small>
+			    </span>
+			</label>
+		    </div>
+
+		    
+		    <label>Measures to address risk of bias</label>
+		    <div class="mb-3 list-group" id="vertical-arrow-evidence-rob">
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="randomization">
+			    <span>
+				Randomization
+				<small class="d-block text-body-secondary">Randomized experimental design is mentioned</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="masking">
+			    <span>
+				Masking
+				<small class="d-block text-body-secondary">Masked experimental design is mentioned</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="pre-registration">
+			    <span>
+				Pre-registration
+				<small class="d-block text-body-secondary">Study in question was pre-registered</small>
+			    </span>
+			</label>
+			
+		    </div>
+		    
+		</div>
+
+		<!-- Conditional display depending on whether we're looking at evidence for a horizontal or vertical arrow -->
+		<div id="evidence-editor-horizontal-arrow-fields">
+		    <label>Types of evidence provided</label>
+		    <div class="mb-3 list-group" id="horizontal-arrow-evidence-types">
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="target-present">
+			    <span>
+				Target evidence
+				<small class="d-block text-body-secondary">Evidence suggesting drug target/functional assay used in models is also present in target patients</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="construct-validity">
+			    <span>
+				Construct validity
+				<small class="d-block text-body-secondary">Explanation of relationships between various features of a model systems and those for the target scenario</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="external-validity">
+			    <span>
+				External validity
+				<small class="d-block text-body-secondary">Replication of effects in different model systems</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="interfering-effects">
+			    <span>
+				Interfering effects
+				<small class="d-block text-body-secondary">Evidence suggesting the absence of "interfering effects" in the target scenario</small>
+			    </span>
+			</label>
+			<label class="list-group-item d-flex gap-2">
+			    <input class="form-check-input flex-shrink-0" type="checkbox" value="systematic-review">
+			    <span>
+				Systematic review
+				<small class="d-block text-body-secondary">Systematic review evidence regarding the model's predictive value</small>
+			    </span>
+			</label>
+		    </div>
+		    
+		</div>
+	    </div>
+	    <!-- End of conditional display -->
+
+	    <hr>
+	    
+	    <div id="references-in-editor-block">
+		<h3>References</h3>
+		<div class="references-space">
+		    <div class="references-container"></div>
+		    <div class="add-ref-space add-ref-by-doi">
+			<div class="mb-1">
+			    <label for="dialog-doi-to-look-up">Add reference by DOI lookup</label>
+			    <input type="text" class="form-control doi-to-look-up" id="dialog-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
+			    <small class="doi-to-look-up-feedback"></small>
+			</div>
+			<button class="btn btn-primary btn-sm do-doi-lookup">
+			    <svg width="16" height="16" fill="currentColor">
+				<use href="images/bootstrap-icons.svg#plus-circle"/>
+			    </svg>
+			    Look up reference by DOI
+			</button>
+			<button class="btn btn-sm cancel-add-refs">
+			    <svg width="16" height="16" fill="currentColor">
+				<use href="images/bootstrap-icons.svg#x-circle"/>
+			    </svg>
+			    Cancel
+			</button>
+		    </div>
+		    <div class="add-ref-space add-ref-manual">
+				<div class="mb-1">
+				    <label for="summary-manual-authors">Authors</label>
+				    <input type="text" class="form-control manual-ref-authors" id="summary-manual-authors" placeholder="Kimmelman J, Carlisle BG, et al.">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-title">Title</label>
+				    <input type="text" class="form-control manual-ref-title" id="summary-manual-title" placeholder="Activity of Antonib in a xenograft mouse model">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-journal">Journal</label>
+				    <input type="text" class="form-control manual-ref-journal" id="summary-manual-journal" placeholder="Journal of Preclinical Evidence">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-year">Year</label>
+				    <input type="text" class="form-control manual-ref-year" id="summary-manual-year" placeholder="2025">
+				</div>
+				<div class="mb-3">
+				    <label for="summary-manual-url">URL</label>
+				    <input type="text" class="form-control manual-ref-url" id="summary-manual-url" placeholder="https://www.translationalethics.com/pathbuilder/">
+				</div>
+				<button class="btn btn-primary btn-sm add-manual-reference">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#plus-circle"/>
+				    </svg>
+				    Add manual reference
+				</button>
+				<button class="btn btn-sm cancel-add-refs">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#x-circle"/>
+				    </svg>
+				    Cancel
+				</button>
+		    </div>
+		    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
+			<svg width="16" height="16" fill="currentColor">
+			    <use href="images/bootstrap-icons.svg#plus-circle"/>
+			</svg>
+			Add reference by DOI lookup
+		    </button>
+		    <button class="btn btn-primary btn-sm edit-new-reference-manual add-refs-buttons">
+			<svg width="16" height="16" fill="currentColor">
+			    <use href="images/bootstrap-icons.svg#plus-circle"/>
+			</svg>
+			Add reference manually
+		    </button>
+		</div>
+	    </div>
+
+	    
 	    <input type="hidden" id="editor-evidence-step" value="">
 	    <input type="hidden" id="editor-evidence-index" value="">
+	    <input type="hidden" id="editor-evidence-index-new" value="true">
 	    <button class="btn btn-primary dialog-close" id="confirm-evidence-editor">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#check-circle"/>
@@ -368,6 +586,26 @@
 	    <hr>
 	    <input type="hidden" id="delete-evidence-index" value="">
 	    <button class="btn btn-danger dialog-close" id="confirm-delete">
+		<svg width="20" height="20" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#backspace"/>
+		</svg>
+		Delete
+	    </button>
+	</div>
+
+	<div id="reference-delete" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Confirm delete reference</h2>
+	    <div class="alert alert-warning" role="alert">Are you sure you want to delete the following reference?</div>
+	    <hr>
+	    <div id="delete-reference-text" style="margin-bottom: 20px"></div>
+	    <hr>
+	    <input type="hidden" id="delete-reference-key" value="">
+	    <button class="btn btn-danger dialog-close" id="confirm-delete-ref">
 		<svg width="20" height="20" fill="currentColor">
 		    <use href="images/bootstrap-icons.svg#backspace"/>
 		</svg>
@@ -397,6 +635,19 @@
 	    </button>
 	</div>
 
+	<div id="guide-chooser" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Start a new PATH with guidance</h2>
+	    <p>The following buttons will open guides for using the PATH approach in different situations:</p>
+	    <div id="path-guide-options-container"></div>
+	</div>
+
+	<div id="guidance-pages-container">
+	</div>
 	<!-- End of dialog boxes -->
 	<div class="container-fluid titlebar">
 	    <div class="row">
@@ -744,6 +995,80 @@
 			</div>
 		    </div>
 
+		    <hr>
+
+		    <div id="references-block">
+			<h3>References</h3>
+			<div class="references-space">
+			    <div class="references-container"></div>
+			    <div class="add-ref-space add-ref-by-doi">
+				<div class="mb-1">
+				    <label for="summary-doi-to-look-up">Add reference by DOI lookup</label>
+				    <input type="text" class="form-control doi-to-look-up" id="summary-doi-to-look-up" placeholder="E.g. 10.1016/j.medj.2024.07.014">
+				    <small class="doi-to-look-up-feedback"></small>
+				</div>
+				<button class="btn btn-primary btn-sm do-doi-lookup">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#plus-circle"/>
+				    </svg>
+				    Look up reference by DOI
+				</button>
+				<button class="btn btn-sm cancel-add-refs">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#x-circle"/>
+				    </svg>
+				    Cancel
+				</button>
+			    </div>
+			    <div class="add-ref-space add-ref-manual">
+				<div class="mb-1">
+				    <label for="summary-manual-authors">Authors</label>
+				    <input type="text" class="form-control manual-ref-authors" id="summary-manual-authors" placeholder="Kimmelman J, Carlisle BG, et al.">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-title">Title</label>
+				    <input type="text" class="form-control manual-ref-title" id="summary-manual-title" placeholder="Activity of Antonib in a xenograft mouse model">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-journal">Journal</label>
+				    <input type="text" class="form-control manual-ref-journal" id="summary-manual-journal" placeholder="Journal of Preclinical Evidence">
+				</div>
+				<div class="mb-1">
+				    <label for="summary-manual-year">Year</label>
+				    <input type="text" class="form-control manual-ref-year" id="summary-manual-year" placeholder="2025">
+				</div>
+				<div class="mb-3">
+				    <label for="summary-manual-url">URL</label>
+				    <input type="text" class="form-control manual-ref-url" id="summary-manual-url" placeholder="https://www.translationalethics.com/pathbuilder/">
+				</div>
+				<button class="btn btn-primary btn-sm add-manual-reference">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#plus-circle"/>
+				    </svg>
+				    Add manual reference
+				</button>
+				<button class="btn btn-sm cancel-add-refs">
+				    <svg width="16" height="16" fill="currentColor">
+					<use href="images/bootstrap-icons.svg#x-circle"/>
+				    </svg>
+				    Cancel
+				</button>
+			    </div>
+			    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add reference by DOI lookup
+			    </button>
+			    <button class="btn btn-primary btn-sm edit-new-reference-manual add-refs-buttons">
+				<svg width="16" height="16" fill="currentColor">
+				    <use href="images/bootstrap-icons.svg#plus-circle"/>
+				</svg>
+				Add reference manually
+			    </button>
+			</div>
+		    </div>
+
 		    <!-- End of text summary -->
 		</div>
 	    </div>
@@ -755,6 +1080,7 @@
 	<script src="jquery-3.7.1.min.js"></script>
 	<script src="jquery-ui-1.13.2/jquery-ui.min.js"></script>
 	<script>
+	 var pathguides = <?php include("guides.php"); ?>;
 	 <?php include("pathbuilder.js"); ?>
 	</script>
 	<!-- End of Javascript -->

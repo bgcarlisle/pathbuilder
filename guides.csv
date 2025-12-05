@@ -1,5 +1,5 @@
 guide_name,page_no,element_type,element_details,path_data_location
-M0-M1 only,1,prompt,Welcome to PATH,NA
+M0-M1 only,1,prompt,"Welcome to PATH, here is the guidance",NA
 M0-M1 only,1,text,Please specify the target scenario,targetScenario
 M0-M1 only,2,prompt,Here is the 2nd page; I can write some text,NA
 M0-M1 only,2,text,What evidence do you have from models suggests that the drug engages and has the desired effect on its molecular target (M0-M1)?,step:m0m1

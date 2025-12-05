@@ -235,7 +235,6 @@ function add_new_reference_by_doi (authors, title, journal, year, doi, evidence,
     
 }
 
-
 function add_new_manual_reference (authors, title, journal, year, url, evidence) {
     // Check that there isn't already one with an identical DOI
 
@@ -548,25 +547,13 @@ function evidence_number (evidence_key) {
     }
 }
 
+// Stuff to do when the page is loaded
 $(document).ready(function() {
 
-    $('#pagemask, .dialog-close').on('click', function (event) {
-	$('.dialog').slideUp(250, function () {
-	    $('#pagemask').fadeOut(250);
-	});
-	$('.cancel-add-refs').click();
-    });
-
+    // Show the startup dialog
     showdialog('startup');
 
-    document.addEventListener('keyup', function (event) {
-	if (! $('#pagemask').is(':hidden')) { // If the page mask is visible
-	    if (event.keyCode == 27) { // Esc key pressed
-		$('#pagemask').click(); // Hide all dialogs and page mask
-	    }	    
-	}
-    });
-    
+    // Make the evidence draggable
     $('.evidence-container').sortable({
 	connectWith: ".evidence-container",
 	placeholder: "evidence-placeholder",
@@ -620,15 +607,84 @@ $(document).ready(function() {
 	showdialog('startup');
     });
 
+    // Show save/export buttons
+    $('#show-save-options').on('click', function(event) {
+	showdialog('save-or-export');
+    });
+    // Populate the PATH guidances
+    for (var guideno in pathguides) {
+	// Add buttons to chooser
+	$('#path-guide-options-container').append(
+	    '<button class="btn btn-primary choose-guide" data-guideno="' + guideno + '">' +
+	    pathguides[guideno]['guide_name'] +
+	    '</button> '
+	);
+	// Add pages from guides as dialogs
+	for (var pageno in pathguides[guideno]['pages']) {
+
+	    // Put together all the page elements into a string
+	    page_elements = '';
+	    for (var elementno in pathguides[guideno]['pages'][pageno]['elements']) {
+		element_type = pathguides[guideno]['pages'][pageno]['elements'][elementno]['element_type'];
+		switch (element_type) {
+		    case 'prompt':
+			page_elements += '<p>';
+			page_elements += pathguides[guideno]['pages'][pageno]['elements'][elementno]['element_details'];
+			page_elements += '</p>';
+			break;
+		}
+	    }
+	    
+	    $('#guidance-pages-container').append(
+		'<div class="dialog" id="guide-' + guideno + '-' + pathguides[guideno]['pages'][pageno]['page_no'] + '">' +
+		'<button class="btn dialog-close-x dialog-close"><svg width="32" height="32" fill="currentColor"><use href="images/bootstrap-icons.svg#x"/></svg></button>' +
+		page_elements +
+		'<small>' + pathguides[guideno]['guide_name'] + ', p. ' + pathguides[guideno]['pages'][pageno]['page_no'] + '</small>' +
+		'</div>'
+	    );
+	}
+	$('#guidance-pages-container').append(
+	    '<div class="dialog">' +
+	    '<button class="btn dialog-close-x dialog-close"><svg width="32" height="32" fill="currentColor"><use href="images/bootstrap-icons.svg#x"/></svg></button>' +
+	    '</div>'
+	);
+    }
+    $('#path-guide-options-container .choose-guide').on('click', function (event) {
+	// Make the choose guide buttons clicky
+	console.log($(this).data('guideno'));
+	showdialog('guide-' + $(this).data('guideno') + '-' + 1);
+    });
+    $('').on('click', function(event) {
+	// Make the navigation buttons in the guides clicky	
+    });
+    // End populating the PATH guidances
+
+    // Add functionality for dismissing dialogs
+    $('#pagemask, .dialog-close').on('click', function (event) {
+	$('.dialog').slideUp(250, function () {
+	    $('#pagemask').fadeOut(250);
+	});
+	$('.cancel-add-refs').click();
+    });
+    
+    // Add functionality for dismissing dialogs with Esc key
+    document.addEventListener('keyup', function (event) {
+	if (! $('#pagemask').is(':hidden')) { // If the page mask is visible
+	    if (event.keyCode == 27) { // Esc key pressed
+		$('#pagemask').click(); // Hide all dialogs and page mask
+	    }	    
+	}
+    });
+
+    // Show PATH guidance chooser
+    $('#choose-guide').on('click', function(event) {	
+	showdialog('guide-chooser');
+    });
+
     // Edit target scenario
     $('#edit-target-scenario').on('click', function(event) {
 	showdialog('target-scenario');
 	$('#target-scenario-text').val(pathdata.targetScenario);
-    });
-
-    // Show save/export buttons
-    $('#show-save-options').on('click', function(event) {
-	showdialog('save-or-export');
     });
 
     // Confirm target scenario changes

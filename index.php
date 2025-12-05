@@ -210,7 +210,7 @@
 		    </svg>
 		    View an example PATH
 		</button>
-		<button class="btn btn-primary" disabled>
+		<button class="btn btn-primary" id="choose-guide">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#person-raised-hand"/>
 		    </svg>
@@ -635,6 +635,19 @@
 	    </button>
 	</div>
 
+	<div id="guide-chooser" class="dialog">
+	    <button class="btn dialog-close-x dialog-close">
+		<svg width="32" height="32" fill="currentColor">
+		    <use href="images/bootstrap-icons.svg#x"/>
+		</svg>
+	    </button>
+	    <h2>Start a new PATH with guidance</h2>
+	    <p>The following buttons will open guides for using the PATH approach in different situations:</p>
+	    <div id="path-guide-options-container"></div>
+	</div>
+
+	<div id="guidance-pages-container">
+	</div>
 	<!-- End of dialog boxes -->
 	<div class="container-fluid titlebar">
 	    <div class="row">

@@ -98,6 +98,9 @@ var masking_regex = [
 ];
 
 function showdialog (dialogname) {
+    if (! $('#pagemask').is(':hidden')) { // If the page mask is visible
+	$('.dialog').slideUp(0);
+    }
     $('#pagemask').fadeIn(250, function () {
 	$('#' + dialogname).slideDown();
 	$('#' + dialogname + ' textarea,#' + dialogname + ' input').first().focus();
@@ -655,7 +658,7 @@ $(document).ready(function() {
 	    for (var pageno2 in pathguides[guideno]['pages']) {
 		count_pages_in_guide++;
 		if (pageno != pageno2) {
-		    guide_pagination += '<button class="btn btn-sm" onclick="$(\'.dialog-close-x\').click();showdialog(\'guide-' + guideno + '-' + pathguides[guideno]['pages'][pageno2]['page_no'] + '\');">' + pathguides[guideno]['pages'][pageno2]['page_no'] + '</button> '
+		    guide_pagination += '<button class="btn btn-sm" onclick="showdialog(\'guide-' + guideno + '-' + pathguides[guideno]['pages'][pageno2]['page_no'] + '\');">' + pathguides[guideno]['pages'][pageno2]['page_no'] + '</button> '
 		} else {
 		    guide_pagination += '<button class="btn btn-sm" disabled>' + pathguides[guideno]['pages'][pageno2]['page_no'] + '</button> '
 		}

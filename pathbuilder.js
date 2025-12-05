@@ -628,18 +628,46 @@ $(document).ready(function() {
 		element_type = pathguides[guideno]['pages'][pageno]['elements'][elementno]['element_type'];
 		switch (element_type) {
 		    case 'prompt':
-			page_elements += '<p>';
+			page_elements += '<p class="mb-3">';
 			page_elements += pathguides[guideno]['pages'][pageno]['elements'][elementno]['element_details'];
 			page_elements += '</p>';
 			break;
+		    case 'text':
+			page_elements += '<div class="mb-3">';
+			page_elements += '<label class="form-label" for="' + pathguides[guideno]['pages'][pageno]['elements'][elementno]['path_data_location'] + '">';
+			page_elements += pathguides[guideno]['pages'][pageno]['elements'][elementno]['element_details'];
+			page_elements += '</label>';
+			page_elements += '<textarea id="' + pathguides[guideno]['pages'][pageno]['elements'][elementno]['path_data_location'] + '" class="form-control" rows="3"></textarea>';
+			page_elements += '</div>';
+			break;
+		    case 'check':
+			page_elements += '<div class="mb-3 list-group">';
+			page_elements += '<label class="list-group-item d-flex gap-2">';
+			page_elements += '<input class="form-check-input flex-shrink-0" type="checkbox" value="">';
+			page_elements += '<span>' + pathguides[guideno]['pages'][pageno]['elements'][elementno]['element_details'] + '</span>';
+			page_elements += '</label>';
+			page_elements += '</div>';
+			break;
 		}
 	    }
-	    
+	    guide_pagination = '<div class="mb-3 text-center">';
+	    count_pages_in_guide = 0;
+	    for (var pageno2 in pathguides[guideno]['pages']) {
+		count_pages_in_guide++;
+		if (pageno != pageno2) {
+		    guide_pagination += '<button class="btn btn-sm" onclick="$(\'.dialog-close-x\').click();showdialog(\'guide-' + guideno + '-' + pathguides[guideno]['pages'][pageno2]['page_no'] + '\');">' + pathguides[guideno]['pages'][pageno2]['page_no'] + '</button> '
+		} else {
+		    guide_pagination += '<button class="btn btn-sm" disabled>' + pathguides[guideno]['pages'][pageno2]['page_no'] + '</button> '
+		}
+	    }
+	    guide_pagination += '</div>';
+
 	    $('#guidance-pages-container').append(
 		'<div class="dialog" id="guide-' + guideno + '-' + pathguides[guideno]['pages'][pageno]['page_no'] + '">' +
 		'<button class="btn dialog-close-x dialog-close"><svg width="32" height="32" fill="currentColor"><use href="images/bootstrap-icons.svg#x"/></svg></button>' +
+		'<h2>' + pathguides[guideno]['guide_name'] + '</h2>' +
 		page_elements +
-		'<small>' + pathguides[guideno]['guide_name'] + ', p. ' + pathguides[guideno]['pages'][pageno]['page_no'] + '</small>' +
+		guide_pagination +
 		'</div>'
 	    );
 	}

@@ -1,23 +1,103 @@
 guide_name,page_no,element_type,element_details,path_data_location
-Short example,1,prompt,Welcome to PATH but for preclinical,NA
-Short example,1,text,Please specify the target scenario,targetScenario
-Short example,2,prompt,Here is the 2nd page; I can write some text,NA
-Short example,2,text,What evidence do you have from models that suggests the drug engages and has the desired effect on its molecular target (M0-M1)?,m0m1
-Short example,3,check,Magnitude of effect (The size of the effect being reported is quantified),m0m1:magnitude-of-effect
-Short example,3,prompt,Goodbye,NA
+Model -> Direct -> Translational,1,prompt,"Welcome to PATH, here is the guidance",NA
+Model -> Direct -> Translational,1,text,Please specify the target scenario,targetScenario
 ,,,,
-Basic PATH guide,1,prompt,"Welcome to PATH, here is the guidance",NA
-Basic PATH guide,1,text,Please specify the target scenario,targetScenario
-Basic PATH guide,2,prompt,Here is the 2nd page; I can write some text,NA
-Basic PATH guide,2,text,What evidence do you have from models that suggests the drug engages and has the desired effect on its molecular target (M0-M1)?,m0m1
-Basic PATH guide,2,prompt,Does this evidence address the following threats to validity?,NA
-Basic PATH guide,2,check,Magnitude of effect (The size of the effect being reported is quantified),m0m1:magnitude-of-effect
-Basic PATH guide,3,prompt,Goodbye,NA
+Model -> Direct -> Translational,2,prompt,Evidence from model systems about the molecular target of the proposed intervention,NA
+Model -> Direct -> Translational,2,text,What evidence do you have from models that suggests the drug engages and has the desired effect on its molecular target (M0-M1)?,m0m1
+Model -> Direct -> Translational,2,prompt,Does this evidence address the following threats to validity?,NA
+Model -> Direct -> Translational,2,check,Magnitude of effect (The size of the effect being reported is quantified),m0m1:magnitude-of-effect
+Model -> Direct -> Translational,2,check,Units are provided for all reported measures of effect where appropriate,m0m1:units-provided
+Model -> Direct -> Translational,2,check,"If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.",m0m1:measure-precision
+Model -> Direct -> Translational,2,check,Identity of comparator mentioned,m0m1:comparator
+Model -> Direct -> Translational,2,prompt,Does this evidence include the following measures to address risk of bias?,NA
+Model -> Direct -> Translational,2,check,Randomized experimental design is mentioned,m0m1:randomization
+Model -> Direct -> Translational,2,check,Masked experimental design is mentioned,m0m1:masking
+Model -> Direct -> Translational,2,check,Study in question was pre-registered,m0m1:preregistration
 ,,,,
+Model -> Direct -> Translational,3,prompt,Evidence from model systems that the drug about the physiological effects of the drug,NA
+Model -> Direct -> Translational,3,text,"What evidence from models suggests that the drug, once it has engaged with the molecular target, will go on to produce the intended physiological effect?",m1m2
+Model -> Direct -> Translational,3,prompt,Does this evidence address the following threats to validity?,NA
+Model -> Direct -> Translational,3,check,Magnitude of effect (The size of the effect being reported is quantified),m1m2:magnitude-of-effect
+Model -> Direct -> Translational,3,check,Units are provided for all reported measures of effect where appropriate,m1m2:units-provided
+Model -> Direct -> Translational,3,check,"If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.",m1m2:measure-precision
+Model -> Direct -> Translational,3,check,Identity of comparator mentioned,m1m2:comparator
+Model -> Direct -> Translational,3,prompt,Does this evidence include the following measures to address risk of bias?,NA
+Model -> Direct -> Translational,3,check,Randomized experimental design is mentioned,m0m1:randomization
+Model -> Direct -> Translational,3,check,Masked experimental design is mentioned,m1m2:masking
+Model -> Direct -> Translational,3,check,Study in question was pre-registered,m1m2:preregistration
 ,,,,
+Model -> Direct -> Translational,4,prompt,Evidence from model systems about the clinical effects of the drug,NA
+Model -> Direct -> Translational,4,text,"What evidence from models suggests that the drug, once it has produced the intended physiological effect, will go on to also produce the desired clinical effect?",m2m3
+Model -> Direct -> Translational,4,prompt,Does this evidence address the following threats to validity?,NA
+Model -> Direct -> Translational,4,check,Magnitude of effect (The size of the effect being reported is quantified),m2m3:magnitude-of-effect
+Model -> Direct -> Translational,4,check,Units are provided for all reported measures of effect where appropriate,m2m3:units-provided
+Model -> Direct -> Translational,4,check,"If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.",m2m3:measure-precision
+Model -> Direct -> Translational,4,check,Identity of comparator mentioned,m2m3:comparator
+Model -> Direct -> Translational,4,prompt,Does this evidence include the following measures to address risk of bias?,NA
+Model -> Direct -> Translational,4,check,Randomized experimental design is mentioned,m0m1:randomization
+Model -> Direct -> Translational,4,check,Masked experimental design is mentioned,m2m3:masking
+Model -> Direct -> Translational,4,check,Study in question was pre-registered,m2m3:preregistration
 ,,,,
+Model -> Direct -> Translational,5,prompt,Direct evidence about the molecular target of the proposed intervention,NA
+Model -> Direct -> Translational,5,text,What direct evidence from clinical studies in the target population suggests that the drug engages and has the desired effect on its molecular target?,d0d1
+Model -> Direct -> Translational,5,prompt,Does this evidence address the following threats to validity?,NA
+Model -> Direct -> Translational,5,check,Magnitude of effect (The size of the effect being reported is quantified),d0d1:magnitude-of-effect
+Model -> Direct -> Translational,5,check,Units are provided for all reported measures of effect where appropriate,d0d1:units-provided
+Model -> Direct -> Translational,5,check,"If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.",d0d1:measure-precision
+Model -> Direct -> Translational,5,check,Identity of comparator mentioned,d0d1:comparator
+Model -> Direct -> Translational,5,prompt,Does this evidence include the following measures to address risk of bias?,NA
+Model -> Direct -> Translational,5,check,Randomized experimental design is mentioned,m0m1:randomization
+Model -> Direct -> Translational,5,check,Masked experimental design is mentioned,d0d1:masking
+Model -> Direct -> Translational,5,check,Study in question was pre-registered,d0d1:preregistration
 ,,,,
+Model -> Direct -> Translational,6,prompt,Direct evidence about the physiological effects of the drug,NA
+Model -> Direct -> Translational,6,text,What direct evidence from clinical studies in the target population suggests that the drug engages and has the desired effect on its molecular target?,d1d2
+Model -> Direct -> Translational,6,prompt,Does this evidence address the following threats to validity?,NA
+Model -> Direct -> Translational,6,check,Magnitude of effect (The size of the effect being reported is quantified),d1d2:magnitude-of-effect
+Model -> Direct -> Translational,6,check,Units are provided for all reported measures of effect where appropriate,d1d2:units-provided
+Model -> Direct -> Translational,6,check,"If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.",d1d2:measure-precision
+Model -> Direct -> Translational,6,check,Identity of comparator mentioned,d1d2:comparator
+Model -> Direct -> Translational,6,prompt,Does this evidence include the following measures to address risk of bias?,NA
+Model -> Direct -> Translational,6,check,Randomized experimental design is mentioned,m0m1:randomization
+Model -> Direct -> Translational,6,check,Masked experimental design is mentioned,d1d2:masking
+Model -> Direct -> Translational,6,check,Study in question was pre-registered,d1d2:preregistration
 ,,,,
+Model -> Direct -> Translational,7,prompt,Direct evidence about the clinical effects of the drug,NA
+Model -> Direct -> Translational,7,text,What direct evidence from clinical studies in the target population suggests that the drug engages and has the desired effect on its molecular target?,d2d3
+Model -> Direct -> Translational,7,prompt,Does this evidence address the following threats to validity?,NA
+Model -> Direct -> Translational,7,check,Magnitude of effect (The size of the effect being reported is quantified),d2d3:magnitude-of-effect
+Model -> Direct -> Translational,7,check,Units are provided for all reported measures of effect where appropriate,d2d3:units-provided
+Model -> Direct -> Translational,7,check,"If appropriate, some measure of precision around the estimate of effect has been provided, e.g. p-value, 95% confidence interval, etc.",d2d3:measure-precision
+Model -> Direct -> Translational,7,check,Identity of comparator mentioned,d2d3:comparator
+Model -> Direct -> Translational,7,prompt,Does this evidence include the following measures to address risk of bias?,NA
+Model -> Direct -> Translational,7,check,Randomized experimental design is mentioned,m0m1:randomization
+Model -> Direct -> Translational,7,check,Masked experimental design is mentioned,d2d3:masking
+Model -> Direct -> Translational,7,check,Study in question was pre-registered,d2d3:preregistration
 ,,,,
+Model -> Direct -> Translational,8,prompt,Translational evidence about the molecular target of the proposed intervention,NA
+Model -> Direct -> Translational,8,text,What evidence suggests that the drug target engagement / functional effects in models is recapitulated in the target patients such that evidence of the molecular effect of the drug is relevant to the target population?,t1
+Model -> Direct -> Translational,8,check,Evidence suggesting drug target/functional assay used in models is also present in target patients,t1:target-evidence
+Model -> Direct -> Translational,8,check,Construct validity (Explanation of relationships between various features of a model systems and those for the target scenario),t1:construct-validity
+Model -> Direct -> Translational,8,check,External validity (Replication of effects in different model systems),t1:external-validity
+Model -> Direct -> Translational,8,check,"Interfering effects (Evidence suggesting the absence of ""interfering effects"" in the target scenario)",t1:interfering-effects
+Model -> Direct -> Translational,8,check,Systematic review evidence regarding the model's predictive value,t1:systematic-review
 ,,,,
+Model -> Direct -> Translational,9,prompt,Translational evidence about the physiological effects of the drug,NA
+Model -> Direct -> Translational,9,text,What evidence suggests that the drug target engagement / functional effects in models is recapitulated in the target patients such that evidence of the molecular effect of the drug is relevant to the target population?,t2
+Model -> Direct -> Translational,9,check,Evidence suggesting drug target/functional assay used in models is also present in target patients,t2:target-evidence
+Model -> Direct -> Translational,9,check,Construct validity (Explanation of relationships between various features of a model systems and those for the target scenario),t2:construct-validity
+Model -> Direct -> Translational,9,check,External validity (Replication of effects in different model systems),t2:external-validity
+Model -> Direct -> Translational,9,check,"Interfering effects (Evidence suggesting the absence of ""interfering effects"" in the target scenario)",t2:interfering-effects
+Model -> Direct -> Translational,9,check,Systematic review evidence regarding the model's predictive value,t2:systematic-review
 ,,,,
+Model -> Direct -> Translational,9,prompt,Translational evidence about the clinical effects of the drug,NA
+Model -> Direct -> Translational,9,text,What evidence suggests that the drug target engagement / functional effects in models is recapitulated in the target patients such that evidence of the molecular effect of the drug is relevant to the target population?,t3
+Model -> Direct -> Translational,9,check,Evidence suggesting drug target/functional assay used in models is also present in target patients,t3:target-evidence
+Model -> Direct -> Translational,9,check,Construct validity (Explanation of relationships between various features of a model systems and those for the target scenario),t3:construct-validity
+Model -> Direct -> Translational,9,check,External validity (Replication of effects in different model systems),t3:external-validity
+Model -> Direct -> Translational,9,check,"Interfering effects (Evidence suggesting the absence of ""interfering effects"" in the target scenario)",t3:interfering-effects
+Model -> Direct -> Translational,9,check,Systematic review evidence regarding the model's predictive value,t3:systematic-review
+,,,,
+Model -> Direct -> Translational,10,prompt,"The evidence you provided has been added to the PATH figure; please rate the strength of evidence for each step by clicking on the arrow in the figure
+
+(The evidence has not actually been saved yet, this is one of the things that hasn't been implemented because I'm still working through exactly how we want this web app to work)",NA

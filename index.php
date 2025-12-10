@@ -44,20 +44,20 @@
 	 .dialog {
 	     display: none;
 	     width: 50%;
-	     margin: 5% 25%;
+	     margin: 0 25%;
 	     border: 1px solid #666;
 	     background: #fff;
 	     position: fixed;
 	     padding: 20px;
 	     z-index: 2000;
-	     height: 70%;
+	     height: 100%;
 	     overflow-y: scroll;
 	 }
-	 @media (max-width: 900px) {
+	 @media (max-width: 1200px) {
 	     .dialog {
-		 margin: 5% 5%;
+		 margin: 0 5%;
 		 width: 90%;
-		 height: 80%;
+		 height: 100%;
 	     }
 	 }
 	 .dialog-close-x {

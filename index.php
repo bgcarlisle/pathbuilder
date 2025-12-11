@@ -324,13 +324,13 @@
 		</button>
 		<p>SVG export will only include the image of the PATH figure</p>
 		
-		<button class="btn btn-sm btn-primary" onclick="export_as_md();">
-		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#filetype-md"/>
-		    </svg>
-		    Export PATH summary as Markdown (text only)
-		</button>
-		<p>Markdown export will only include the text of the PATH summary</p>
+		<!-- <button class="btn btn-sm btn-primary" onclick="export_as_md();">
+		     <svg width="32" height="32" fill="currentColor">
+		     <use href="images/bootstrap-icons.svg#filetype-md"/>
+		     </svg>
+		     Export PATH summary as Markdown (text only)
+		     </button>
+		     <p>Markdown export will only include the text of the PATH summary</p> -->
 		
 		<button class="btn btn-sm btn-primary" onclick="export_as_docx();">
 		    <svg width="32" height="32" fill="currentColor">

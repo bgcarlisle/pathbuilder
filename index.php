@@ -154,6 +154,10 @@
 	     fill: #666;
 	     stroke: #333;
 	 }
+	 .path-arrow:hover {
+	     fill: #777;
+	     stroke: #444;
+	 }
 	 .strength1 {
 	     fill: #ff0000;
 	 }
@@ -178,6 +182,10 @@
 	 }
 	 .path-evidence-box {
 	     fill: #ddd;
+	 }
+	 .path-evidence-box:hover{
+	     fill: #eee;
+	     stroke: #ddd;
 	 }
 	 .path-evidence-text {
 	     fill: #000;

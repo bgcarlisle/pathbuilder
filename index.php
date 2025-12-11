@@ -155,8 +155,7 @@
 	     stroke: #333;
 	 }
 	 .path-arrow:hover {
-	     fill: #777;
-	     stroke: #444;
+	     stroke: #000;
 	 }
 	 .strength1 {
 	     fill: #ff0000;
@@ -230,12 +229,12 @@
 		    </svg>
 		    Open a PATH previously saved to your computer
 		</button>
-		<button class="btn btn-primary" disabled>
+		<!-- <button class="btn btn-primary" disabled>
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#cloud"/>
 		    </svg>
 		    Open a PATH saved online (requires account)
-		</button>
+		</button> -->
 	    </div>
 	</div>
 
@@ -305,19 +304,19 @@
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-json"/>
 		    </svg>
-		    Save PATH as JSON
+		    Save PATH as JSON (all data)
 		</button>
-		<p>Saving your work to your computer as a JSON will allow you to edit it again using JSON Builder</p>
+		<p>Save this PATH as a JSON and you will be able to edit it again using PATH Builder</p>
 		
-		<button class="btn btn-sm btn-primary" disabled>
-		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#cloud"/>
-		    </svg>
-		    Save PATH online (requires account)
-		</button>
-		<p>Continue working on your PATH later</p>
+		<!-- <button class="btn btn-sm btn-primary" disabled>
+		     <svg width="32" height="32" fill="currentColor">
+		     <use href="images/bootstrap-icons.svg#cloud"/>
+		     </svg>
+		     Save PATH online (requires account)
+		     </button>
+		     <p>Continue working on your PATH later</p> -->
 		
-		<button class="btn btn-sm btn-primary" disabled>
+		<button class="btn btn-sm btn-primary" onclick="export_as_svg();">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-svg"/>
 		    </svg>

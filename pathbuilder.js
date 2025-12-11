@@ -550,6 +550,80 @@ function evidence_number (evidence_key) {
     }
 }
 
+async function export_as_svg () {
+
+    const response = await fetch("export-svg.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams ({
+            d0d1: $('#evidence-d0d1').html(),
+	    d1d2: $('#evidence-d1d2').html(),
+	    d2d3: $('#evidence-d2d3').html(),
+            m0m1: $('#evidence-m0m1').html(),
+	    m1m2: $('#evidence-m1m2').html(),
+	    m2m3: $('#evidence-m2m3').html(),
+            t1: $('#evidence-t1').html(),
+	    t2: $('#evidence-t2').html(),
+	    t3: $('#evidence-t3').html(),
+
+	    d0d1_strength: $('#arrow-d0d1').attr("class").replace("path-arrow", ""),
+	    d1d2_strength: $('#arrow-d1d2').attr("class").replace("path-arrow", ""),
+	    d2d3_strength: $('#arrow-d2d3').attr("class").replace("path-arrow", ""),
+	    m0m1_strength: $('#arrow-m0m1').attr("class").replace("path-arrow", ""),
+	    m1m2_strength: $('#arrow-m1m2').attr("class").replace("path-arrow", ""),
+	    m2m3_strength: $('#arrow-m2m3').attr("class").replace("path-arrow", ""),
+	    t1_strength: $('#arrow-t1').attr("class").replace("path-arrow", ""),
+	    t2_strength: $('#arrow-t2').attr("class").replace("path-arrow", ""),
+	    t3_strength: $('#arrow-t3').attr("class").replace("path-arrow", "")
+        })
+    });
+
+    if (!response.ok) {
+        console.error("SVG download failed");
+        return;
+    }
+    
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "path.svg";
+    a.click();
+
+    URL.revokeObjectURL(url);
+    
+}
+
+async function export_as_md () {
+
+    const response = await fetch("export-md.php", {
+	method: "POST",
+	headers: {
+	    "Content-Type": "application/json"
+	},
+	body: JSON.stringify({ pd: pathdata })
+    });
+
+    if (!response.ok) {
+        console.error("Markdown download failed");
+        return;
+    }
+    
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "path.md";
+    a.click();
+
+    URL.revokeObjectURL(url);
+    
+}
+
 // Stuff to do when the page is loaded
 $(document).ready(function() {
 

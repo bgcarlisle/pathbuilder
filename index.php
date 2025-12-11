@@ -324,7 +324,7 @@
 		</button>
 		<p>SVG export will only include the image of the PATH figure</p>
 		
-		<button class="btn btn-sm btn-primary" disabled>
+		<button class="btn btn-sm btn-primary" onclick="export_as_md();">
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#filetype-md"/>
 		    </svg>

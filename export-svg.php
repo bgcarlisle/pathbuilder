@@ -26,8 +26,7 @@ header('Content-Disposition: attachment; filename="path.svg"');
 	 stroke: #333;
      }
      .path-arrow:hover {
-	 fill: #777;
-	 stroke: #444;
+	 stroke: #000;
      }
      .strength1 {
 	 fill: #ff0000;

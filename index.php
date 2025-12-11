@@ -332,13 +332,21 @@
 		</button>
 		<p>Markdown export will only include the text of the PATH summary</p>
 		
-		<button class="btn btn-sm btn-primary" disabled>
+		<button class="btn btn-sm btn-primary" onclick="export_as_docx();">
 		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#filetype-pdf"/>
+			<use href="images/bootstrap-icons.svg#filetype-docx"/>
 		    </svg>
-		    Export PATH figure and summary as PDF
+		    Export PATH summary as Word document (text only)
 		</button>
-		<p>PDF export will include both the text of the PATH summary and the PATH figure</p>
+		<p>Word export will only include the text of the PATH summary</p>
+		
+		<!-- <button class="btn btn-sm btn-primary" disabled>
+		     <svg width="32" height="32" fill="currentColor">
+		     <use href="images/bootstrap-icons.svg#filetype-pdf"/>
+		     </svg>
+		     Export PATH figure and summary as PDF
+		     </button>
+		     <p>PDF export will include both the text of the PATH summary and the PATH figure</p> -->
 	    </div>
 	    <!-- End of export buttons -->
 	</div>

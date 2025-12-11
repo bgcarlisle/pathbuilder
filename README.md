@@ -28,3 +28,5 @@ $ source ~/.bash_profile
 ```
 
 Now pandoc should work
+
+Put the absolute path in `config.php`

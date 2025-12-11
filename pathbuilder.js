@@ -624,6 +624,33 @@ async function export_as_md () {
     
 }
 
+async function export_as_docx () {
+
+    const response = await fetch("export-docx.php", {
+	method: "POST",
+	headers: {
+	    "Content-Type": "application/json"
+	},
+	body: JSON.stringify({ pd: pathdata })
+    });
+
+    if (!response.ok) {
+        console.error("Word download failed");
+        return;
+    }
+    
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "path.docx";
+    a.click();
+
+    URL.revokeObjectURL(url);
+    
+}
+
 // Stuff to do when the page is loaded
 $(document).ready(function() {
 

@@ -39,22 +39,22 @@ $md .= "---\n\n";
 
 $md .= "# Target scenario\n\n";
 
-$md .= trim($pathdata['targetScenario']) . "\n\n";
+if (trim($pathdata['targetScenario']) != "") {
+    $md .= trim($pathdata['targetScenario']) . "\n\n";
+} else {
+    $md .= "No target scenario has been specified\n\n";
+}
+
 
 foreach ($steps as $step => $stepdesc) {
 
-    if (substr($step, 0, 1) == "m" || substr($step, 0, 1) == "d") {
-	$md .= "# " . strtoupper(substr($step, 0, 2)) . "-" . strtoupper(substr($step, 2, 2)) . ": " . $stepdesc . "\n\n";
-	
-    } else {
-	$md .= "# " . strtoupper($step) . ": " . $stepdesc . "\n\n";
-    }
-
-
+    $step_md = "";
+    $n_evidence_for_step = 0;
     foreach ($evidence as $key => $evi) {
 
 	if ($evi['step'] == $step) {
-	    $md .= $evi['number'] . ". " . trim($evi['text']);
+	    $step_md .= $evi['number'] . ". " . trim($evi['text']);
+	    $n_evidence_for_step++;
 
 	    $evi_refs = [];
 	    foreach ($references as $ref) {
@@ -68,14 +68,25 @@ foreach ($steps as $step => $stepdesc) {
 	    }
 
 	    if (count($evi_refs) > 0) {
-		$md .= " [";
-		$md .= implode("," , $evi_refs);
-		$md .= "]";
+		$step_md .= " [";
+		$step_md .= implode("," , $evi_refs);
+		$step_md .= "]";
 	    }
 	    
-	    $md .= "\n\n";
+	    $step_md .= "\n\n";
 	}
 	
+    }
+
+    if ($n_evidence_for_step > 0) {
+	if (substr($step, 0, 1) == "m" || substr($step, 0, 1) == "d") {
+	    $md .= "# " . strtoupper(substr($step, 0, 2)) . "-" . strtoupper(substr($step, 2, 2)) . ": " . $stepdesc . "\n\n";
+	    
+	} else {
+	    $md .= "# " . strtoupper($step) . ": " . $stepdesc . "\n\n";
+	}
+
+	$md .= $step_md;
     }
     
 }

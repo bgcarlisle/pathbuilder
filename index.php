@@ -221,7 +221,7 @@
 		    <svg width="32" height="32" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#person-raised-hand"/>
 		    </svg>
-		    Start a new PATH with guidance
+		    Start a new PATH with guidance (not entirely functional)
 		</button>
 		<button class="btn btn-primary" id="open-json-file">
 		    <svg width="32" height="32" fill="currentColor">
@@ -388,7 +388,7 @@
 		    <svg width="16" height="16" fill="currentColor">
 			<use href="images/bootstrap-icons.svg#magic"/>
 		    </svg>
-		    Auto-analyze evidence
+		    Auto-analyze evidence (work in progress)
 		</button>
 		<div id="auto-analysis-report"></div>
 	    </div>

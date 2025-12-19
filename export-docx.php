@@ -97,11 +97,22 @@ if (count($references) > 0) {
 
     foreach ($references as $ref) {
 	$md .= $ref['number'] . ". ";
-	$md .= $ref['authors'] . ". ";
-	$md .= "*" . $ref['title'] . ".* ";
-	$md .= $ref['journal'] . ". ";
-	$md .= "(" . $ref['year'] . ") ";
-	$md .= "DOI: " . $ref['doi'] . "\n\n";
+	if ($ref['authors'] != "") {
+	    $md .= $ref['authors'] . ". ";
+	}
+	if ($ref['title'] != "") {
+	    $md .= "*" . $ref['title'] . ".* ";
+	}
+	if ($ref['journal'] != "") {
+	    $md .= $ref['journal'] . ". ";
+	}
+	if ($ref['year'] != "") {
+	    $md .= "(" . $ref['year'] . ") ";
+	}
+	if ($ref['doi'] != "") {
+	    $md .= "DOI: " . $ref['doi'];
+	}
+	$md .= "\n\n";
     }
     
 }

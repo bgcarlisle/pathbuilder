@@ -7,6 +7,31 @@ header("Pragma: no-cache");
 header('Content-Type: image/svg+xml');
 header('Content-Disposition: attachment; filename="path.svg"');
 
+function css_class_to_hex_colour ($css) {
+
+    switch (trim($css)) {
+	case "strength1":
+	    return "#ff0000";
+	    break;
+	case "strength2":
+	    return "#ff8000";
+	    break;
+	case "strength3":
+	    return "#ffff38";
+	    break;
+	case "strength4":
+	    return "#bbe33d";
+	    break;
+	case "strength5":
+	    return "#127622";
+	    break;
+	default:
+	    return "#666";
+	    
+    }
+    
+}
+
 ?><svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
 
     <style>
@@ -22,26 +47,10 @@ header('Content-Disposition: attachment; filename="path.svg"');
 	 font-weight: 400;
      }
      .path-arrow {
-	 fill: #666;
 	 stroke: #333;
      }
      .path-arrow:hover {
 	 stroke: #000;
-     }
-     .strength1 {
-	 fill: #ff0000;
-     }
-     .strength2 {
-	 fill: #ff8000;
-     }
-     .strength3 {
-	 fill: #ffff38;
-     }
-     .strength4 {
-	 fill: #bbe33d;
-     }
-     .strength5 {
-	 fill: #127622;
      }
      .path-step-label {
 	 font-size: 16px;
@@ -106,26 +115,26 @@ header('Content-Disposition: attachment; filename="path.svg"');
     <!-- Vertical arrows -->
 
     <!-- D0-D1 -->
-    <path d="M110 120 L130 120 L130 240 L140 240 L120 260 L100 240 L110 240 L110 120" class="path-arrow<?php echo $_POST['d0d1_strength']; ?>" id="arrow-d0d1" data-step="d0d1"></path>
+    <path d="M110 120 L130 120 L130 240 L140 240 L120 260 L100 240 L110 240 L110 120" fill="<?php echo css_class_to_hex_colour($_POST['d0d1_strength']); ?>" class="path-arrow" id="arrow-d0d1" data-step="d0d1"></path>
     <!-- M0-M1 -->
-    <path d="M370 120 L390 120 L390 240 L400 240 L380 260 L360 240 L370 240 L370 120" class="path-arrow<?php echo $_POST['m0m1_strength']; ?>" id="arrow-m0m1" data-step="m0m1"></path>
+    <path d="M370 120 L390 120 L390 240 L400 240 L380 260 L360 240 L370 240 L370 120" fill="<?php echo css_class_to_hex_colour($_POST['m0m1_strength']); ?>" class="path-arrow" id="arrow-m0m1" data-step="m0m1"></path>
     <!-- D1-D2 -->
-    <path d="M110 280 L130 280 L130 400 L140 400 L120 420 L100 400 L110 400 L110 280" class="path-arrow<?php echo $_POST['d1d2_strength']; ?>" id="arrow-d1d2" data-step="d1d2"></path>
+    <path d="M110 280 L130 280 L130 400 L140 400 L120 420 L100 400 L110 400 L110 280" fill="<?php echo css_class_to_hex_colour($_POST['d1d2_strength']); ?>" class="path-arrow" id="arrow-d1d2" data-step="d1d2"></path>
     <!-- M1-M2 -->
-    <path d="M370 280 L390 280 L390 400 L400 400 L380 420 L360 400 L370 400 L370 280" class="path-arrow<?php echo $_POST['m1m2_strength']; ?>" id="arrow-m1m2" data-step="m1m2"></path>
+    <path d="M370 280 L390 280 L390 400 L400 400 L380 420 L360 400 L370 400 L370 280" fill="<?php echo css_class_to_hex_colour($_POST['m1m2_strength']); ?>" class="path-arrow" id="arrow-m1m2" data-step="m1m2"></path>
     <!-- D2-D3 -->
-    <path d="M110 440 L130 440 L130 560 L140 560 L120 580 L100 560 L110 560 L110 440" class="path-arrow<?php echo $_POST['d2d3_strength']; ?>" id="arrow-d2d3" data-step="d2d3"></path>
+    <path d="M110 440 L130 440 L130 560 L140 560 L120 580 L100 560 L110 560 L110 440" fill="<?php echo css_class_to_hex_colour($_POST['d2d3_strength']); ?>" class="path-arrow" id="arrow-d2d3" data-step="d2d3"></path>
     <!-- M2-M3 -->
-    <path d="M370 440 L390 440 L390 560 L400 560 L380 580 L360 560 L370 560 L370 440" class="path-arrow<?php echo $_POST['m2m3_strength']; ?>" id="arrow-m2m3" data-step="m2m3"></path>
+    <path d="M370 440 L390 440 L390 560 L400 560 L380 580 L360 560 L370 560 L370 440" fill="<?php echo css_class_to_hex_colour($_POST['m2m3_strength']); ?>" class="path-arrow" id="arrow-m2m3" data-step="m2m3"></path>
 
     <!-- Horizontal arrows -->
 
     <!-- T1 -->
-    <path d="M130 180 L150 160 L150 170 L350 170 L350 160 L370 180 L350 200 L350 190 L150 190 L150 200 L130 180" class="path-arrow<?php echo $_POST['t1_strength']; ?>" id="arrow-t1" data-step="t1"></path>
+    <path d="M130 180 L150 160 L150 170 L350 170 L350 160 L370 180 L350 200 L350 190 L150 190 L150 200 L130 180" fill="<?php echo css_class_to_hex_colour($_POST['t1_strength']); ?>" class="path-arrow" id="arrow-t1" data-step="t1"></path>
     <!-- T2 -->
-    <path d="M130 340 L150 320 L150 330 L350 330 L350 320 L370 340 L350 360 L350 350 L150 350 L150 360 L130 340" class="path-arrow<?php echo $_POST['t2_strength']; ?>" id="arrow-t2" data-step="t2"></path>
+    <path d="M130 340 L150 320 L150 330 L350 330 L350 320 L370 340 L350 360 L350 350 L150 350 L150 360 L130 340" fill="<?php echo css_class_to_hex_colour($_POST['t2_strength']); ?>" class="path-arrow" id="arrow-t2" data-step="t2"></path>
     <!-- T3 -->
-    <path d="M130 500 L150 480 L150 490 L350 490 L350 480 L370 500 L350 520 L350 510 L150 510 L150 520 L130 500" class="path-arrow<?php echo $_POST['t3_strength']; ?>" id="arrow-t3" data-step="t3"></path>
+    <path d="M130 500 L150 480 L150 490 L350 490 L350 480 L370 500 L350 520 L350 510 L150 510 L150 520 L130 500" fill="<?php echo css_class_to_hex_colour($_POST['t3_strength']); ?>" class="path-arrow" id="arrow-t3" data-step="t3"></path>
 
     <!-- Evidence statement boxes -->
 

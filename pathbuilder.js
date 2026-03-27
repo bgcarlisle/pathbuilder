@@ -626,6 +626,22 @@ function export_pathdata_to_json() {
     document.body.removeChild(dl);
 }
 
+function removeDuplicates(arr) {
+    return [...new Set(arr)];
+}
+
+function return_unique_matches(text, regexes) {
+    var matches = [];
+    for (var key in regexes) {
+        regex_matches = text.matchAll(regexes[key]);
+        for (var regex_match of regex_matches) {
+            matches.push(regex_match[0]);
+        }
+    }
+    // Remove duplicates
+    return removeDuplicates(matches);
+}
+
 function updatepage () {
 
     // Update target Scenario
@@ -1690,8 +1706,8 @@ $(document).ready(function() {
 	
 	// Always check precision and comparator for vertical steps
 	if (step_type == 'vertical') {
-            // Precision analysis
-            var precision_matches = return_matches(evidence_text, precision_regex);
+            // Precision analysis - USE UNIQUE MATCHES
+            var precision_matches = return_unique_matches(evidence_text, precision_regex);
             var precision_result = checkMissingIndicator('measure-precision', 'Precision', precision_matches, true);
             if (precision_result.found) {
 		indicators_found = true;
@@ -1704,8 +1720,8 @@ $(document).ready(function() {
 		report_html += '<div class="mb-2 alert alert-warning"><strong>⚠️ Warning:</strong> "Precision around estimate" box is checked but no precision indicators found in the text. Consider adding p-values, confidence intervals, or statistical measures.</div>';
             }
             
-            // Comparator analysis
-            var comparator_matches = return_matches(evidence_text, comparator_regex);
+            // Comparator analysis - USE UNIQUE MATCHES
+            var comparator_matches = return_unique_matches(evidence_text, comparator_regex);
             var comparator_result = checkMissingIndicator('comparator', 'Comparator', comparator_matches, true);
             if (comparator_result.found) {
 		indicators_found = true;
@@ -1718,8 +1734,8 @@ $(document).ready(function() {
 		report_html += '<div class="mb-2 alert alert-warning"><strong>⚠️ Warning:</strong> "Comparator" box is checked but no comparator indicators found. Consider adding "compared to", "versus", "placebo", "control group", etc.</div>';
             }
             
-            // Randomization analysis
-            var randomization_matches = return_matches(evidence_text, randomization_regex);
+            // Randomization analysis - USE UNIQUE MATCHES
+            var randomization_matches = return_unique_matches(evidence_text, randomization_regex);
             var randomization_result = checkMissingIndicator('randomization', 'Randomization', randomization_matches, true);
             if (randomization_result.found) {
 		indicators_found = true;
@@ -1732,8 +1748,8 @@ $(document).ready(function() {
 		report_html += '<div class="mb-2 alert alert-warning"><strong>⚠️ Warning:</strong> "Randomization" box is checked but no randomization indicators found. Consider adding "randomized", "random assignment", "RCT", etc.</div>';
             }
             
-            // Masking analysis
-            var masking_matches = return_matches(evidence_text, masking_regex);
+            // Masking analysis - USE UNIQUE MATCHES
+            var masking_matches = return_unique_matches(evidence_text, masking_regex);
             var masking_result = checkMissingIndicator('masking', 'Masking', masking_matches, true);
             if (masking_result.found) {
 		indicators_found = true;
@@ -1746,8 +1762,8 @@ $(document).ready(function() {
 		report_html += '<div class="mb-2 alert alert-warning"><strong>⚠️ Warning:</strong> "Masking" box is checked but no masking indicators found. Consider adding "blinded", "masked", "double-blind", etc.</div>';
             }
             
-            // Pre-registration analysis
-            var preregistration_matches = return_matches(evidence_text, preregistration_regex);
+            // Pre-registration analysis - USE UNIQUE MATCHES
+            var preregistration_matches = return_unique_matches(evidence_text, preregistration_regex);
             var preregistration_result = checkMissingIndicator('pre-registration', 'Pre-registration', preregistration_matches, true);
             if (preregistration_result.found) {
 		indicators_found = true;
@@ -1760,8 +1776,8 @@ $(document).ready(function() {
 		report_html += '<div class="mb-2 alert alert-warning"><strong>⚠️ Warning:</strong> "Pre-registration" box is checked but no pre-registration indicators found. Consider adding "pre-registered", "clinicaltrials.gov", "registered protocol", etc.</div>';
             }
             
-            // Magnitude of effect analysis
-            var magnitude_matches = return_matches(evidence_text, magnitude_regex);
+            // Magnitude of effect analysis - USE UNIQUE MATCHES
+            var magnitude_matches = return_unique_matches(evidence_text, magnitude_regex);
             var magnitude_result = checkMissingIndicator('magnitude-of-effect', 'Magnitude of effect', magnitude_matches, true);
             if (magnitude_result.found) {
 		indicators_found = true;
@@ -1774,8 +1790,8 @@ $(document).ready(function() {
 		report_html += '<div class="mb-2 alert alert-warning"><strong>⚠️ Warning:</strong> "Magnitude of effect" box is checked but no magnitude indicators found. Consider adding effect sizes, HR/OR/RR values, or percentage changes.</div>';
             }
             
-            // Units provided analysis
-            var units_matches = return_matches(evidence_text, units_regex);
+            // Units provided analysis - USE UNIQUE MATCHES
+            var units_matches = return_unique_matches(evidence_text, units_regex);
             var units_result = checkMissingIndicator('units-provided', 'Units provided', units_matches, true);
             if (units_result.found) {
 		indicators_found = true;
@@ -1789,10 +1805,10 @@ $(document).ready(function() {
             }
             
 	} else if (step_type == 'horizontal') {
-            // Horizontal step analyses
+            // Horizontal step analyses - ALL USE UNIQUE MATCHES
             
             // Target evidence analysis
-            var target_matches = return_matches(evidence_text, target_evidence_regex);
+            var target_matches = return_unique_matches(evidence_text, target_evidence_regex);
             var target_result = checkMissingIndicator('target-present', 'Target evidence', target_matches, true);
             if (target_result.found) {
 		indicators_found = true;
@@ -1806,7 +1822,7 @@ $(document).ready(function() {
             }
             
             // Construct validity analysis
-            var construct_matches = return_matches(evidence_text, construct_validity_regex);
+            var construct_matches = return_unique_matches(evidence_text, construct_validity_regex);
             var construct_result = checkMissingIndicator('construct-validity', 'Construct validity', construct_matches, true);
             if (construct_result.found) {
 		indicators_found = true;
@@ -1820,7 +1836,7 @@ $(document).ready(function() {
             }
             
             // External validity analysis
-            var external_matches = return_matches(evidence_text, external_validity_regex);
+            var external_matches = return_unique_matches(evidence_text, external_validity_regex);
             var external_result = checkMissingIndicator('external-validity', 'External validity', external_matches, true);
             if (external_result.found) {
 		indicators_found = true;
@@ -1834,7 +1850,7 @@ $(document).ready(function() {
             }
             
             // Interfering effects analysis
-            var interfering_matches = return_matches(evidence_text, interfering_effects_regex);
+            var interfering_matches = return_unique_matches(evidence_text, interfering_effects_regex);
             var interfering_result = checkMissingIndicator('interfering-effects', 'Interfering effects', interfering_matches, true);
             if (interfering_result.found) {
 		indicators_found = true;
@@ -1848,7 +1864,7 @@ $(document).ready(function() {
             }
             
             // Systematic review analysis
-            var systematic_matches = return_matches(evidence_text, systematic_review_regex);
+            var systematic_matches = return_unique_matches(evidence_text, systematic_review_regex);
             var systematic_result = checkMissingIndicator('systematic-review', 'Systematic review', systematic_matches, true);
             if (systematic_result.found) {
 		indicators_found = true;

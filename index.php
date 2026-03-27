@@ -384,12 +384,12 @@
 	    <div class="mb-3">
 		<label for="evidence-editor-text" class="form-label">Evidence</label>
 		<textarea class="form-control mb-2" id="evidence-editor-text" rows="3"></textarea>
-		<!-- <button class="btn btn-primary btn-sm mb-2 auto-analyze-evidence">
-		     <svg width="16" height="16" fill="currentColor">
-		     <use href="images/bootstrap-icons.svg#magic"/>
-		     </svg>
-		     Auto-analyze evidence (work in progress)
-		     </button> -->
+		<button class="btn btn-primary btn-sm mb-2 auto-analyze-evidence">
+		    <svg width="16" height="16" fill="currentColor">
+			<use href="images/bootstrap-icons.svg#magic"/>
+		    </svg>
+		    Auto-analyze evidence
+		</button>
 		<div id="auto-analysis-report"></div>
 	    </div>
 

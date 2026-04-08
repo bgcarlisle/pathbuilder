@@ -1507,7 +1507,7 @@ $(document).ready(function() {
 	}, 500);
 	$('#evidence-block-' + step + ' h3').addClass('highlight');
 	setTimeout(() => {
-	    $('#evidence-block-' + step + ' h3').removeClass('highlight');
+	    $('h3').removeClass('highlight');
 	}, 1500)
 	
     });

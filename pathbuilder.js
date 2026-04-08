@@ -686,7 +686,7 @@ function updatepage () {
 	);
     }
 
-    // Put evidence on the PATH figure and show/hide strength of evidence buttons
+    // Put evidence on the PATH figure and enable/disable strength of evidence sliders
     for (var nstep in steps) {
 	var step_evidence = [];
 	var noevidence = true;
@@ -699,15 +699,18 @@ function updatepage () {
 	}
 	$('#evidence-' + steps[nstep]).html(step_evidence.join(', '));
 	if (noevidence) {
-	    $('#evidence-block-' + steps[nstep] + ' button.edit-evidence-strength').fadeOut();
+	    $('#evidence-block-' + steps[nstep] + ' input.evidence-strength-slider').attr('disabled', true);
+	    $('#evidence-block-' + steps[nstep] + ' input.evidence-strength-slider').val('1');
 	    $('#arrow-' + steps[nstep]).removeClass('strength1 strength2 strength3 strength4 strength5');
 	    $('#arrow-' + steps[nstep]).addClass('strength1');
 	} else {
-	    $('#evidence-block-' + steps[nstep] + ' button.edit-evidence-strength').fadeIn();
+	    $('#evidence-block-' + steps[nstep] + ' input.evidence-strength-slider').attr('disabled', false);
 	    if (pathdata.strength.hasOwnProperty(steps[nstep])) { // If the strength of evidence is set for this step
 		$('#arrow-' + steps[nstep]).removeClass('strength1 strength2 strength3 strength4 strength5');
 		$('#arrow-' + steps[nstep]).addClass('strength' + pathdata.strength[steps[nstep]]);
+		$('#evidence-block-' + steps[nstep] + ' input.evidence-strength-slider').val(pathdata.strength[steps[nstep]]);
 	    } else {
+		$('#evidence-block-' + steps[nstep] + ' input.evidence-strength-slider').val('1');
 		$('#arrow-' + steps[nstep]).removeClass('strength1');
 	    }
 	}
@@ -1495,53 +1498,17 @@ $(document).ready(function() {
 	showdialog('reference-delete');
     });
 
-    // Show evidence strength editor
-    $('.edit-evidence-strength').on('click', function(event) {
-	showdialog('evidence-strength');
-	step = $(this).parent().parent().data('step');
-	$('#evidence-strength-step').val(step);
-	$('.evidence-strength-stepname').html(stepname(step));
-	if (pathdata.strength.hasOwnProperty(step)) {
-	    $('#evidence-strength-slider').val(pathdata.strength[step]);
-	} else {
-	    $('#evidence-strength-slider').val(1);	    
-	}
-	// Enable slider and confirm
-	$('#evidence-strength-slider').attr('disabled', false);
-	$('#confirm-evidence-strength').attr('disabled', false);
-    });
-
     // Show evidence strength editor (arrow click)
     $('.path-arrow').on('click', function (event) {
 	// Check whether there's any evidence
 	step = $(this).data('step');
-	var count_evidence = 0;
-	for (var key in pathdata.evidence) {
-	    if (step == pathdata.evidence[key].step) {
-		count_evidence ++;
-	    }
-	}
-	if (count_evidence > 0) { // There is evidence for this step
-	    showdialog('evidence-strength');
-	    $('#evidence-strength-step').val(step);
-	    $('.evidence-strength-stepname').html(stepname(step));
-	    if (pathdata.strength.hasOwnProperty(step)) {
-		$('#evidence-strength-slider').val(pathdata.strength[step]);
-	    } else {
-		$('#evidence-strength-slider').val(1);	    
-	    }
-	    // Enable slider and confirm
-	    $('#evidence-strength-slider').attr('disabled', false);
-	    $('#confirm-evidence-strength').attr('disabled', false);
-	} else { // No evidence for this step
-	    showdialog('evidence-strength');
-	    $('#evidence-strength-step').val(step);
-	    $('.evidence-strength-stepname').html(stepname(step));
-	    $('#evidence-strength-slider').val(1);
-	    // Disable slider and confirm
-	    $('#evidence-strength-slider').attr('disabled', true);
-	    $('#confirm-evidence-strength').attr('disabled', true);   
-	}
+	$('html, body').animate({
+	    scrollTop: $('#evidence-block-' + step).offset().top - 10
+	}, 500);
+	$('#evidence-block-' + step + ' h3').addClass('highlight');
+	setTimeout(() => {
+	    $('#evidence-block-' + step + ' h3').removeClass('highlight');
+	}, 1500)
 	
     });
 
@@ -1607,9 +1574,11 @@ $(document).ready(function() {
 	updatepage()
     });
 
-    // Confirm strength
-    $('#confirm-evidence-strength').on('click', function(event){
-	pathdata.strength[$('#evidence-strength-step').val()] = $('#evidence-strength-slider').val();
+    // Save strength on slider change
+    $('.evidence-strength-slider').on('input', function(event){
+	step = $(this).parent().parent().data('step');
+	strength = $('#evidence-block-' + step + ' .evidence-strength-slider').val();
+	pathdata.strength[step] = strength;
 	updatepage();
     });
     

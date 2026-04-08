@@ -28,6 +28,10 @@
 	     color: #423629;
 	     font-weight: 600;
 	 }
+	 .highlight {
+	     color: #fff;
+	     background-color: #423629;
+	 }
 	 .subtitle {
 	     font-size: 50%;
 	     font-weight: 400;
@@ -230,11 +234,11 @@
 		    Open a PATH previously saved to your computer
 		</button>
 		<!-- <button class="btn btn-primary" disabled>
-		    <svg width="32" height="32" fill="currentColor">
-			<use href="images/bootstrap-icons.svg#cloud"/>
-		    </svg>
-		    Open a PATH saved online (requires account)
-		</button> -->
+		     <svg width="32" height="32" fill="currentColor">
+		     <use href="images/bootstrap-icons.svg#cloud"/>
+		     </svg>
+		     Open a PATH saved online (requires account)
+		     </button> -->
 	    </div>
 	</div>
 
@@ -528,38 +532,38 @@
 			</button>
 		    </div>
 		    <div class="add-ref-space add-ref-manual">
-				<div class="mb-1">
-				    <label for="summary-manual-authors">Authors</label>
-				    <input type="text" class="form-control manual-ref-authors" id="summary-manual-authors" placeholder="Kimmelman J, Carlisle BG, et al.">
-				</div>
-				<div class="mb-1">
-				    <label for="summary-manual-title">Title</label>
-				    <input type="text" class="form-control manual-ref-title" id="summary-manual-title" placeholder="Activity of Antonib in a xenograft mouse model">
-				</div>
-				<div class="mb-1">
-				    <label for="summary-manual-journal">Journal</label>
-				    <input type="text" class="form-control manual-ref-journal" id="summary-manual-journal" placeholder="Journal of Preclinical Evidence">
-				</div>
-				<div class="mb-1">
-				    <label for="summary-manual-year">Year</label>
-				    <input type="text" class="form-control manual-ref-year" id="summary-manual-year" placeholder="2025">
-				</div>
-				<div class="mb-3">
-				    <label for="summary-manual-url">URL</label>
-				    <input type="text" class="form-control manual-ref-url" id="summary-manual-url" placeholder="https://www.translationalethics.com/pathbuilder/">
-				</div>
-				<button class="btn btn-primary btn-sm add-manual-reference">
-				    <svg width="16" height="16" fill="currentColor">
-					<use href="images/bootstrap-icons.svg#plus-circle"/>
-				    </svg>
-				    Add manual reference
-				</button>
-				<button class="btn btn-sm cancel-add-refs">
-				    <svg width="16" height="16" fill="currentColor">
-					<use href="images/bootstrap-icons.svg#x-circle"/>
-				    </svg>
-				    Cancel
-				</button>
+			<div class="mb-1">
+			    <label for="summary-manual-authors">Authors</label>
+			    <input type="text" class="form-control manual-ref-authors" id="summary-manual-authors" placeholder="Kimmelman J, Carlisle BG, et al.">
+			</div>
+			<div class="mb-1">
+			    <label for="summary-manual-title">Title</label>
+			    <input type="text" class="form-control manual-ref-title" id="summary-manual-title" placeholder="Activity of Antonib in a xenograft mouse model">
+			</div>
+			<div class="mb-1">
+			    <label for="summary-manual-journal">Journal</label>
+			    <input type="text" class="form-control manual-ref-journal" id="summary-manual-journal" placeholder="Journal of Preclinical Evidence">
+			</div>
+			<div class="mb-1">
+			    <label for="summary-manual-year">Year</label>
+			    <input type="text" class="form-control manual-ref-year" id="summary-manual-year" placeholder="2025">
+			</div>
+			<div class="mb-3">
+			    <label for="summary-manual-url">URL</label>
+			    <input type="text" class="form-control manual-ref-url" id="summary-manual-url" placeholder="https://www.translationalethics.com/pathbuilder/">
+			</div>
+			<button class="btn btn-primary btn-sm add-manual-reference">
+			    <svg width="16" height="16" fill="currentColor">
+				<use href="images/bootstrap-icons.svg#plus-circle"/>
+			    </svg>
+			    Add manual reference
+			</button>
+			<button class="btn btn-sm cancel-add-refs">
+			    <svg width="16" height="16" fill="currentColor">
+				<use href="images/bootstrap-icons.svg#x-circle"/>
+			    </svg>
+			    Cancel
+			</button>
 		    </div>
 		    <button class="btn btn-primary btn-sm edit-new-reference-doi add-refs-buttons">
 			<svg width="16" height="16" fill="currentColor">
@@ -625,28 +629,6 @@
 		    <use href="images/bootstrap-icons.svg#backspace"/>
 		</svg>
 		Delete
-	    </button>
-	</div>
-
-	<div id="evidence-strength" class="dialog">
-	    <button class="btn dialog-close-x dialog-close">
-		<svg width="32" height="32" fill="currentColor">
-		    <use href="images/bootstrap-icons.svg#x"/>
-		</svg>
-	    </button>
-	    <h2>Rate strength of <span class="evidence-strength-stepname"></span> evidence</h2>
-	    <div>
-		<label for="evidence-strength-slider" class="form-label">The <span class="evidence-strength-stepname"></span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection below.</label>
-		<div style="float: left;">No evidence</div>
-		<div style="float: right;">Strong evidence</div>
-		<input type="range" class="form-range" min="1" max="5" id="evidence-strength-slider">
-	    </div>
-	    <input type="hidden" id="evidence-strength-step" value="">
-	    <button class="btn btn-primary dialog-close" id="confirm-evidence-strength">
-		<svg width="20" height="20" fill="currentColor">
-		    <use href="images/bootstrap-icons.svg#check-circle"/>
-		</svg>
-		Confirm
 	    </button>
 	</div>
 
@@ -822,13 +804,14 @@
 		    <div class="evidence-block" id="evidence-block-m0m1" data-step="m0m1">
 			<h3>
 			    Target modulation in models (M0-M1)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">M0-M1</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -843,13 +826,14 @@
 		    <div class="evidence-block" id="evidence-block-t1" data-step="t1">
 			<h3>
 			    Translatability (T1)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">T1</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -864,13 +848,14 @@
 		    <div class="evidence-block" id="evidence-block-m1m2" data-step="m1m2">
 			<h3>
 			    Physiological effect in models (M1-M2)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">M1-M2</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -885,13 +870,14 @@
 		    <div class="evidence-block" id="evidence-block-t2" data-step="t2">
 			<h3>
 			    Translatability (T2)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">T2</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -906,13 +892,14 @@
 		    <div class="evidence-block" id="evidence-block-m2m3" data-step="m2m3">
 			<h3>
 			    Clinical effect in models (M2-M3)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">M2-M3</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -927,13 +914,14 @@
 		    <div class="evidence-block" id="evidence-block-t3" data-step="t3">
 			<h3>
 			    Translatability (T3)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">T3</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -950,13 +938,14 @@
 		    <div class="evidence-block" id="evidence-block-d0d1" data-step="d0d1">
 			<h3>
 			    Target modulation in the target scenario (D0-D1)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">D0-D1</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -978,6 +967,13 @@
 				Rate strength of evidence
 			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">D1-D2</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">
@@ -992,13 +988,14 @@
 		    <div class="evidence-block" id="evidence-block-d2d3" data-step="d2d3">	    
 			<h3>
 			    Clinical effect in the target scenario (D2-D3)
-			    <button class="btn btn-primary btn-sm edit-evidence-strength">
-				<svg width="16" height="16" fill="currentColor">
-				    <use href="images/bootstrap-icons.svg#award"/>
-				</svg>
-				Rate strength of evidence
-			    </button>
 			</h3>
+			<div>
+			    <div style="float: left;">No evidence</div>
+			    <div style="float: right;">Strong evidence</div>
+			    <input type="range" class="form-range evidence-strength-slider" min="1" max="5" value="1" disabled autocomplete="off">
+			    <label for="evidence-strength-slider" class="form-label small mb-3">The <span class="evidence-strength-stepname">D2-D3</span> arrow will be colour-coded from red (no evidence) to green (strong evidence) according to the selection above.</label>
+			</div>
+			
 			<div class="evidence-space">
 			    <div class="evidence-container"></div>
 			    <button class="btn btn-primary btn-sm edit-new-evidence">

@@ -92,6 +92,18 @@ function getAllEvidenceFlat() {
         });
     });
 
+    // Sort by number (ascending), missing values last
+    rows.sort((a, b) => {
+        const na = Number(a.number);
+        const nb = Number(b.number);
+
+        if (isNaN(na) && isNaN(nb)) return 0;
+        if (isNaN(na)) return 1;
+        if (isNaN(nb)) return -1;
+
+        return na - nb;
+    });
+
     return rows;
 }
 

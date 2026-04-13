@@ -86,6 +86,12 @@
 	 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .badge-primary {
 	     background-color: #423629 !important;
 	 }
+	 .btn-outline-primary {
+	     color: #423629 !important;
+	 }
+	 .btn-group .btn:hover {
+	     background-color: #fff;
+	 }
 	 .btn {
 	     border-color: #423629 !important;
 	 }
@@ -146,6 +152,10 @@
 	 }
 	 .evidence-references-number-instance {
 	     margin: 0 3px;
+	 }
+	 .table-dark tr th {
+	     color: #fff;
+	     background-color: #423629 !important;;
 	 }
 	 /* Beginning of PATH figure styles */
 	 #pathfigure {
@@ -662,7 +672,52 @@
 	    </div>
 	</div>
 	<div class="container-md">
-	    <div class="row">
+
+	    <div class="d-flex justify-content-between mb-3">
+		<div class="btn-group">
+		    <button class="btn btn-primary active" id="view-editor">Evidence editor</button>
+		    <button class="btn btn-outline-primary" id="view-table">Table</button>
+		    <button class="btn btn-outline-primary" id="view-analysis">Analysis</button>
+		</div>
+	    </div>
+
+	    <div id="table-controls" class="card mb-3" style="display:none;">
+		<div class="card-body">
+		    <div class="row g-3">
+
+			<div class="col-md-2">
+			    <label class="form-label">Min strength</label>
+			    <input type="range" class="form-range" min="1" max="5" value="1" id="filter-strength">
+			</div>
+
+			<div class="col-md-2">
+			    <label class="form-label">Step</label>
+			    <select class="form-select" id="filter-step">
+				<option value="">All</option>
+				<option value="m0m1">M0-M1</option>
+			    </select>
+			</div>
+
+			<div class="col-md-2 form-check">
+			    <input class="form-check-input" type="checkbox" id="f-randomization" autocomplete="off">
+			    <label class="form-check-label">Randomized</label>
+			</div>
+
+			<div class="col-md-2 form-check">
+			    <input class="form-check-input" type="checkbox" id="f-comparator" autocomplete="off">
+			    <label class="form-check-label">Comparator</label>
+			</div>
+
+			<div class="col-md-2 form-check">
+			    <input class="form-check-input" type="checkbox" id="f-refs" autocomplete="off">
+			    <label class="form-check-label" for="f-refs">Has references</label>
+			</div>
+
+		    </div>
+		</div>
+	    </div>
+
+	    <div class="row" id="graph-view">
 		<div class="col-md-5">
 		    
 		    <div id="path-figure-container" class="sticky-top">
@@ -786,7 +841,13 @@
 		    </div>
 		    
 		</div>
-		<div class="col-md-7">
+
+		
+
+		<div class="col-md-7" id="table-view" style="display:none;"></div>
+		<div class="col-md-7" id="analysis-view" class="mb-3" style="display:none;"></div>
+	    
+		<div class="col-md-7" id="evidence-view">
 		    <!-- Beginning of text summary -->
 		    <h2>Target scenario</h2>
 		    <div>
@@ -1093,6 +1154,7 @@
 	<script src="jquery-ui-1.13.2/jquery-ui.min.js"></script>
 	<script>
 	 var pathguides = <?php include("guides.php"); ?>;
+	 <?php include("regex.js"); ?>
 	 <?php include("pathbuilder.js"); ?>
 	</script>
 	<!-- End of Javascript -->

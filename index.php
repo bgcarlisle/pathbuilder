@@ -153,7 +153,7 @@
 	 .evidence-references-number-instance {
 	     margin: 0 3px;
 	 }
-	 .table-bordered td {
+	 .table-bordered td,.table-bordered th {
 	     border-right: 0;
 	     border-left: 0;
 	 }
@@ -817,12 +817,12 @@
 			<div class="card-body">
 			    <div class="row g-3">
 
-				<div class="col-md-2">
+				<div class="col-md-5">
 				    <label class="form-label">Minimum strength</label>
 				    <input type="range" class="form-range" min="1" max="5" value="1" id="filter-strength">
 				</div>
 
-				<div class="col-md-2">
+				<div class="col-md-3">
 				    <label class="form-label">Step</label>
 				    <select class="form-select" id="filter-step">
 					<option value="">All</option>
@@ -839,7 +839,7 @@
 				     <label class="form-check-label">Comparator</label>
 				     </div> -->
 
-				<div class="col-md-2 form-check">
+				<div class="col-md-4 form-check">
 				    <input class="form-check-input" type="checkbox" id="f-refs" autocomplete="off">
 				    <label class="form-check-label" for="f-refs">Has references</label>
 				</div>

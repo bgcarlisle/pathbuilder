@@ -159,7 +159,7 @@ function renderTableView() {
         let mismatch = Math.abs(derived - r.strength_assigned) >= 2;
 
         html += `
-        <tr class="${mismatch ? 'table-warning' : ''}">
+        <tr class="${mismatch ? 'table-warning ' : ''}${r.step}">
             <td>${r.number}</td>
             <td>${r.step}</td>
             <td>${r.strength_assigned}</td>
@@ -1247,16 +1247,31 @@ $(document).ready(function() {
 
     // Show evidence strength editor (arrow click)
     $('.path-arrow').on('click', function (event) {
-	// Check whether there's any evidence
 	step = $(this).data('step');
-	$('html, body').animate({
-	    scrollTop: $('#evidence-block-' + step).offset().top - 10
-	}, 500);
-	$('#evidence-block-' + step + ' h3').addClass('highlight');
-	setTimeout(() => {
-	    $('h3').removeClass('highlight');
-	}, 1500)
-	
+	// Check which view is visible
+	// If in evidence editor view
+	if ($('#evidence-view').is(':visible')) {	    
+	    $('html, body').animate({
+		scrollTop: $('#evidence-block-' + step).offset().top - 10
+	    }, 500);
+	    $('#evidence-block-' + step + ' h3').addClass('highlight');
+	    setTimeout(() => {
+		$('h3').removeClass('highlight');
+	    }, 1500)
+	}
+	// If in table view
+	if ($('#table-view').is(':visible')) {
+	    // Check that there is at least one row for that step
+	    if ($('tr.' + step).length) {
+		$('html, body').animate({
+		    scrollTop: $('tr.' + step).first().offset().top - 10
+		}, 500);
+		$('tr.' + step).addClass('highlight-row');
+		setTimeout(() => {
+		    $('tr').removeClass('highlight-row');
+		}, 1500)
+	    }
+	}
     });
 
     // Confirm evidence

@@ -222,29 +222,6 @@ function scoreStep(step) {
     return scores.reduce((a,b)=>a+b,0)/scores.length;
 }
 
-function analyzeWeakness(step) {
-
-    let ev = getAllEvidenceFlat().filter(e => e.step === step);
-
-    if (ev.length === 0) return ["No evidence"];
-
-    let issues = [];
-
-    if (!ev.some(e => e.meta["randomization"]))
-        issues.push("No randomized evidence");
-
-    if (!ev.some(e => e.meta["comparator"]))
-        issues.push("No comparator");
-
-    if (!ev.some(e => e.references.length > 0))
-        issues.push("No references");
-
-    if (!ev.some(e => e.meta["external-validity"]))
-        issues.push("No replication across models");
-
-    return issues;
-}
-
 const PATHS = [
     ["m0m1","t1","d0d1","d1d2","d2d3"],
     ["m0m1","m1m2","t2","d1d2","d2d3"],
@@ -293,34 +270,6 @@ function populateStepFilter() {
 }
 
 populateStepFilter();
-
-function auditStrength(step) {
-
-    let ev = getAllEvidenceFlat().filter(e => e.step === step);
-
-    let messages = [];
-
-    ev.forEach(e => {
-
-        let derived = deriveStrength(e);
-
-        if (Math.abs(derived - e.strength_assigned) >= 2) {
-            messages.push(`Evidence #${e.number}: assigned ${e.strength_assigned}, expected ~${derived}`);
-        }
-
-        if (e.strength_assigned >= 4 && !e.text.toLowerCase().includes("randomized")) {
-            messages.push(`Evidence #${e.number}: high strength but no randomization`);
-        }
-
-    });
-
-    let html = `
-    <div class="alert ${messages.length ? 'alert-warning' : 'alert-success'}">
-        ${messages.length ? messages.join("<br>") : "Strength looks reasonable"}
-    </div>`;
-
-    $("#analysis-view").prepend(html);
-}
 
 $(document).on("click","#view-table",function(){
     $("#table-view").show();

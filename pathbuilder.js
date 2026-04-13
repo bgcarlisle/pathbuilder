@@ -47,9 +47,7 @@ function getAllEvidenceFlat() {
 
     if (!pathdata?.evidence) return rows;
 
-    // -------------------------
-    // refMap MUST be here
-    // -------------------------
+    // Index with references
     const refMap = {};
 
     if (Array.isArray(pathdata.references)) {
@@ -73,9 +71,7 @@ function getAllEvidenceFlat() {
         });
     }
 
-    // -------------------------
-    // flatten evidence
-    // -------------------------
+    // Flatten
     Object.entries(pathdata.evidence).forEach(([id, ev]) => {
         if (!ev) return;
 
@@ -153,7 +149,7 @@ function renderTableView() {
             <th>Derived</th>
             <th>Evidence</th>
             <th>Flags</th>
-            <th>Audit</th>
+            <th>Edit</th>
         </tr>
     </thead><tbody>`;
 
@@ -171,8 +167,9 @@ function renderTableView() {
             <td>${r.text}</td>
             <td>${renderFlags(r)}</td>
             <td>
-                <button class="btn btn-sm btn-outline-danger audit-btn" data-step="${r.step}">
-                    Check
+                <button class="btn btn-sm btn-outline edit-old-evidence" data-step="${r.step}" data-index="${r.id}">
+                    <svg width="12" height="12" fill="currentColor"><use href="images/bootstrap-icons.svg#pencil"/></svg>
+                    Edit
                 </button>
             </td>
         </tr>`;
@@ -1121,10 +1118,18 @@ $(document).ready(function() {
     });
 
     // Show evidence editor (edit old)
-    $('.evidence-block').on('click', '.edit-old-evidence', function(event) {
+    $('.evidence-block,#table-view').on('click', '.edit-old-evidence', function(event) {
 	showdialog('evidence-editor');
-	step = $(this).parent().parent().parent().parent().parent().data('step');
-	index = $(this).parent().parent().data('index');
+	if ($(this).attr('data-index') !== undefined) {
+	    index = $(this).data('index');
+	} else {
+	    index = $(this).parent().parent().data('index');
+	}
+	if ($(this).attr('data-step') !== undefined) {
+	    step = $(this).data('step');
+	} else {
+	    step = $(this).parent().parent().parent().parent().parent().data('step');
+	}
 	$('#editor-evidence-index-new').val('false');
 	$('#editor-evidence-step').val(step); // Update step
 	$('.editor-evidence-stepname').html(stepname(step)); // Update user-facing step name in editor

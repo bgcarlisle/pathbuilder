@@ -153,6 +153,10 @@
 	 .evidence-references-number-instance {
 	     margin: 0 3px;
 	 }
+	 .table-bordered td {
+	     border-right: 0;
+	     border-left: 0;
+	 }
 	 .table-dark tr th {
 	     color: #fff;
 	     background-color: #423629 !important;;

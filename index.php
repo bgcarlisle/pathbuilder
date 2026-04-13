@@ -32,8 +32,9 @@
 	     color: #fff;
 	     background-color: #423629;
 	 }
-	 .highlight-row td:first-of-type {
-	     border-left: 10px solid #423629;
+	 .highlight-row td:nth-of-type(2) {
+	     background-color: #423629;
+	     color: #fff;
 	 }
 	 .subtitle {
 	     font-size: 50%;

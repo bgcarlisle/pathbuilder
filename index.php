@@ -694,19 +694,18 @@
 			    <label class="form-label">Step</label>
 			    <select class="form-select" id="filter-step">
 				<option value="">All</option>
-				<option value="m0m1">M0-M1</option>
 			    </select>
 			</div>
 
-			<div class="col-md-2 form-check">
-			    <input class="form-check-input" type="checkbox" id="f-randomization" autocomplete="off">
-			    <label class="form-check-label">Randomized</label>
-			</div>
+			<!-- <div class="col-md-2 form-check">
+			     <input class="form-check-input" type="checkbox" id="f-randomization" autocomplete="off">
+			     <label class="form-check-label">Randomized</label>
+			     </div>
 
-			<div class="col-md-2 form-check">
-			    <input class="form-check-input" type="checkbox" id="f-comparator" autocomplete="off">
-			    <label class="form-check-label">Comparator</label>
-			</div>
+			     <div class="col-md-2 form-check">
+			     <input class="form-check-input" type="checkbox" id="f-comparator" autocomplete="off">
+			     <label class="form-check-label">Comparator</label>
+			     </div> -->
 
 			<div class="col-md-2 form-check">
 			    <input class="form-check-input" type="checkbox" id="f-refs" autocomplete="off">

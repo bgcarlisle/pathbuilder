@@ -11,9 +11,9 @@ var magnitude_regex = [
     /\bHR\s*[=:]\s*\d+(?:\.\d+)?(?:\s*$$\s*95%\s*CI\s*[:]\s*[\d\.]+\s*[-–]\s*[\d\.]+\s*$$)?/gi,
     /\bhazard\s+ratio\s*[=:]\s*\d+(?:\.\d+)?(?:\s*$$\s*95%\s*CI\s*[:]\s*[\d\.]+\s*[-–]\s*[\d\.]+\s*$$)?/gi,
     
-    /\bOR\b/gi,
+    /\bOR\b/g,
     /\bodds\s+ratio\b/gi,
-    /\bOR\s*[=:]\s*\d+(?:\.\d+)?/gi,
+    /\bOR\s*[=:]\s*\d+(?:\.\d+)?/g,
     /\bodds\s+ratio\s*[=:]\s*\d+(?:\.\d+)?/gi,
     
     /\bRR\b/gi,
@@ -149,9 +149,9 @@ var units_regex = [
     /\bhazard\s+ratio\s*[=:]\s*\d+(?:\.\d+)?/gi,
     
     // Odds ratios
-    /\bOR\b/gi,
+    /\bOR\b/g,
     /\bodds\s+ratio\b/gi,
-    /\bOR\s*[=:]\s*\d+(?:\.\d+)?/gi,
+    /\bOR\s*[=:]\s*\d+(?:\.\d+)?/g,
     /\bodds\s+ratio\s*[=:]\s*\d+(?:\.\d+)?/gi,
     
     // Relative risks

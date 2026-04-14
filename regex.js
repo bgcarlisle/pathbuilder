@@ -187,7 +187,6 @@ var units_regex = [
     /\bprevalence\s*[=:]\s*\d+(?:\.\d+)?/gi,
     /\bmortality\b/gi,
     /\bmortality\s*[=:]\s*\d+(?:\.\d+)?/gi,
-    /\bsurvival\b/gi,
     /\bsurvival\s*[=:]\s*\d+(?:\.\d+)?/gi,
     
     // Response/outcome rates
@@ -195,9 +194,7 @@ var units_regex = [
     /\bresponse\s+rate\s*[=:]\s*\d+(?:\.\d+)?/gi,
     /\bremission\s+rate\b/gi,
     /\bremission\s+rate\s*[=:]\s*\d+(?:\.\d+)?/gi,
-    /\bprogression[\s-]free\s+survival\b/gi,
     /\bprogression[\s-]free\s+survival\s*[=:]\s*\d+(?:\.\d+)?/gi,
-    /\boverall\s+survival\b/gi,
     /\boverall\s+survival\s*[=:]\s*\d+(?:\.\d+)?/gi,
     
     // Effect sizes
@@ -304,28 +301,19 @@ var comparator_regex = [
     /\b\w+\s+led\s+to\s+\d+(?:\.\d+)?%\s+(?:increased|decreased|reduced|elevated|lowered)/gi,
     /\b\d+(?:\.\d+)?%\s+(?:increase|decrease|reduction|elevation|lowering)\s+of\s+\w+/gi
 ];
+
 var randomization_regex = [
-    /\brandomized\b/gi,
+    /\brandomi(s|z)ed\b/gi,
     /\brandomly\b/gi,
-    /\brandomization\b/gi,
+    /\brandomi(s|z)ation\b/gi,
     /\brandom\b/gi,
     /\bRCT\b/gi,
     /\brandomi(z|s)ed\s+(?:controlled|clinical)\s+trial\b/gi,
     /\brandom\s+allocation\b/gi,
     /\brandom\s+assignment\b/gi,
-    /\block\s+randomi(z|s)ation\b/gi,
-    /\bstratified\s+randomi(z|s)ation\b/gi,
-    /\brandomized\s+xenograft\s+studies?\b/gi,
     /\brandomized\s+(?:tumor|cancer)\s+(?:studies?|models?|experiments?)\b/gi,
-    /\bxenograft\s+studies?\s+(?:were|was|are|is)\s+randomized\b/gi,
-    /\bin\s+randomized\s+(?:xenograft|preclinical|animal)\s+studies?\b/gi,
-
-    /\bphase\s+\d+\s+trial\b/gi,
-    /\bphase\s+\d+\s+(?:clinical|research)\s+trial\b/gi,
-    /\bin\s+phase\s+\d+\s+trial\b/gi,
-    /\bphase\s+\d+\s+clinical\s+(?:study|investigation)\b/gi,
-    /\bmixed\s+cancers?\b/gi,
-    /\bmultiple\s+cancer\s+types?\s+(?:in|within)\s+(?:a\s+)?phase\s+\d+\s+trial\b/gi
+    /\b(?:were|was|are|is)\s+randomized\b/gi,
+    /\brandomized\s+(?:xenograft|preclinical|animal|clinical)\s+studies?\b/gi
 ];
 
 var masking_regex = [
@@ -409,10 +397,10 @@ var construct_validity_regex = [
     /\bspecificity\s+(?:issues|concerns|limitations)\b/gi,
     /\bsensitivity\s+(?:but|while|although|however)\s+specificity\b/gi,
     /\b(?:sensitive|specific)\s+models?\s+(?:for|of)\s+human\s+\w+/gi,
-    /\bhuman\s+\w+\s+(?:are|is)\s+(?:sensitive|specific)\s+models?\b/gi,
+    /\bhuman\s+\w+\s+(?:are|is)\s+w+\s+models?\b/gi,
     /\b\w+-bearing\s+\w+\s+(?:mice|rats|animals)\b/gi,
     /\borthotopic\s+(?:mice|rats|animals|models?)\b/gi,
-    /\b(?:are|is)\s+(?:sensitive|specific)\s+models?\s+(?:for|of)\s+human\b/gi,
+    /\b(?:are|is)\s+\w+\s+models?\s+(?:for|of)\s+human\b/gi,
     /\bmodels?\s+(?:for|of)\s+human\s+\w+\b/gi,
     /\bmodels?\s+(?:are|is)\s+not\s+specific\s+(?:for|of)\s+human\b/gi,
     /\blimitations?\s+(?:of|in)\s+(?:the\s+)?models?\b/gi,
@@ -422,8 +410,7 @@ var construct_validity_regex = [
     /\b\w+-bearing\s+orthotopic\s+(?:mice|rats|animals)\s+(?:are|is)\s+(?:sensitive|specific)\b/gi,
     /\bhuman\s+\w+\s+(?:are|is)\s+(?:modeled|represented|simulated)\s+(?:by|in)\s+\w+/gi,
     /\b\w+\s+(?:models?|represents|simulates)\s+human\s+\w+\b/gi,
-    /\b(?:the\s+)?model\s+is\s+(?:very\s+)?sensitive\s+but\s+(?:not\s+)?(?:very\s+)?specific\b/gi,
-    /\bsensitive\s+but\s+not\s+specific\s+for\s+predicting\s+human\s+response\b/gi,
+    /\bpredicting\s+human\s+response\b/gi,
     /\bsensitivity\s+but\s+lack\s+of\s+specificity\b/gi,
     /\bhigh\s+sensitivity\s+but\s+low\s+specificity\b/gi,
     /\bpredictive\s+(?:accuracy|value|power)\s+(?:for|of)\s+human\s+response\b/gi,
@@ -473,7 +460,6 @@ var external_validity_regex = [
     /\bindependent\s+studies?\s+(?:show|demonstrate|indicate|reveal)\b/gi,
     /\bmultiple\s+independent\s+studies?\s+(?:confirm|support|validate)\b/gi,
     /\bindependent\s+replication\s+of\s+\w+\s+(?:findings|results|effects)\b/gi,
-    /\b(?:lung|colorectal|breast|prostate|pancreatic|ovarian)\s+(?:and|,)\s+(?:colorectal|lung|breast|prostate|pancreatic|ovarian)\s+cancers?\b/gi,
     /\bmultiple\s+cancer\s+types?\s+(?:are|is)\s+driven\s+by\s+\w+/gi,
     /\b\w+\s+over-?activation\s+in\s+(?:multiple|various|different)\s+cancer\s+types?\b/gi,
     /\bcross-?cancer\s+(?:mechanism|pathway|target)\b/gi,
@@ -503,18 +489,13 @@ var interfering_effects_regex = [
     /\bwell\s+tolerated\s+(?:at|with|in)\s+\w+/gi,
     /\bno\s+(?:serious|significant|major)\s+adverse\s+events?\b/gi,
     /\bno\s+(?:dose-limiting|treatment-related)\s+toxicity\b/gi,
-    /\b(?:when|while)\s+scaled\s+(?:to|for)\s+patients?\b/gi,
-    /\bscaled\s+(?:to|for)\s+patients?\s*(?:,|and|but)\s+(?:did\s+not|didnt)\s+cause\b/gi,
+    /\bscaled\s+(?:to|for)\s+patients?\b/gi,
     /\b(?:in|with)\s+studies?\s+involving\s+\d+\s+patients?\s*(?:,|and|but)\s+(?:did\s+not|didnt)\s+cause\b/gi,
     /\b(?:in|with)\s+\d+\s+patients?\s*(?:,|and|but)\s+(?:did\s+not|didnt)\s+cause\s+any\s+(?:adverse|serious|toxic)\s+(?:effects?|events?)\b/gi,
     /\b(?:in|with)\s+\d+\s+patients?\s*(?:,|and|but)\s+(?:did\s+not|didnt)\s+cause\s+any\s+(?:S)?AEs?\b/gi,
     /\b(?:studies|trials|research)\s+involving\s+\d+\s+patients?\s*(?:showed|demonstrated|found|reported)\s+(?:good|excellent|acceptable)\s+tolerability\b/gi,
     /\b(?:good|excellent|acceptable)\s+tolerability\s+(?:was|were|is|are)\s+(?:observed|seen|noted|reported|demonstrated)\b/gi,
     /\bno\s+(?:safety|tolerability)\s+(?:concerns|issues|problems)\s+(?:were|was)\s+(?:identified|noted|reported)\b/gi,
-    /\bdoses?\s+(?:needed|required)\s+to\s+achieve\s+target\s+(?:inhibition|effect)\s*(?:when|while)\s+scaled\s+(?:to|for)\s+patients?\b/gi,
-    /\bdose\s+scaling\s+(?:to|for)\s+patients?\s*(?:did\s+not|didnt)\s+(?:result\s+in|cause|lead\s+to)\s+(?:adverse|toxic|serious)\s+(?:effects?|events?)\b/gi,
-    /\bdose\s+scaling\s+(?:to|for)\s+patients?\s*(?:did\s+not|didnt)\s+(?:result\s+in|cause|lead\s+to)\s+any\s+(?:S)?AEs?\b/gi,
-    /\btherapeutic\s+dose\s+(?:when|while)\s+scaled\s+(?:to|for)\s+patients?\s*(?:was|were)\s+(?:well\s+tolerated|safe|acceptable)\b/gi,
     /\babsence\s+of\s+(?:interfering|adverse|toxic|off-target)\s+(?:effects?|events?|toxicity)\b/gi,
     /\b(?:lack|absence)\s+of\s+(?:significant|serious|major)\s+(?:side\s+effects?|adverse\s+events?|toxicity)\b/gi,
     /\b(?:lack|absence)\s+of\s+any\s+(?:S)?AEs?\b/gi,

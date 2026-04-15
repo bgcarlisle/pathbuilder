@@ -893,7 +893,7 @@
 
 			<div class="evidence-block" id="evidence-block-t1" data-step="t1">
 			    <h3>
-				Translatability (T1)
+				Translatability of molecular/target effects (T1)
 			    </h3>
 			    <div>
 				<div style="float: left;">No evidence</div>
@@ -937,7 +937,7 @@
 
 			<div class="evidence-block" id="evidence-block-t2" data-step="t2">
 			    <h3>
-				Translatability (T2)
+				Translatability of pathophysiological effects (T2)
 			    </h3>
 			    <div>
 				<div style="float: left;">No evidence</div>
@@ -981,7 +981,7 @@
 
 			<div class="evidence-block" id="evidence-block-t3" data-step="t3">
 			    <h3>
-				Translatability (T3)
+				Translatability of clinical/functional effects (T3)
 			    </h3>
 			    <div>
 				<div style="float: left;">No evidence</div>

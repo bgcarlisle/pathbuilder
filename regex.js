@@ -525,7 +525,8 @@ var interfering_effects_regex = [
     /\bserious\s+adverse\s+events?\s+(?:in|among)\s+\d+%\s+of\s+patients?\b/gi,
     /\bsafety\s+profile\s+(?:showed|demonstrated|indicated)\s+\d+%\s+serious\s+adverse\s+events?\b/gi,
     /\badverse\s+event\s+rate\s+(?:of|was)\s+\d+%/gi,
-    /\bincidence\s+of\s+serious\s+adverse\s+events?\s+(?:was|were)\s+\d+%/gi
+    /\bincidence\s+of\s+serious\s+adverse\s+events?\s+(?:was|were)\s+\d+%/gi,
+    /\bblood\s+brain\s+barrier\b/gi
 ];
 
 var systematic_review_regex = [

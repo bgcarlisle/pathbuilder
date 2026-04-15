@@ -375,9 +375,9 @@ var target_evidence_regex = [
     /\b(?:target|biomarker|receptor|enzyme|protein|gene|molecule)\s+(?:is|are|was|were)\s+(?:also\s+)?(?:expressed|present|found)\s+(?:in|within)\s+(?:both|either)\s+(?:human|patient|clinical)\s+(?:and|or)\s+(?:murine|animal)\s+(?:model|models|tissue|cells|samples?)\b/gi,
     /\b(?:human|patient|clinical)\s+(?:and|or)\s+(?:murine|animal)\s+(?:model|models|tissue|cells|samples?)\s+(?:both|either)\s+(?:express|contain|have|show)\s+(?:the\s+)?(?:same|similar)\s+(?:target|biomarker|receptor|enzyme|protein|gene|molecule)\b/gi,
     
-    /\balso\s+found\s+in\s+(?:a|the)?\s*murine\s+model\b/gi,
-    /\balso\s+present\s+in\s+(?:a|the)?\s*murine\s+model\b/gi,
-    /\b(?:found|present|detected|expressed|observed|identified|located)\s+(?:also\s+)?in\s+(?:a|the)?\s*murine\s+model\b/gi
+    /\balso\s+found\s+in\s+(?:a|the)?\s*\w+\s+model\b/gi,
+    /\balso\s+present\s+in\s+(?:a|the)?\s*\w+\s+model\b/gi,
+    /\b(?:found|present|detected|expressed|observed|identified|located)\s+(?:also\s+)?in\s+(?:a|the)?\s*\w+\s+model\b/gi
 ];
 
 var construct_validity_regex = [

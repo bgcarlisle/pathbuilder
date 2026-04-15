@@ -822,8 +822,8 @@
 			    <div class="row g-3">
 
 				<div class="col-md-5">
-				    <label class="form-label">Minimum strength</label>
-				    <input type="range" class="form-range" min="1" max="5" value="1" id="filter-strength">
+				    <label class="form-label">Minimum auto-assigned score</label>
+				    <input type="range" class="form-range" min="0" max="5" value="0" id="filter-strength" autocomplete="off">
 				</div>
 
 				<div class="col-md-3">

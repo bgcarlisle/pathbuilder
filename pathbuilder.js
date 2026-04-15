@@ -104,23 +104,34 @@ function getAllEvidenceFlat() {
 }
 
 function deriveStrength(e) {
+    
     if (!e?.text) return 0;
+    
+    let score = 0;
 
-    let t = e.text.toLowerCase();
-    let score = 1;
+    if (steptype(e.step) == "vertical") {
+	if (return_unique_matches(e.text, magnitude_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, units_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, precision_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, comparator_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, randomization_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, masking_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, preregistration_regex).length > 0) score += 1;
+    }
 
-    if (t.includes("randomized")) score += 2;
-    if (t.includes("blinded")) score += 1;
-    if (t.includes("p <")) score += 1;
-    if (t.includes("%")) score += 1;
-    if (t.includes("replicated") || t.includes("reproduced")) score += 1;
-    if (t.includes("meta-analysis")) score += 2;
+    if (steptype(e.step) == "horizontal") {
+	if (return_unique_matches(e.text, target_evidence_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, construct_validity_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, external_validity_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, interfering_effects_regex).length > 0) score += 1;
+	if (return_unique_matches(e.text, systematic_review_regex).length > 0) score += 1;
+    }
 
     return Math.min(5, score);
 }
 
 let filters = {
-    minStrength: 1,
+    minStrength: 0,
     step: ""
 };
 
@@ -144,9 +155,9 @@ function renderTableView() {
     <thead class="table-dark">
         <tr>
             <th>#</th>
-            <th>Step</th>
-            <th>Assigned</th>
-            <th>Derived</th>
+            <th style="min-width: 60px;">Step</th>
+            <th>Step strength</th>
+            <th>Auto scoring</th>
             <th>Evidence</th>
             <th>Flags</th>
             <th>Edit</th>
@@ -161,7 +172,7 @@ function renderTableView() {
         html += `
         <tr class="${mismatch ? 'table-warning ' : ''}${r.step}">
             <td>${r.number}</td>
-            <td>${r.step}</td>
+            <td>${stepname(r.step)}</td>
             <td>${r.strength_assigned}</td>
             <td>${derived}</td>
             <td>${r.text}</td>
@@ -260,7 +271,7 @@ function populateStepFilter() {
 
     let html = `<option value="">All</option>`;
     steps.forEach(s => {
-        html += `<option value="${s}">${s}</option>`;
+        html += `<option value="${s}">${stepname(s)}</option>`;
     });
 
     $("#filter-step").html(html);

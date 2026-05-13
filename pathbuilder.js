@@ -1368,6 +1368,7 @@ $(document).ready(function() {
 
     // Replace data with example
     $('#confirm-replace-with-example').on('click', function(event) {
+	$('#view-editor').click();
 	pathdata = JSON.parse(ex_pathdata);
 	updatepage();
     });
@@ -1385,6 +1386,7 @@ $(document).ready(function() {
 
     // Read JSON from disk and replace PATH data in memory
     $('#confirm-replace-with-file-data').on('click', function(event) {
+	$('#view-editor').click();
         let fr = new FileReader();
         fr.onload = function () {
 	    pathdata = JSON.parse(fr.result);
@@ -1394,6 +1396,7 @@ $(document).ready(function() {
     });
 
     $('#new-path-from-scratch').on('click', function(event) {
+	$('#view-editor').click();
 	if (Object.keys(pathdata.evidence).length == 0 & Object.keys(pathdata.strength).length == 0 & pathdata.targetScenario == '' & Object.keys(pathdata.references).length == 0) {
 	    $('.dialog-close-x').click();
 	} else {
